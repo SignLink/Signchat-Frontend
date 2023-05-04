@@ -25,6 +25,7 @@
 
 .how-it-works-description {
     padding-top: 2rem;
-    width: 35rem;
+    max-width: 35rem;
+    width: 100%;
     line-height: 40px;
 }
