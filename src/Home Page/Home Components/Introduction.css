@@ -1,14 +1,37 @@
-.intro-main{
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+.intro-main {
     display: flex;
     justify-content: space-between;
     margin-top: 9.5rem;
+   
 }
-.intro-description{
+
+.intro-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     min-width: 40%;
     width: 42rem;
-    border: 1px solid black;
-    padding-left: 1rem;
-}
-.intro-description h1{
+    padding-right: 1.3rem;
     color: var(--font-color);
+    position: relative;
+}
+
+.intro-description h1 {
+    font-weight: 700;
+    font-size: 3rem;
+
+}
+.intro-description p{
+    margin-top: 1.7rem;
+    line-height: 2.5rem;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+.sign-up-button{
+    margin-top: 2.635rem;
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }

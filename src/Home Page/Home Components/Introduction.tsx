@@ -14,7 +14,9 @@ function Introduction() {
             community through sign language! Join our community of signers from
             all over the world and start chatting in sign language today.
           </p>
-          <Button buttonName="Sign Up" />
+          <div className="sign-up-button">
+            <Button buttonName="Sign Up" />
+          </div>
         </div>
         <div className="intro-pic">
           <img src={introPerson} alt="person-doing-sign-on-laptop"></img>
