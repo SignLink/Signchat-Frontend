@@ -1,0 +1,43 @@
+.navigation-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.main-logo img {
+    width: 250px;
+    height: 77px;
+}
+
+.nav-buttons {
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.nav-buttons span {
+    display: inline-block;
+    font-size: 1.25rem;
+    width: 7rem;
+    color: var(--font-color);
+    text-align: center;
+    padding-bottom: .3rem;
+    margin-left: 1rem;
+}
+
+.nav-buttons span:hover {
+    border-bottom: 3px solid #008AB8;
+}
+
+.blue-button {
+    color: white !important;
+    background-color: var(--font-color);
+    border: none;
+    border-radius: 10px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    padding: .8rem 4.7rem;
+    cursor: pointer;
+    margin-left: 1rem;
+
+}
