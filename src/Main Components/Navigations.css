@@ -15,18 +15,27 @@
     cursor: pointer;
 }
 
+.nav-buttons a {
+    display: inline-block;
+    text-decoration: none;
+    width: 7rem;
+    color: var(--font-color);
+}
+
 .nav-buttons span {
     display: inline-block;
     font-size: 1.25rem;
     width: 7rem;
     color: var(--font-color);
     text-align: center;
-    padding-bottom: .3rem;
     margin-left: 1rem;
 }
 
-.nav-buttons span:hover {
-    border-bottom: 3px solid #008AB8;
+.nav-buttons a.active,
+.nav-buttons a:hover {
+    color: #00a8e8;
+    border-bottom: 3px solid #00a8e8;
+    padding-bottom: .3rem;
 }
 
 .blue-button {
@@ -38,6 +47,4 @@
     font-weight: 700;
     padding: .8rem 4.7rem;
     cursor: pointer;
-    margin-left: 1rem;
-
 }
