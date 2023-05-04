@@ -1,8 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
 
 :root {
-  --font-color: #008AB8
+  --nav-font-color: #008AB8;
+  --active-color: #00a8e8;
+  --font-color:#003459;
 }
 
 body {
@@ -10,7 +17,7 @@ body {
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  padding: .5rem 1.5rem 0rem 1.5rem;
+  padding: 1rem 3rem 0rem 3rem;
 }
 
 code {
