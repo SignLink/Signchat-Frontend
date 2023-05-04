@@ -1,0 +1,46 @@
+import React from "react";
+import "../Home Components/Descriptions.css";
+import messageIcon from '../../Icons/icons8-messaging.png'
+import videocall from '../../Icons/icons8-videocall.png'
+import signLanguage from '../../Icons/icons8-sign-language.png'
+
+function Descriptions() {
+  return (
+    <>
+      <div className="descriptions-main">
+        <div className="message-description">
+          <div className="icon">
+            <img src={messageIcon} alt="message" />
+          </div>
+          <h1>Real-Time Messaging</h1>
+          <p>
+            SignChat includes a messaging feature that allows users to engage in
+            real-time text-based conversation
+          </p>
+        </div>
+        <div className="videocall-description">
+          <div className="icon">
+            <img src={videocall} alt="message" />
+          </div>
+          <h1>Real-Time Video Chat</h1>
+          <p>
+            SignChat includes a messaging feature that allows users to engage in
+            real-time text-based conversation
+          </p>
+        </div>
+        <div className="signlanguage-description">
+          <div className="icon">
+            <img src={signLanguage} alt="message" />
+          </div>
+          <h1>Sign Language Translation</h1>
+          <p>
+            SignChat includes a messaging feature that allows users to engage in
+            real-time text-based conversation
+          </p>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default Descriptions;
