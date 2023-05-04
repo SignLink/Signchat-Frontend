@@ -48,3 +48,7 @@
     padding: .8rem 4.7rem;
     cursor: pointer;
 }
+
+.blue-button:hover {
+    background-color: #00a8e8;
+}
