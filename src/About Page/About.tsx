@@ -1,7 +1,7 @@
 import React from "react";
 import Navigation from "../Main Components/Navigation";
 import MainWrapper from "../Main Components/MainWrapper";
-import AboutUsDescription from "./AboutUsDescription";
+import AboutUsDescription from "./About Components/AboutUsDescription";
 import Footer from "../Main Components/Footer";
 
 function About() {
@@ -9,9 +9,9 @@ function About() {
     <>
       <MainWrapper>
         <Navigation />
-        <AboutUsDescription/>
+        <AboutUsDescription />
       </MainWrapper>
-      <Footer/>
+      <Footer />
     </>
   );
 }

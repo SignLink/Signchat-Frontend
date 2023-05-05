@@ -1,8 +1,8 @@
 import React from "react";
-import "../About Page/AboutUsDescription.css";
-import conferenceCall from "../Images/undraw_conference_call.svg";
-import chat from "../Images/undraw_chat.svg";
-import socialInteraction from "../Images/Social interaction.svg";
+import "../About Components/AboutUsDescription.css";
+import conferenceCall from "../../Images/undraw_conference_call.svg";
+import chat from "../../Images/undraw_chat.svg";
+import socialInteraction from "../../Images/Social interaction.svg";
 
 const aboutUsDescriptions = [
   {
