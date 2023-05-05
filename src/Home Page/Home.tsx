@@ -4,6 +4,7 @@ import Introduction from "./Home Components/Introduction";
 import Descriptions from "./Home Components/Descriptions";
 import MainWrapper from "../Main Components/MainWrapper";
 import HowItWorks from "./Home Components/HowItWorks";
+import Footer from "../Main Components/Footer";
 
 function Home() {
   return (
@@ -12,8 +13,9 @@ function Home() {
         <Navigation />
         <Introduction />
         <Descriptions />
-        <HowItWorks/>
+        <HowItWorks />
       </MainWrapper>
+      <Footer />
     </>
   );
 }
