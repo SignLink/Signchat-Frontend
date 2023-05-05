@@ -28,14 +28,12 @@ function HowItWorks() {
             <img src={laptopimg} alt="laptop-img" />
           </div>
           <div className="how-it-works-descriptions-main">
-            {howItWorksDescriptions.map(function (data, index) {
+            {howItWorksDescriptions.map((data, index) => {
               return (
-                <>
-                  <div className="how-it-works-description" key={index}>
-                    <h2>{data.title}</h2>
-                    <p>{data.description}</p>
-                  </div>
-                </>
+                <div className="how-it-works-description" key={index}>
+                  <h2>{data.title}</h2>
+                  <p>{data.description}</p>
+                </div>
               );
             })}
           </div>
