@@ -1,6 +1,7 @@
 import React from "react";
 import '../Contact Components/ContactDescription.css'
 import contactUs from '../../Images/undraw_contact_us.svg'
+import Button from "../../Main Components/Button";
 
 function ContactDescription() {
   return (
@@ -14,8 +15,8 @@ function ContactDescription() {
         <div className="inputs-main">
           <div className="inputs">
             <div className="name-inputs">
-              <input placeholder="Enter your firstname" className="firstname"/>
-              <input placeholder="Enter your lastname" className="lastname"/>
+              <input placeholder="Enter your firstname" className="firstname" />
+              <input placeholder="Enter your lastname" className="lastname" />
             </div>
             <input
               placeholder="Enter your email"
@@ -23,9 +24,12 @@ function ContactDescription() {
               className="email-input"
             />
             <textarea placeholder="Describe your issue" className="text-area" />
+            <div className="send-button">
+              <Button buttonName="Send" />
+            </div>
           </div>
           <div className="inputs-image">
-            <img src={contactUs} alt="contact"/>
+            <img src={contactUs} alt="contact" />
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
-.contact-main{
+.contact-main {
     margin-bottom: 12.5rem;
 }
+
 .contact-main h1 {
     font-size: 2.5rem;
     color: var(--font-color);
@@ -8,7 +9,8 @@
     width: 100%;
     margin-top: 10rem;
 }
-.inputs{
+
+.inputs {
     width: 50%;
 }
 
@@ -20,6 +22,24 @@
     background-color: rgba(247, 247, 247, 1);
     border: 1px solid rgb(187, 187, 187);
     width: 100%;
+}
+
+.name-inputs input:focus,
+.email-input:focus,
+.inputs textarea:focus {
+    outline: none;
+    border: 2px solid #008AB8;
+    background-color: white;
+}
+
+.name-inputs input,
+.email-input,
+.inputs textarea {
+    font-family: 'Inter', sans-serif;
+    color: var(--font-color);
+}
+.inputs textarea{
+    font-size: .87rem;
 }
 
 .contact-main input::placeholder {
@@ -58,8 +78,10 @@
     height: 20.6rem;
     margin-top: 1.5rem;
     width: 100%;
+    margin-bottom: 2rem;
 }
-.inputs textarea::placeholder{
+
+.inputs textarea::placeholder {
     font-family: 'Inter', sans-serif;
     color: rgba(177, 177, 177, 1);
     font-size: .87rem;
@@ -75,4 +97,10 @@
 .name-inputs {
     display: flex;
     gap: 1.25rem;
+}
+
+.send-button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
