@@ -25,7 +25,7 @@
 
 .nav-buttons span {
     display: inline-block;
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     width: 7rem;
     color: var(--nav-font-color);
     text-align: center;
@@ -44,7 +44,7 @@
     background-color: var(--nav-font-color);
     border: none;
     border-radius: 10px;
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     font-weight: 700;
     padding: .8rem 4.7rem;
     cursor: pointer;
