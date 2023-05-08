@@ -104,3 +104,20 @@
     display: flex;
     justify-content: center;
 }
+.warning-message{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(255, 196, 0, 0.171);
+    padding: .5rem;
+    border-radius: 10px;
+}
+.warning-message img{
+    width: 30px;
+    height: 30px;
+}
