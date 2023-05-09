@@ -1,0 +1,11 @@
+.modal-main {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.416);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
