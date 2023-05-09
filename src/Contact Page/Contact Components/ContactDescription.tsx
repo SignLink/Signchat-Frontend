@@ -115,7 +115,7 @@ function ContactDescription() {
   const validIssue = state.issue.trim().length < 10;
 
   function onFocusValidInputs(
-    requirements: any,
+    requirements: boolean,
     actionName: string,
     message: string
   ) {
