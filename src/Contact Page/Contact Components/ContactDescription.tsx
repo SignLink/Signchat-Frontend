@@ -134,7 +134,7 @@ function ContactDescription() {
     onFocusValidInputs(
       validFirstname,
       "firstnameNotValid",
-      '"Please enter a valid name"'
+      "Please enter a valid name"
     );
   }
   function lastnameHandler(event: React.ChangeEvent<HTMLInputElement>) {
@@ -169,14 +169,12 @@ function ContactDescription() {
       return;
     }
 
-    const data = {
-      firtname: state.firstName,
-      lastname: state.lastName,
-      email: state.email,
-      issue: state.issue,
-    };
-
-    console.log(data);
+    // const data = {
+    //   firtname: state.firstName,
+    //   lastname: state.lastName,
+    //   email: state.email,
+    //   issue: state.issue,
+    // };
 
     dispatch({ type: "firstname", payload: "" });
     dispatch({ type: "lastname", payload: "" });
