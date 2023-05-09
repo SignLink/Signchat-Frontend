@@ -10,12 +10,15 @@ interface contactState {
   email: string;
   issue: string;
   inputIsNotValid: boolean;
+  firstnameNotValid: boolean;
+  emailNotValid: boolean;
+  issueNotValid: boolean;
   message: string;
 }
 
 interface contactAction {
   type: string;
-  payload: string;
+  payload: any;
 }
 
 function reducer(state: contactState, action: contactAction): contactState {
@@ -63,6 +66,30 @@ function reducer(state: contactState, action: contactAction): contactState {
       inputIsNotValid: true,
       message: action.payload,
     };
+  }
+  if (action.type === "inputNotValid") {
+    return {
+      ...state,
+      inputIsNotValid: action.payload,
+    };
+  }
+  if (action.type === "firstnameNotValid") {
+    return {
+      ...state,
+      firstnameNotValid: action.payload,
+    };
+  }
+  if (action.type === "emailNotValid") {
+    return {
+      ...state,
+      emailNotValid: action.payload,
+    };
+  }
+  if (action.type === "issueNotValid") {
+    return {
+      ...state,
+      issueNotValid: action.payload,
+    };
   } else {
     return state;
   }
@@ -75,36 +102,55 @@ function ContactDescription() {
     email: "",
     issue: "",
     inputIsNotValid: false,
+    firstnameNotValid: false,
+    emailNotValid: false,
+    issueNotValid: false,
     message: "",
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  const validFirstname = state.firstName.trim().length < 2;
+  const validEmail = !state.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
+  const validIssue = state.issue.trim().length < 10;
+
+  function onFocusValidInputs(requirements: any, actionName: string) {
+    if (requirements) {
+      dispatch({ type: actionName, payload: true });
+    } else {
+      dispatch({ type: "inputNotValid", payload: false });
+      dispatch({ type: actionName, payload: false });
+    }
+  }
+
   function firstnameHandler(event: React.ChangeEvent<HTMLInputElement>) {
     dispatch({ type: "firstname", payload: event.target.value });
+    onFocusValidInputs(validFirstname, "firstnameNotValid");
   }
   function lastnameHandler(event: React.ChangeEvent<HTMLInputElement>) {
     dispatch({ type: "lastname", payload: event.target.value });
   }
   function emailHandler(event: React.ChangeEvent<HTMLInputElement>) {
     dispatch({ type: "email", payload: event.target.value });
+    onFocusValidInputs(validEmail, "emailNotValid");
   }
   function issueHandler(event: React.ChangeEvent<HTMLTextAreaElement>) {
     dispatch({ type: "issue", payload: event.target.value });
+    onFocusValidInputs(validIssue, "issueNotValid");
   }
 
   function submitContactForm(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if (state.firstName.trim().length < 3) {
+    if (validFirstname) {
       dispatch({ type: "validName", payload: "Please enter a valid name" });
       return;
     }
-    if (!state.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+    if (validEmail) {
       dispatch({ type: "validEmail", payload: "Please enter a valid email" });
       return;
     }
-    if (state.issue.trim().length < 10) {
+    if (validIssue) {
       dispatch({ type: "validIssue", payload: "Please type a message" });
       return;
     }
@@ -144,7 +190,9 @@ function ContactDescription() {
               <div className="name-inputs">
                 <input
                   placeholder="Enter your firstname"
-                  className="firstname"
+                  className={
+                    state.firstnameNotValid ? "firstname-invalid" : "firstname"
+                  }
                   onChange={firstnameHandler}
                   value={state.firstName}
                 />
@@ -157,14 +205,17 @@ function ContactDescription() {
               </div>
               <input
                 placeholder="Enter your email"
-                type={"text"}
-                className="email-input"
+                className={
+                  state.emailNotValid ? "email-input-invalid" : "email-input"
+                }
                 onChange={emailHandler}
                 value={state.email}
               />
               <textarea
                 placeholder="Describe your issue"
-                className="text-area"
+                className={
+                  state.issueNotValid ? "text-area-invalid" : "text-area"
+                }
                 onChange={issueHandler}
                 value={state.issue}
               />

@@ -26,7 +26,7 @@
 
 .name-inputs input:focus,
 .email-input:focus,
-.inputs textarea:focus {
+.inputs .text-area:focus {
     outline: none;
     border: 2px solid #008AB8;
     background-color: white;
@@ -34,11 +34,13 @@
 
 .name-inputs input,
 .email-input,
+.email-input-invalid,
 .inputs textarea {
     font-family: 'Inter', sans-serif;
     color: var(--font-color);
 }
-.inputs textarea{
+
+.inputs textarea {
     font-size: .87rem;
 }
 
@@ -47,7 +49,8 @@
     color: rgba(177, 177, 177, 1);
 }
 
-.email-input {
+.email-input,
+.email-input-invalid {
     max-width: 41.26rem;
     height: 3.6rem;
     border-radius: 20px;
@@ -59,12 +62,20 @@
     width: 100%;
 }
 
+
+
 .contact-main p {
     color: rgba(0, 0, 0, 0.27);
     font-size: 1rem;
     width: 100%;
     text-align: center;
     margin-top: 1rem;
+}
+
+.firstname-invalid:focus {
+    outline: none;
+    border: 2px solid #b81f00;
+    background-color: white;
 }
 
 .inputs textarea {
@@ -87,6 +98,14 @@
     font-size: .87rem;
 }
 
+.name-inputs .firstname-invalid:focus,
+.email-input-invalid:focus,
+.text-area-invalid:focus {
+    outline: none;
+    border: 2px solid #b800007f;
+    background-color: white;
+}
+
 .inputs-main {
     margin-top: 6.25rem;
     display: flex;
@@ -104,7 +123,8 @@
     display: flex;
     justify-content: center;
 }
-.warning-message{
+
+.warning-message {
     display: flex;
     justify-content: center;
     gap: 1rem;
@@ -117,7 +137,8 @@
     padding: .5rem;
     border-radius: 10px;
 }
-.warning-message img{
+
+.warning-message img {
     width: 30px;
     height: 30px;
 }
