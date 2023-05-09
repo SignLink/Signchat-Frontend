@@ -114,29 +114,43 @@ function ContactDescription() {
   const validEmail = !state.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
   const validIssue = state.issue.trim().length < 10;
 
-  function onFocusValidInputs(requirements: any, actionName: string) {
+  function onFocusValidInputs(
+    requirements: any,
+    actionName: string,
+    message: string
+  ) {
     if (requirements) {
       dispatch({ type: actionName, payload: true });
-    } else {
+    } else if (state.message === message) {
       dispatch({ type: "inputNotValid", payload: false });
+      dispatch({ type: actionName, payload: false });
+    } else {
       dispatch({ type: actionName, payload: false });
     }
   }
 
   function firstnameHandler(event: React.ChangeEvent<HTMLInputElement>) {
     dispatch({ type: "firstname", payload: event.target.value });
-    onFocusValidInputs(validFirstname, "firstnameNotValid");
+    onFocusValidInputs(
+      validFirstname,
+      "firstnameNotValid",
+      '"Please enter a valid name"'
+    );
   }
   function lastnameHandler(event: React.ChangeEvent<HTMLInputElement>) {
     dispatch({ type: "lastname", payload: event.target.value });
   }
   function emailHandler(event: React.ChangeEvent<HTMLInputElement>) {
     dispatch({ type: "email", payload: event.target.value });
-    onFocusValidInputs(validEmail, "emailNotValid");
+    onFocusValidInputs(
+      validEmail,
+      "emailNotValid",
+      "Please enter a valid email"
+    );
   }
   function issueHandler(event: React.ChangeEvent<HTMLTextAreaElement>) {
     dispatch({ type: "issue", payload: event.target.value });
-    onFocusValidInputs(validIssue, "issueNotValid");
+    onFocusValidInputs(validIssue, "issueNotValid", "Please type a message");
   }
 
   function submitContactForm(event: React.FormEvent<HTMLFormElement>) {
