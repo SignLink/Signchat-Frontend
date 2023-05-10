@@ -1,5 +1,32 @@
 .signup-main {
-    width: 50rem;
+    width: 60rem;
     background-color: white;
-    height: 50rem;
+    height: 45rem;
+    border: 1px solid rgba(0, 0, 0, 0.291);
+    position: fixed;
+    z-index: 15;
+    border-radius: 10px;
+}
+
+.signup-logo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-icon img {
+    margin-right: 1rem;
+}
+
+.mainlogo-div img {
+    width: 150px;
+    height: 55px;
+    margin-left: 1rem;
+    padding-top: .5rem;
+}
+
+.close-icon img {
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
 }

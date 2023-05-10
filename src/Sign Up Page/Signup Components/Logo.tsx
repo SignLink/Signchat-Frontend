@@ -1,8 +1,15 @@
 import React from "react";
 import mainLogo from "../../Images/logo.svg";
-import close from '../../Icons/close.svg'
+import close from "../../Icons/close.svg";
+import { useDispatch } from "react-redux";
+import { closeModal } from "../../Store-Redux/ModalReducer";
+import '../Signup.css'
 
 function Logo() {
+  const dispatchModal = useDispatch();
+  function closeSignUpPage() {
+    dispatchModal(closeModal());
+  }
   return (
     <>
       <div className="signup-logo">
@@ -10,7 +17,7 @@ function Logo() {
           <img src={mainLogo} alt="logo" />
         </div>
         <div className="close-icon">
-            <img src={close} alt="close" />
+          <img src={close} alt="close" onClick={closeSignUpPage} />
         </div>
       </div>
     </>

@@ -1,9 +1,11 @@
-import Logo from './Signup Components/Logo';
-import '../Sign Up Page/Signup.css'
+import Logo from "./Signup Components/Logo";
+import "../Sign Up Page/Signup.css";
+
+
 
 function Signup() {
   return (
-    <div className="signup-main">
+    <div className="signup-main" >
       <Logo />
     </div>
   );

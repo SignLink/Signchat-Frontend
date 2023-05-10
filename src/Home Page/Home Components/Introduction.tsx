@@ -1,9 +1,17 @@
-import React from "react";
 import introPerson from "../../Images/Person-Sign-Language-Classes.png";
 import "../Home Components/Introduction.css";
 import Button from "../../Main Components/Button";
+import { useDispatch } from "react-redux";
+import { openModal } from "../../Store-Redux/ModalReducer";
 
 function Introduction() {
+  const dispatchModal = useDispatch();
+
+  function openSignupPage() {
+    dispatchModal(openModal());
+  }
+
+
   return (
     <>
       <div className="intro-main">
@@ -15,7 +23,7 @@ function Introduction() {
             all over the world and start chatting in sign language today.
           </p>
           <div className="sign-up-button">
-            <Button buttonName="Sign Up" />
+            <Button buttonName="Sign Up" openModal={openSignupPage}/>
           </div>
         </div>
         <div className="intro-pic">
