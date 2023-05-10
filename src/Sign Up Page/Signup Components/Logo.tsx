@@ -2,13 +2,15 @@ import React from "react";
 import mainLogo from "../../Images/logo.svg";
 import close from "../../Icons/close.svg";
 import { useDispatch } from "react-redux";
+import { closeSignup } from "../../Store-Redux/SignupReducer";
 import { closeModal } from "../../Store-Redux/ModalReducer";
-import '../Signup.css'
+import "../Signup.css";
 
 function Logo() {
   const dispatchModal = useDispatch();
   function closeSignUpPage() {
     dispatchModal(closeModal());
+    dispatchModal(closeSignup());
   }
   return (
     <>

@@ -7,16 +7,16 @@ import HowItWorks from "./Home Components/HowItWorks";
 import Footer from "../Main Components/Footer";
 import Modal from "../Main Components/Modal";
 import Signup from "../Sign Up Page/Signup";
-import { useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
 function Home() {
-  const modalInitialState = useSelector(
-    (state: any) => state.modal.modalIsOpen
+  const signupInitialState = useSelector(
+    (state: any) => state.signup.signupIsOpen
   );
 
   return (
     <>
-      {modalInitialState && (
+      {signupInitialState && (
         <Modal>
           <Signup />
         </Modal>
