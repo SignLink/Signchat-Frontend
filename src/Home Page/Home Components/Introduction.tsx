@@ -2,7 +2,6 @@ import introPerson from "../../Images/Person-Sign-Language-Classes.png";
 import "../Home Components/Introduction.css";
 import Button from "../../Main Components/Button";
 import { useDispatch } from "react-redux";
-import { openModal } from "../../Store-Redux/ModalReducer";
 import { openSignup } from "../../Store-Redux/SignupReducer";
 
 function Introduction() {

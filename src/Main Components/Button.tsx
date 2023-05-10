@@ -1,6 +1,4 @@
-import React from "react";
 import "../Main Components/Navigations.css";
-import { openModal } from "../Store-Redux/ModalReducer";
 
 interface props {
   buttonName: string;
