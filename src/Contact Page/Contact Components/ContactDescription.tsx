@@ -3,6 +3,7 @@ import "../Contact Components/ContactDescription.css";
 import contactUs from "../../Images/undraw_contact_us.svg";
 import Button from "../../Main Components/Button";
 import warning from "../../Icons/icons8-warning.png";
+import WarningMessage from "../../Main Components/WarningMessage";
 
 interface contactState {
   firstName: string;
@@ -193,10 +194,7 @@ function ContactDescription() {
         <div className="inputs-main">
           <div className="inputs">
             {state.inputIsNotValid && (
-              <div className="warning-message">
-                <img src={warning} alt="warning" />
-                <span>{state.message}</span>
-              </div>
+              <WarningMessage warningMessage={state.message} />
             )}
             <form onSubmit={submitContactForm}>
               <div className="name-inputs">

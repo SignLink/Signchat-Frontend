@@ -48,7 +48,8 @@
     gap: 1.7rem;
     align-items: center;
 }
-.signup-inputs h1{
+
+.signup-inputs h1 {
     font-weight: 700;
     color: var(--font-color);
     font-size: 2.5rem;
@@ -64,13 +65,22 @@
     background-color: rgba(247, 247, 247, 1);
     border: 1px solid rgb(187, 187, 187);
 }
-.signup-inputs input:nth-child(6){
+
+.signup-inputs input:focus {
+    outline: none;
+    border: 2px solid #008AB8;
+    background-color: white;
+}
+
+.signup-inputs input:nth-child(6) {
     margin-bottom: .6rem;
 }
-.signup-inputs span{
+
+.signup-inputs span {
     color: rgba(177, 177, 177, 1);
 }
-.signup-inputs span a{
+
+.signup-inputs span a {
     color: var(--nav-font-color);
     text-decoration: none;
 }
