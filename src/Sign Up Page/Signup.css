@@ -42,11 +42,16 @@
     height: 600px;
 }
 
-.signup-inputs {
+.signup-inputs,
+.signup-inputs form {
     display: flex;
     flex-direction: column;
-    gap: 1.7rem;
+    gap: 1.2rem;
     align-items: center;
+}
+
+.signup-inputs form {
+    width: 100%;
 }
 
 .signup-inputs h1 {
@@ -72,8 +77,14 @@
     background-color: white;
 }
 
-.signup-inputs input:nth-child(6) {
-    margin-bottom: .6rem;
+.signup-inputs .firstname-invalid:focus,
+.signup-inputs .lastname-invalid:focus,
+.signup-inputs .email-invalid:focus,
+.signup-inputs .password-invalid:focus,
+.signup-inputs .confirm-password-invalid:focus {
+    outline: none;
+    border: 2px solid #b800007f;
+    background-color: white;
 }
 
 .signup-inputs span {
