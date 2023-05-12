@@ -8,10 +8,14 @@ import Footer from "../Main Components/Footer";
 import Modal from "../Main Components/Modal";
 import Signup from "../Sign Up Page/Signup";
 import { useSelector } from "react-redux";
+import Login from "../Login Page/Login";
 
 function Home() {
   const signupInitialState = useSelector(
     (state: any) => state.signup.signupIsOpen
+  );
+  const loginInitialState = useSelector(
+    (state: any) => state.login.loginIsOpen
   );
 
   return (
@@ -19,6 +23,11 @@ function Home() {
       {signupInitialState && (
         <Modal>
           <Signup />
+        </Modal>
+      )}
+      {loginInitialState && (
+        <Modal>
+          <Login />
         </Modal>
       )}
       <MainWrapper>

@@ -1,0 +1,81 @@
+.login-page-main {
+    width: 60rem;
+    background-color: white;
+    height: 43rem;
+    border: 1px solid var(--popup-border-color);
+    position: fixed;
+    z-index: 15;
+    border-radius: 10px;
+}
+
+.login-inputs-main {
+    display: flex;
+    justify-content: center;
+    gap: 3.5rem;
+    align-items: center;
+}
+
+.login-image img {
+    width: 450px;
+    height: 600px;
+}
+
+.login-inputs,
+.login-inputs form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: center;
+}
+.login-inputs{
+    width: 35%;
+}
+.login-inputs form {
+    width: 100%;
+}
+.login-inputs .password{
+    margin-bottom: 1.3rem;
+}
+.login-inputs h1 {
+    font-weight: 700;
+    color: var(--font-color);
+    font-size: 2.5rem;
+    width: 100%;
+    text-align: center;
+}
+
+.login-inputs input {
+    max-width: 30rem;
+    width: 100%;
+    padding: 1.1rem;
+    height: 2.7rem;
+    border-radius: 20px;
+    background-color: rgba(247, 247, 247, 1);
+    border: 1px solid rgb(187, 187, 187);
+}
+
+.login-inputs input:focus {
+    outline: none;
+    border: 2px solid #008AB8;
+    background-color: white;
+}
+
+.login-inputs h1 {
+    padding-bottom: 3.125rem;
+}
+
+.login-inputs span {
+    color: rgba(177, 177, 177, 1);
+    display: inline-block;
+    margin-top: 2rem;
+}
+
+.login-inputs span a {
+    color: var(--nav-font-color);
+    text-decoration: none;
+}
+
+.login-inputs input::placeholder {
+    font-family: 'Inter', sans-serif;
+    color: rgba(177, 177, 177, 1);
+}

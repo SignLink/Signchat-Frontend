@@ -2,10 +2,15 @@ import "./Navigations.css";
 import logo from "../Images/logo.svg";
 import Button from "./Button";
 import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { openLogin } from "../Store-Redux/LoginReducer";
 
 function Navigation() {
+  const dispatchModal = useDispatch();
 
-
+  function openLoginPage() {
+    dispatchModal(openLogin());
+  }
 
   return (
     <>
@@ -23,7 +28,7 @@ function Navigation() {
           <span style={{ marginRight: "1rem" }}>
             <NavLink to="/contact">Contact</NavLink>
           </span>
-          <Button buttonName="Login" />
+          <Button buttonName="Login" openModal={openLoginPage}/>
         </div>
       </div>
     </>
