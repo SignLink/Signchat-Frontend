@@ -243,14 +243,14 @@ function SignupInputs() {
     }
     dispatch({ type: "inputNotValid", payload: false });
 
-    const data = {
-      firstname: state.firstname,
-      lastname: state.lastname,
-      email: state.email,
-      password: state.password,
-      confirmPassword: state.confirmPassword,
-    };
-    console.log(data);
+    // const data = {
+    //   firstname: state.firstname,
+    //   lastname: state.lastname,
+    //   email: state.email,
+    //   password: state.password,
+    //   confirmPassword: state.confirmPassword,
+    // };
+    // console.log(data);
 
     dispatch({ type: "firstname", payload: "" });
     dispatch({ type: "lastname", payload: "" });
