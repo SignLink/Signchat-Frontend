@@ -117,7 +117,7 @@ function SignupInputs() {
   const validLastname = state.lastname.trim().length >= 2;
   const validEmail = state.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
   const validPassword = state.password.match(/\d/);
-  const validPasswordLength = state.password.trim().length >= 4;
+  const validPasswordLength = state.password.trim().length >= 5;
   const matchingPassword = state.password === state.confirmPassword;
 
   //make input border red if input is invalid
@@ -134,6 +134,33 @@ function SignupInputs() {
     } else {
       dispatch({ type: actionName, payload: false });
     }
+  }
+
+  function validatePassword(password: string): boolean {
+    const regex = /^(?=.*\d)[a-zA-Z0-9]{5,}$/; // Password must contain at least one number and be 5 characters or longer
+    const isValid = regex.test(password);
+
+    if (isValid) {
+      dispatch({ type: "passwordNotValid", payload: false });
+      dispatch({ type: "inputNotValid", payload: false });
+    } else {
+      if (password.length < 5) {
+        dispatch({ type: "inputNotValid", payload: true });
+        dispatch({
+          type: "warning",
+          payload: "Password must be at least 5 characters",
+        });
+      } else {
+        dispatch({ type: "passwordNotValid", payload: true });
+        dispatch({
+          type: "warning",
+          payload: "Password requires a number",
+        });
+      }
+      dispatch({ type: "passwordNotValid", payload: true });
+    }
+
+    return isValid;
   }
 
   //onchange functions for inputs
@@ -163,16 +190,7 @@ function SignupInputs() {
   }
   function passwordHandler(event: React.ChangeEvent<HTMLInputElement>) {
     dispatch({ type: "password", payload: event.target.value });
-    onFocusValidInputs(
-      !validPassword,
-      "passwordNotValid",
-      "Password requires letter, symbol and number"
-    );
-    onFocusValidInputs(
-      !validPasswordLength,
-      "passwordNotValid",
-      "Password must be at least 5 characters"
-    );
+    validatePassword(event.target.value);
   }
   function confirmPasswordHandler(event: React.ChangeEvent<HTMLInputElement>) {
     dispatch({ type: "confirmPassword", payload: event.target.value });
@@ -205,7 +223,7 @@ function SignupInputs() {
     if (!validPassword) {
       dispatch({
         type: "warning",
-        payload: "Password requires letter, symbol and number",
+        payload: "Password requires a number",
       });
       dispatch({ type: "inputNotValid", payload: true });
       return;
@@ -223,6 +241,7 @@ function SignupInputs() {
       dispatch({ type: "inputNotValid", payload: true });
       return;
     }
+    dispatch({ type: "inputNotValid", payload: false });
 
     const data = {
       firstname: state.firstname,
