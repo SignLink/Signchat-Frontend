@@ -6,6 +6,7 @@
     position: fixed;
     z-index: 15;
     border-radius: 10px;
+    transition: transform 0.3s ease;
 }
 
 .signup-logo {

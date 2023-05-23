@@ -1,4 +1,3 @@
-import React from "react";
 import Button from "../../Main Components/Button";
 import man from "../../Images/medium-shot-man-with-laptop.svg";
 import "../Login.css";
