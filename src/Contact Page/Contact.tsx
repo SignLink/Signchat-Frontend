@@ -1,4 +1,3 @@
-import React from "react";
 import Navigation from "../Main Components/Navigation";
 import MainWrapper from "../Main Components/MainWrapper";
 import Footer from "../Main Components/Footer";
