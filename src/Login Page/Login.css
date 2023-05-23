@@ -27,15 +27,19 @@
     gap: 1.2rem;
     align-items: center;
 }
-.login-inputs{
+
+.login-inputs {
     width: 35%;
 }
+
 .login-inputs form {
     width: 100%;
 }
-.login-inputs .password{
+
+.login-inputs .password {
     margin-bottom: 1.3rem;
 }
+
 .login-inputs h1 {
     font-weight: 700;
     color: var(--font-color);
@@ -70,9 +74,10 @@
     margin-top: 2rem;
 }
 
-.login-inputs span a {
+.login-inputs .signup-link {
     color: var(--nav-font-color);
     text-decoration: none;
+    cursor: pointer;
 }
 
 .login-inputs input::placeholder {

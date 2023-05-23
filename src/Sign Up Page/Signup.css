@@ -91,9 +91,10 @@
     color: rgba(177, 177, 177, 1);
 }
 
-.signup-inputs span a {
+.signup-inputs .login-link {
     color: var(--nav-font-color);
     text-decoration: none;
+    cursor: pointer;
 }
 
 .signup-inputs input::placeholder {

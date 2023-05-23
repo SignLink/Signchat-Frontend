@@ -1,9 +1,11 @@
 import "../Signup.css";
 import lady from "../../Images/gorgeous-smiling-female.svg";
 import Button from "../../Main Components/Button";
-import { NavLink } from "react-router-dom";
 import { useReducer } from "react";
 import WarningMessage from "../../Main Components/WarningMessage";
+import { useDispatch } from "react-redux";
+import { openLogin } from "../../Store-Redux/LoginReducer";
+import { closeSignup } from "../../Store-Redux/SignupReducer";
 
 //TODO: Use validation for used email
 
@@ -259,6 +261,14 @@ function SignupInputs() {
     dispatch({ type: "confirmPassword", payload: "" });
   }
 
+  //open login page when u click login
+  const dispatchLogin = useDispatch();
+
+  function openLoginPage() {
+    dispatchLogin(openLogin());
+    dispatchLogin(closeSignup());
+  }
+
   return (
     <>
       <div className="signup-inputs-main">
@@ -318,7 +328,7 @@ function SignupInputs() {
             <Button buttonName="Create Account" />
           </form>
           <span>
-            Already have an account? <NavLink to="/login">Login</NavLink>
+            Already have an account? <span className="login-link" onClick={openLoginPage}>Login</span>
           </span>
         </div>
 

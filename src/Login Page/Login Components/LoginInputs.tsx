@@ -1,10 +1,19 @@
 import React from "react";
 import Button from "../../Main Components/Button";
-import { NavLink } from "react-router-dom";
 import man from "../../Images/medium-shot-man-with-laptop.svg";
 import "../Login.css";
+import { useDispatch } from "react-redux";
+import { openSignup } from "../../Store-Redux/SignupReducer";
+import { closeLogin } from "../../Store-Redux/LoginReducer";
 
 function LoginInputs() {
+  //open signup page when you click signup
+  const dispatchSignup = useDispatch();
+
+  function openSignupPage() {
+    dispatchSignup(openSignup());
+    dispatchSignup(closeLogin());
+  }
   return (
     <>
       <div className="login-inputs-main">
@@ -24,11 +33,11 @@ function LoginInputs() {
             <Button buttonName="Login" />
           </form>
           <span>
-            Don't have an account?<NavLink to="/login"> Sign up</NavLink>
+            Don't have an account? <span className="signup-link" onClick={openSignupPage}> Sign up</span>
           </span>
         </div>
         <div className="login-image">
-          <img src={man} alt="main-on-camera" />
+          <img src={man} alt="man-on-camera" />
         </div>
       </div>
     </>
