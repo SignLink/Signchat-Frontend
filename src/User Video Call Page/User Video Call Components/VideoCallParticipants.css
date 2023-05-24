@@ -1,0 +1,48 @@
+.videocall-participants-main {
+    border: 1px solid black;
+    width: 27rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    min-height: 55rem;
+}
+
+.line {
+    display: inline-block;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.participants{
+    width: 90%;
+}
+.videocall-participants-main{
+    padding-top: 5rem;
+}
+.participants-title {
+    display: flex;
+    gap: 3rem;
+    justify-content: center;
+}
+.participants-title h2{
+    font-size: 1.3rem;
+    color: var(--font-color);
+}
+.participants-title button{
+    width: 40%;
+    padding: .4rem 1rem;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    color: #bababa;
+}
+.participants-lists{
+    border: 1px solid black;
+    min-height: 22rem;
+    height: 40vh;
+    margin: 1rem auto;
+    width: 100%;
+    overflow-y: auto;
+}

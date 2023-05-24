@@ -1,0 +1,12 @@
+.videocall-image img{
+    width: 788px;
+    height: 724px;
+}
+.videocall-image{
+    width: 60%;
+}
+.videocall-button{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
