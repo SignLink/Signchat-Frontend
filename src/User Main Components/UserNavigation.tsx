@@ -1,0 +1,70 @@
+import React, { useState } from "react";
+import "./UserNavigation.css";
+import logo from "../Images/logo-navigation.svg";
+import maleUser from "../Icons/male-user.svg";
+import { NavLink } from "react-router-dom";
+import chat from "../Icons/chat-icon.svg";
+import videocall from "../Icons/videocall-icon.svg";
+import schedule from "../Icons/schedule-icon.svg";
+import friends from "../Icons/add-user-male.svg";
+import settings from "../Icons/settings-icon.svg";
+
+function UserNavigation() {
+  const [username, setUsername] = useState("Deborah Smith");
+
+  return (
+    <div className="user-navigation-main">
+      <div className="user-navigation-logo">
+        <img src={logo} alt="main-logo" />
+      </div>
+      <div className="user-name">
+        <img src={maleUser} alt="" />
+        <span>{username}</span>
+      </div>
+      <div className="user-navigation-buttons">
+        <div className="user-chat">
+          <NavLink to="/user/chat">
+            <button>
+              <img src={chat} alt="chat-icon" />
+              <span>Chat</span>
+            </button>
+          </NavLink>
+        </div>
+        <div className="user-videocall">
+          <NavLink to="/user/videocall">
+            <button>
+              <img src={videocall} alt="chat-icon" />
+              <span>Video Call</span>
+            </button>
+          </NavLink>
+        </div>
+        <div className="user-schedule">
+          <NavLink to="/user/schedule">
+            <button>
+              <img src={schedule} alt="chat-icon" />
+              <span>Schedule</span>
+            </button>
+          </NavLink>
+        </div>
+        <div className="user-friends">
+          <NavLink to="/user/friends">
+            <button>
+              <img src={friends} alt="chat-icon" />
+              <span>Friends</span>
+            </button>
+          </NavLink>
+        </div>
+      </div>
+      <div className="user-settings">
+        <NavLink to="/user/settings">
+          <button>
+            <img src={settings} alt="chat-icon" />
+            <span>Settings</span>
+          </button>
+        </NavLink>
+      </div>
+    </div>
+  );
+}
+
+export default UserNavigation;

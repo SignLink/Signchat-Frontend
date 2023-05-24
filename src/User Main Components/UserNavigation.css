@@ -1,0 +1,76 @@
+.user-navigation-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 21rem;
+    height: 100vh;
+}
+
+.user-navigation-logo {
+    margin-top: 2rem;
+}
+
+.user-navigation-logo img {
+    height: 50px;
+}
+
+.user-navigation-buttons {
+    margin-top: 5rem;
+}
+
+.username img,
+.user-navigation-buttons img,
+.user-settings img {
+    width: 40px;
+    height: 40px;
+}
+
+.user-name {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 2.3rem;
+}
+
+.user-navigation-main button {
+    width: 12rem;
+    height: 3.2rem;
+    display: flex;
+    justify-content: flex-start;
+    background-color: #fff;
+    border: none;
+    gap: 1rem;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 3.5rem;
+    border-radius: 10px;
+    padding-left: 1rem;
+}
+
+.user-navigation-main button span {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--font-color);
+}
+
+.user-navigation-main a {
+    text-decoration: none;
+}
+
+.user-navigation-main a.active button,
+.user-navigation-main a.active span,
+.user-navigation-main a:hover button,
+.user-navigation-main a:hover span {
+    background-color: var(--nav-font-color);
+    color: white;
+}
+
+.user-navigation-main a.active button img,
+.user-navigation-main a:hover button img {
+    filter: brightness(0) invert(1);
+}
+
+.user-settings {
+    margin-top: 5rem;
+}
