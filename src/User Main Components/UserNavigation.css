@@ -48,7 +48,8 @@
     padding-left: 1rem;
 }
 
-.user-navigation-main button span {
+.user-navigation-main button span,
+.user-name span {
     font-size: 1.1rem;
     font-weight: 700;
     color: var(--font-color);
