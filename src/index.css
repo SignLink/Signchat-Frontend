@@ -6,6 +6,23 @@
   box-sizing: border-box;
 }
 
+*::-webkit-scrollbar {
+  width: 7px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #fff;
+  /* color of the tracking area */
+}
+
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(#00a8e8, #007ea7);
+  /* color of the scroll thumb */
+  border-radius: 50px;
+  /* roundness of the scroll thumb */
+  /* border: 3px solid orange;  creates padding around scroll thumb */
+}
+
 :root {
   --nav-font-color: #008AB8;
   --active-color: #00a8e8;
