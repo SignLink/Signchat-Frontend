@@ -3,7 +3,7 @@ import "./VideoCallParticipants.css";
 import line from "../../Images/Line.svg";
 import profile from "../../Icons/male-user.svg";
 import mute from "../../Icons/mute-unmute.svg";
-
+import send from "../../Icons/sent.svg";
 function VideoCallParticipants() {
   const participantsLists = [
     {
@@ -50,9 +50,9 @@ function VideoCallParticipants() {
         <div className="participants-lists">
           {participantsLists.map(function (names, index) {
             return (
-              <div key={index}>
+              <div key={index} className="participants-box">
                 <img src={profile} alt="profile-pic" />
-                <div>
+                <div className="participants-name-and-mute">
                   <span>{names.name}</span>
                   <button>
                     <img src={mute} alt="mute-button" />
@@ -69,7 +69,14 @@ function VideoCallParticipants() {
       </span>
       <div className="videocall-chat-main">
         <div className="videocall-chat-box"></div>
-        <div className="videocall-send"></div>
+        <div className="videocall-send">
+          <input type="text" placeholder="Send..." id="Send-input" />
+          <div className="videocall-send-div">
+            <button>
+              <img src={send} alt="send" />
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
