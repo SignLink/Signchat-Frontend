@@ -1,0 +1,47 @@
+.active-videocall-main {
+    height: 100%;
+    
+}
+
+.video-chat {
+    height: 90%;
+}
+
+.videocall-buttons {
+    height: 10%;
+    max-width: 37rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    align-items: center;
+}
+
+.videocall-buttons button {
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    padding: .5rem;
+    border: 1px solid var(--popup-border-color);
+    cursor: pointer;
+}
+
+.leave-button {
+    width: 10rem;
+    height: 2.4rem;
+    border-radius: 13px !important;
+    border: none !important;
+    background-color: #C8471E;
+    font-size: 1rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+
+}
+
+.videocall-buttons img {
+    width: 25px;
+    height: 25px;
+}

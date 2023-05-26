@@ -6,6 +6,7 @@ import VideoCallParticipants from "./User Video Call Components/VideoCallPartici
 import { useState } from "react";
 import VideoCallPopup from "./User Video Call Components/VideoCallPopup";
 import Modal from "../Main Components/Modal";
+import UserActiveVideoCall from "./User Video Call Components/UserActiveVideoCall";
 
 function UserVideoCallPage() {
   const [openCreateRoom, setOpenCreateRoom] = useState(false);
@@ -24,7 +25,8 @@ function UserVideoCallPage() {
       <MainWrapper>
         <div className="user-videocall-main">
           <UserNavigation />
-          <UserVideoCall openCreateVideoCall={openStartVideoCall} />
+          {/* <UserVideoCall openCreateVideoCall={openStartVideoCall} /> */}
+          <UserActiveVideoCall/>
           <VideoCallParticipants />
         </div>
       </MainWrapper>
