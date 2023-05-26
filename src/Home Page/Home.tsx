@@ -7,8 +7,11 @@ import HowItWorks from "./Home Components/HowItWorks";
 import Footer from "../Main Components/Footer";
 import Modal from "../Main Components/Modal";
 import Signup from "../Sign Up Page/Signup";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Login from "../Login Page/Login";
+import { closeLogin } from "../Store-Redux/LoginReducer";
+import { closeModal } from "../Store-Redux/ModalReducer";
+import { closeSignup } from "../Store-Redux/SignupReducer";
 
 function Home() {
   const signupInitialState = useSelector(
@@ -18,15 +21,23 @@ function Home() {
     (state: any) => state.login.loginIsOpen
   );
 
+  const dispatchModal = useDispatch()
+
+function closeModalHandler() {
+  dispatchModal(closeModal());
+  dispatchModal(closeLogin());
+  dispatchModal(closeSignup());
+}
+
   return (
     <>
       {signupInitialState && (
-        <Modal>
+        <Modal onClose={closeModalHandler}>
           <Signup />
         </Modal>
       )}
       {loginInitialState && (
-        <Modal>
+        <Modal onClose={closeModalHandler}>
           <Login />
         </Modal>
       )}

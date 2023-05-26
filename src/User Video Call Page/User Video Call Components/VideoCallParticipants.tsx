@@ -78,6 +78,17 @@ function VideoCallParticipants() {
               </div>
             </div>
           </div>
+          <div className="chat-info">
+            <img src={profile} alt="profile-pic" />
+            <div className="chat">
+              <span>John Smith</span>
+              <div className="chat-message">
+                That sounds fascinating! I'll be presenting a case study on the
+                use of technology in sign language interpretation. I think our
+                presentations will complement each other well.
+              </div>
+            </div>
+          </div>
         </div>
         <div className="videocall-send">
           <input type="text" placeholder="Send..." id="Send-input" />
