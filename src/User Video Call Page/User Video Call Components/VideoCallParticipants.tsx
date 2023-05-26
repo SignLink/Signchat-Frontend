@@ -68,7 +68,17 @@ function VideoCallParticipants() {
         <img src={line} alt="line" />
       </span>
       <div className="videocall-chat-main">
-        <div className="videocall-chat-box"></div>
+        <div className="videocall-chat-box">
+          <div className="chat-info">
+            <img src={profile} alt="profile-pic" />
+            <div className="chat">
+              <span>Deborah Smith</span>
+              <div className="chat-message">
+                Hi, you guys. Glad u are here 😁
+              </div>
+            </div>
+          </div>
+        </div>
         <div className="videocall-send">
           <input type="text" placeholder="Send..." id="Send-input" />
           <div className="videocall-send-div">

@@ -99,6 +99,7 @@
     height: 20rem;
     border-radius: 10px;
     background-color: #fbfbfb;
+    padding: 1rem;
 }
 .videocall-send{
     margin-top: .5rem;
@@ -140,4 +141,27 @@
     border: 2px solid #008ab8;
     outline: none;
     background-color: #fff;
+}
+.chat-info{
+    display: flex;
+    gap: .5rem;
+    font-size: .8rem;
+}
+.chat-info img{
+    width: 30px;
+    height: 30px;
+}
+.chat-info span{
+    font-weight: 700;
+    color: var(--font-color);
+}
+.chat-message{
+    margin-top: .3rem;
+    padding: .6rem .8rem;
+    font-weight: 600;
+    color: var(--font-color);
+    background-color: #f1f1f1;
+    max-width: 15rem;
+    width: 100%;
+    border-radius: 10px;
 }
