@@ -10,7 +10,6 @@ function VideoCallPopup() {
           <span>Create Room</span>
         </div>
         <div className="room-name">
-          <span>Room Name</span>
           <input type="text" id="input-room-name" placeholder="Enter Room Name..."/>
         </div>
         <div className="create-videocall-button-div">
