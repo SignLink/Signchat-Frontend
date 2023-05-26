@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "../../Main Components/Button";
+import './VideoCallPopup.css'
 
 function VideoCallPopup() {
   return (
@@ -10,7 +11,7 @@ function VideoCallPopup() {
         </div>
         <div className="room-name">
           <span>Room Name</span>
-          <input type="text" id="input-room-name" />
+          <input type="text" id="input-room-name" placeholder="Enter Room Name..."/>
         </div>
         <div className="create-videocall-button-div">
           <Button buttonName="Create Video Call" />

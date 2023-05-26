@@ -10,14 +10,14 @@ import Modal from "../Main Components/Modal";
 function UserVideoCallPage() {
   const [openCreateRoom, setOpenCreateRoom] = useState(false);
 
-  function openStartVideoCall(){
-    setOpenCreateRoom(true)
+  function openStartVideoCall() {
+    setOpenCreateRoom(true);
   }
 
   return (
     <>
       {openCreateRoom && (
-        <Modal>
+        <Modal onClose={() => setOpenCreateRoom(false)}>
           <VideoCallPopup />
         </Modal>
       )}

@@ -10,10 +10,9 @@
   width: 7px;
 }
 
-*::-webkit-scrollbar-track {
+/* *::-webkit-scrollbar-track {
   background: #fff;
-  /* color of the tracking area */
-}
+} */
 
 *::-webkit-scrollbar-thumb {
   background: linear-gradient(#00a8e8, #007ea7);
