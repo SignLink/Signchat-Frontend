@@ -14,7 +14,10 @@ function UserVideoCall(props: Props) {
           <img src={meeting} alt="" />
         </div>
         <div className="videocall-button">
-          <Button buttonName="Start Video Call" openModal={props.openCreateVideoCall} />
+          <Button
+            buttonName="Start Video Call"
+            openModal={props.openCreateVideoCall}
+          />
         </div>
       </div>
     </>
