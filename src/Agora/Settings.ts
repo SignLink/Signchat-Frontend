@@ -1,15 +1,22 @@
-import { createClient, createMicrophoneAndCameraTracks } from "agora-rtc-react";
-
-const appId: string = "fc72deb92dd544adb7ed2300bbb52a1a";
-const token: string =
-  "007eJxTYBCrvu8c+yxExahsb3LIT+X1gmuLCjr85rTfY8oV5SvecluBIS3Z3CglNcnSKCXF1MQkMSXJPDXFyNjAICkpydQo0TDxoX9hSkMgI8OpuUmsjAwQCOILMQRnpuc5ZySW6IZlpqTmOyfm5DAwAAD/rSR4";
-
-export const config: any = {
+import {
+  ClientConfig,
+  IAgoraRTCRemoteUser,
+  ICameraVideoTrack,
+  IMicrophoneAudioTrack,
+  AgoraVideoPlayer,
+  createClient,
+  createMicrophoneAndCameraTracks,
+} from "agora-rtc-react";
+//Agora Video Settings
+const config: ClientConfig = {
   mode: "rtc",
   codec: "vp8",
-  appId: appId,
-  token: token,
 };
+export const appId: string = "fc72deb92dd544adb7ed2300bbb52a1a";
+export const token: string =
+  "007eJxTYLAxDbgfq1pkWd7YnrPNV1ZFaEu4U3WIwT2Z0jd/LrnHuykwpCWbG6WkJlkapaSYmpgkpiSZp6YYGRsYJCUlmRolGiZuWVye0hDIyKAkuZGJkQECQXwhhuLM9LzkjMQS3bLMlNT85MScHAYGAIUgI1Q=";
+export const nameOfChannel: string = "signchat-videocall";
+
+//setting up video call
 export const useClient = createClient(config);
 export const useMicrophoneAndCameraTracks = createMicrophoneAndCameraTracks();
-export const channelName = "SignChat-VideoCall";

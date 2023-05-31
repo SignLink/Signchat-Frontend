@@ -16,81 +16,25 @@ interface Props {
   users: any[];
 }
 
-function UserActiveVideoCall({
-  currentUsers,
-  tracks,
-  setInCall,
-  setStart,
-  users,
-}: Props) {
+function UserActiveVideoCall() {
   const client = useClient();
   const [trackState, setTrackState] = useState({ video: true, audio: true });
 
-  //leave video call
-  const leaveChannel = async function () {
-    await client.leave();
-    client.removeAllListeners();
-    tracks[0].close();
-    tracks[1].close();
-    setStart(false);
-    setInCall(false);
-  };
-
-  //mute function
-  const mute = async function (type: string) {
-    //mute audio
-    if (type === "audio") {
-      await tracks[0].setEnabled(!trackState.audio);
-      setTrackState((ps) => {
-        return { ...ps, audio: !ps.audio };
-      });
-    }
-    //mute video
-    if (type === "video") {
-      await tracks[1].setEnabled(!trackState.audio);
-      setTrackState((ps) => {
-        return { ...ps, video: !ps.video };
-      });
-    }
-  };
-
-  const muteButtonColor = trackState.audio ? "gray" : "red";
-  const offVideoColor = trackState.video ? "gray" : "red";
   return (
     <>
       <div className="active-videocall-main">
         <div className="video-call-info">
           <span>
             <img src={people} alt="people" />
-            {`${currentUsers} people`}
+            {`${0} people`}
           </span>
           <button className="add-people-button">
             <img src={addPeople} alt="add-people" />
             Add People
           </button>
         </div>
-        <div className="main-user" id="user-1">
-          <AgoraVideoPlayer
-            videoTrack={tracks[1]}
-            style={{ height: "100%", width: "100%" }}
-          />
-        </div>
-        <div className="video-chat">
-          {users.length > 0 &&
-            users.map(function (user, index) {
-              if (user.videoTrack) {
-                return (
-                  <div className="video-call-frame" id="user-2" key={index}>
-                    <AgoraVideoPlayer
-                      videoTrack={user.videoTrack}
-                      key={user.uid}
-                      style={{ height: "100%", width: "100%" }}
-                    />
-                  </div>
-                );
-              } else return null;
-            })}
-        </div>
+        <div className="main-user" id="user-1"></div>
+        <div className="video-chat"></div>
         <div className="videocall-buttons">
           <button className="sharescreen-button">
             <img src={shareScreen} alt="share-screen" />
@@ -98,19 +42,11 @@ function UserActiveVideoCall({
           <button>
             <img src={fullscreen} alt="full-screen" />
           </button>
-          <button className="leave-button" onClick={() => leaveChannel()}>
-            Leave
-          </button>
-          <button
-            style={{ backgroundColor: muteButtonColor }}
-            onClick={() => mute("audio")}
-          >
+          <button className="leave-button">Leave</button>
+          <button>
             <img src={muteIcon} alt="mute" />
           </button>
-          <button
-            style={{ backgroundColor: offVideoColor }}
-            onClick={() => mute("video")}
-          >
+          <button>
             <img src={noVideo} alt="no-video" />
           </button>
         </div>
