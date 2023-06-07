@@ -37,7 +37,12 @@ function UserActiveVideoCall({ closeVideo }: Props) {
 
   let client: any;
 
+  let handleUserJoined =async () => {
+    console.log('Another User Joined')
+  }
+
   let joinRoomInit = async () => {
+    console.log('I triggered')
     client = await AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
     [uid, localTracks.audioTracks, localTracks.videoTracks] = await Promise.all(
       [
@@ -46,6 +51,8 @@ function UserActiveVideoCall({ closeVideo }: Props) {
         AgoraRTC.createCameraVideoTrack(),
       ]
     );
+
+    client.on('user-published', handleUserJoined)
     joinStream();
   };
 
@@ -62,7 +69,8 @@ function UserActiveVideoCall({ closeVideo }: Props) {
 
     await client.publish([localTracks.audioTracks, localTracks.videoTracks]);
   };
-  joinRoomInit();
+
+  joinRoomInit()
 
   async function leaveChannel() {}
   return (
@@ -80,9 +88,6 @@ function UserActiveVideoCall({ closeVideo }: Props) {
         </div>
         <div className="main-user" id="main-user-1"></div>
         <div className="video-chat" ref={userPlayer}>
-          {/* <div className="video-call-frame" id={`user-container-1`}>
-            <div className="user-video-player" id={`user-1`}></div>
-          </div> */}
         </div>
         <div className="videocall-buttons">
           <button className="sharescreen-button">
