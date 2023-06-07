@@ -88,6 +88,9 @@
     width: 100%;
     background-color: white;
 }
+.user-video-player > div{
+    background-color: transparent !important;
+}
 .user-video-player video{
     border-radius: 10px;
     background-color: white;
