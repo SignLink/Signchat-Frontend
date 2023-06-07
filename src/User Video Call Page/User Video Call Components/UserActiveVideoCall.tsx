@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import muteIcon from "../../Icons/mute-unmute.svg";
 import fullscreen from "../../Icons/full-screen.svg";
 import shareScreen from "../../Icons/share-screen.svg";
@@ -6,20 +6,62 @@ import noVideo from "../../Icons/no-video.svg";
 import "./UserActiveVideoCall.css";
 import people from "../../Icons/people.svg";
 import addPeople from "../../Icons/add-user-group-woman-man.svg";
-import { useClient } from "../../Agora/Settings";
-import { AgoraVideoPlayer } from "agora-rtc-react";
+import { channelName, appId, token } from "../../Agora/Settings";
+import AgoraRTC from "agora-rtc-sdk-ng";
 interface Props {
-  currentUsers: number;
-  tracks: any;
-  setStart: any;
-  setInCall: any;
-  users: any[];
+  closeVideo: any;
 }
 
-function UserActiveVideoCall() {
-  const client = useClient();
-  const [trackState, setTrackState] = useState({ video: true, audio: true });
+interface localtracksTypes {
+  audioTracks: any;
+  videoTracks: any;
+}
 
+function UserActiveVideoCall({ closeVideo }: Props) {
+  let userPlayer = useRef<HTMLDivElement>(null);
+
+  let localTracks: localtracksTypes = {
+    audioTracks: null,
+    videoTracks: null,
+  };
+  let remoteUsers = {};
+  let uid: any;
+
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  let roomId: any = urlParams.get("room");
+
+  if (!roomId) {
+    roomId = channelName;
+  }
+
+  let client: any;
+
+  let joinStream = async () => {
+    client = await AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
+    // Join the new channel and create local tracks
+    [uid, localTracks.audioTracks, localTracks.videoTracks] = await Promise.all(
+      [
+        client.join(appId, roomId, token),
+        AgoraRTC.createMicrophoneAudioTrack(),
+        AgoraRTC.createCameraVideoTrack(),
+      ]
+    );
+
+    let videoPlayer = `<div class="video-call-frame" id="user-container-${uid}">
+         <div class="user-video-player" id="user-${uid}"></div>
+       </div>`;
+
+    userPlayer.current?.insertAdjacentHTML("beforeend", videoPlayer);
+
+    localTracks.videoTracks.play(`user-${uid}`);
+
+    await client.publish([localTracks.audioTracks, localTracks.videoTracks]);
+  };
+
+  joinStream();
+
+  async function leaveChannel() {}
   return (
     <>
       <div className="active-videocall-main">
@@ -33,8 +75,12 @@ function UserActiveVideoCall() {
             Add People
           </button>
         </div>
-        <div className="main-user" id="user-1"></div>
-        <div className="video-chat"></div>
+        <div className="main-user" id="main-user-1"></div>
+        <div className="video-chat" ref={userPlayer}>
+          {/* <div className="video-call-frame" id={`user-container-1`}>
+            <div className="user-video-player" id={`user-1`}></div>
+          </div> */}
+        </div>
         <div className="videocall-buttons">
           <button className="sharescreen-button">
             <img src={shareScreen} alt="share-screen" />
@@ -42,7 +88,9 @@ function UserActiveVideoCall() {
           <button>
             <img src={fullscreen} alt="full-screen" />
           </button>
-          <button className="leave-button">Leave</button>
+          <button className="leave-button" onClick={leaveChannel}>
+            Leave
+          </button>
           <button>
             <img src={muteIcon} alt="mute" />
           </button>

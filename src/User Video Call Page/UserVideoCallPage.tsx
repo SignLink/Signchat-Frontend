@@ -3,14 +3,10 @@ import UserNavigation from "../User Main Components/UserNavigation";
 import UserVideoCall from "./User Video Call Components/UserVideoCall";
 import "./UserVideoCallPage.css";
 import VideoCallParticipants from "./User Video Call Components/VideoCallParticipants";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import VideoCallPopup from "./User Video Call Components/VideoCallPopup";
 import Modal from "../Main Components/Modal";
 import UserActiveVideoCall from "./User Video Call Components/UserActiveVideoCall";
-import { useMicrophoneAndCameraTracks, useClient } from "../Agora/Settings";
-import { read } from "fs";
-
-type Person = number | any;
 
 function UserVideoCallPage() {
   const [openCreateRoom, setOpenCreateRoom] = useState(false);
@@ -38,7 +34,9 @@ function UserVideoCallPage() {
           {!inCall ? (
             <UserVideoCall openCreateVideoCall={openStartVideoCall} />
           ) : (
-            <UserActiveVideoCall />
+            <UserActiveVideoCall
+              closeVideo={setInCall}
+            />
           )}
           <VideoCallParticipants />
         </div>

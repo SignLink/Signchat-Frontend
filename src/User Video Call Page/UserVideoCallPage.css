@@ -6,8 +6,10 @@
     display: flex;
     justify-content: space-between;
 }
-.videocall-buttons{
-    margin: auto;;
+
+.videocall-buttons {
+    margin: auto;
+    ;
 }
 
 .video-call-info {
@@ -51,12 +53,7 @@
     height: 35px;
 }
 
-.video-call-frame {
-    border: 1px solid black;
-    display: grid;
-
-}
-.video-chat{
+.video-chat {
     margin-top: .2rem;
     margin-bottom: 3rem;
     display: flex;
@@ -65,8 +62,10 @@
     width: 100%;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
-.main-user{
+
+.main-user {
     margin-top: 3rem;
     width: 100%;
     height: 25rem;
@@ -75,6 +74,7 @@
 }
 
 .video-call-frame {
+    /* border: 1px solid black; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -82,4 +82,13 @@
     cursor: pointer;
     width: 12.92rem;
     height: 12rem;
+}
+.user-video-player{
+    height: 100%;
+    width: 100%;
+    background-color: white;
+}
+.user-video-player video{
+    border-radius: 10px;
+    background-color: white;
 }
