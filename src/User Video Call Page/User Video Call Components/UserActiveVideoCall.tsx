@@ -36,16 +36,9 @@ function UserActiveVideoCall({ closeVideo }: Props) {
   }
 
   let client: any;
-  
-  let joinRoomInit =async () => {
+
+  let joinRoomInit = async () => {
     client = await AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
-
-    joinStream()
-  }
-
-  let joinStream = async () => {
-    
-    // Join the new channel and create local tracks
     [uid, localTracks.audioTracks, localTracks.videoTracks] = await Promise.all(
       [
         client.join(appId, roomId, token),
@@ -53,6 +46,11 @@ function UserActiveVideoCall({ closeVideo }: Props) {
         AgoraRTC.createCameraVideoTrack(),
       ]
     );
+    joinStream();
+  };
+
+  let joinStream = async () => {
+    // Join the new channel and create local tracks
 
     let videoPlayer = `<div class="video-call-frame" id="user-container-${uid}">
          <div class="user-video-player" id="user-${uid}"></div>
@@ -64,7 +62,7 @@ function UserActiveVideoCall({ closeVideo }: Props) {
 
     await client.publish([localTracks.audioTracks, localTracks.videoTracks]);
   };
-  joinRoomInit()
+  joinRoomInit();
 
   async function leaveChannel() {}
   return (
