@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    
+
 }
 
 .video-chat {
@@ -47,4 +47,51 @@
 .videocall-buttons img {
     width: 25px;
     height: 25px;
+}
+
+.video-chat {
+    margin-top: .2rem;
+    margin-bottom: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .3rem;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.main-user {
+    margin-top: 3rem;
+    width: 100%;
+    height: 25rem;
+    border-radius: 10px;
+}
+
+.video-call-frame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 12.92rem;
+    height: 12rem;
+}
+
+.user-video-player,
+.main-user-video-player {
+    height: 100%;
+    width: 100%;
+    background-color: white;
+}
+
+.user-video-player>div,
+.main-user-video-player>div {
+    background-color: transparent !important;
+}
+
+.user-video-player video,
+.main-user-video-player video {
+    border-radius: 10px;
+    background-color: white;
 }
