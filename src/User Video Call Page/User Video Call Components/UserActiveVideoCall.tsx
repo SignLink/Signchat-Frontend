@@ -47,10 +47,7 @@ function UserActiveVideoCall({
             remoteUsers.map(function (remoteUser, index) {
               if (remoteUser.videoTrack) {
                 return (
-                  <div
-                    className="user-video-player"
-                    key={index}
-                  >
+                  <div className="user-video-player" key={index}>
                     <AgoraVideoPlayer
                       videoTrack={remoteUser.videoTrack}
                       key={remoteUser.id}
@@ -59,6 +56,7 @@ function UserActiveVideoCall({
                   </div>
                 );
               }
+              return null;
             })}
         </div>
         <div className="videocall-buttons">
