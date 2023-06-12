@@ -12,15 +12,14 @@ import AgoraRTC, {
   IMicrophoneAudioTrack,
   ICameraVideoTrack,
 } from "agora-rtc-sdk-ng";
-import { appId, channelName, token } from "../Agora/Settings";
+import { appId, channelName, token, client } from "../Agora/Settings";
 
 interface localTracksTypes {
-  audioTracks: IMicrophoneAudioTrack | null;
-  videoTracks: ICameraVideoTrack | null;
+  audioTrack: IMicrophoneAudioTrack | null;
+  videoTrack: ICameraVideoTrack | null;
 }
 
 function UserVideoCallPage() {
-  const client = useRef<IAgoraRTCClient>(null);
   const localUserRef = useRef<HTMLDivElement>(null);
   const remoteUserRef = useRef<HTMLDivElement | null>(null);
   const mainLocalUserRef = useRef<HTMLDivElement | null>(null);
@@ -28,10 +27,11 @@ function UserVideoCallPage() {
 
   const [openCreateRoom, setOpenCreateRoom] = useState(false);
   const [inCall, setInCall] = useState(false);
+  const [remoteUsers, setRemoteUsers] = useState<any[]>([]);
 
   const localTracks: localTracksTypes = {
-    audioTracks: null,
-    videoTracks: null,
+    audioTrack: null,
+    videoTrack: null,
   };
 
   function openStartVideoCall() {
@@ -47,27 +47,58 @@ function UserVideoCallPage() {
   }
   let uid = 0;
 
-
   async function joinCall() {
+    await client.join(appId, roomId, token, uid);
     if (localUserRef.current) {
       localUserRef.current.id = uid.toString();
     }
-    await client.current?.join(appId, roomId, token, uid);
-    localTracks.audioTracks = await AgoraRTC.createMicrophoneAudioTrack();
-    localTracks.videoTracks = await AgoraRTC.createCameraVideoTrack();
+    localTracks.audioTrack = await AgoraRTC.createMicrophoneAudioTrack();
+    localTracks.videoTrack = await AgoraRTC.createCameraVideoTrack();
     mainLocalUserRef.current?.appendChild(localUserRef.current!);
-    await client.current?.publish([
-      localTracks.audioTracks,
-      localTracks.videoTracks,
-    ]);
-    localTracks.videoTracks.play(localUserRef.current!);
-    console.log("publish success!");
-
-    client.current?.on("user-published", handleUserJoined);
+    await client.publish([localTracks.audioTrack, localTracks.videoTrack]);
+    localTracks.videoTrack.play(localUserRef.current!);
+    console.log("publish success for local!");
+    client.on("user-published", handleUserJoined);
   }
 
   async function handleUserJoined(user: any, mediaType: any) {
-    console.log("user has joined stream");
+    await client.subscribe(user, mediaType);
+    console.log("publish success for remote user!");
+    if (mediaType === "video") {
+      const newUser = {
+        id: user.uid.toString(),
+        videoTrack: user.videoTrack,
+        audioTrack: user.audioTrack,
+      };
+      setRemoteUsers((prevUsers) => [...prevUsers, newUser]);
+      user.videoTrack.play();
+    }
+    if (mediaType === "audio") {
+      const newUser = {
+        id: user.uid.toString(),
+        audioTrack: user.audioTrack,
+      };
+      setRemoteUsers((prevUsers) => [...prevUsers, newUser]);
+      user.audioTrack.play();
+    }
+
+    client.on("user-unpublished", (user) => {
+      console.log(user.uid + " has left the channel");
+      setRemoteUsers((prevUsers) =>
+        prevUsers.filter((remoteUser) => remoteUser.id !== user.uid.toString())
+      );
+    });
+  }
+  async function leaveCall() {
+    localTracks.audioTrack?.close();
+    localTracks.videoTrack?.close();
+    await client.leave();
+    await client.removeAllListeners()
+    remoteUserRef.current?.remove();
+    localUserRef.current?.remove();
+    setOpenCreateRoom(false);
+    setInCall(false);
+    console.log("left Channel");
   }
 
   return (
@@ -94,6 +125,9 @@ function UserVideoCallPage() {
               localUserRef={localUserRef}
               remoteUserRef={remoteUserRef}
               mainLocalUserRef={mainLocalUserRef}
+              mainRemoteUserRef={mainRemoteUserRef}
+              leaveCall={leaveCall}
+              remoteUsers={remoteUsers}
             />
           )}
           <VideoCallParticipants />

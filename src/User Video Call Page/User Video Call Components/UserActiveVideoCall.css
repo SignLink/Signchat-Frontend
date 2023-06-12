@@ -6,10 +6,6 @@
 
 }
 
-.video-chat {
-    height: 90%;
-}
-
 .videocall-buttons {
     height: 10%;
     max-width: 37rem;
@@ -68,7 +64,7 @@
     border-radius: 10px;
 }
 
-.video-call-frame {
+.user-video-player {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -78,14 +74,12 @@
     height: 12rem;
 }
 
-.user-video-player,
 .main-user-video-player {
     height: 100%;
     width: 100%;
-    background-color: white;
 }
 
-.user-video-player>div,
+.user-video-player>div>div,
 .main-user-video-player>div {
     background-color: transparent !important;
 }
