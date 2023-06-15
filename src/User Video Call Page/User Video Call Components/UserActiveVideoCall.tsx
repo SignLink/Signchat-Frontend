@@ -8,7 +8,6 @@ import people from "../../Icons/people.svg";
 import addPeople from "../../Icons/add-user-group-woman-man.svg";
 import { AgoraVideoPlayer } from "agora-rtc-react";
 interface Props {
-  closeVideo: React.Dispatch<React.SetStateAction<boolean>>;
   localUserRef: React.MutableRefObject<HTMLDivElement | null>;
   remoteUserRef: React.MutableRefObject<HTMLDivElement | null>;
   mainLocalUserRef: React.MutableRefObject<HTMLDivElement | null>;
@@ -18,7 +17,6 @@ interface Props {
 }
 
 function UserActiveVideoCall({
-  closeVideo,
   localUserRef,
   remoteUserRef,
   mainLocalUserRef,
