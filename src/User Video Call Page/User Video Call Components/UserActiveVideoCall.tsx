@@ -14,6 +14,7 @@ interface Props {
   mainRemoteUserRef: React.MutableRefObject<HTMLDivElement | null>;
   leaveCall: () => void;
   remoteUsers: any[];
+  userCount: number;
 }
 
 function UserActiveVideoCall({
@@ -23,14 +24,17 @@ function UserActiveVideoCall({
   mainRemoteUserRef,
   leaveCall,
   remoteUsers,
+  userCount,
 }: Props) {
+  //Function to handle clicking on a remote user's video player
+  let peopleOrPerson = userCount === 1 ? "Person" : "People";
   return (
     <>
       <div className="active-videocall-main">
         <div className="video-call-info">
           <span>
             <img src={people} alt="people" />
-            {`${0} people`}
+            {`${userCount + " " + peopleOrPerson}`}
           </span>
           <button className="add-people-button">
             <img src={addPeople} alt="add-people" />
@@ -58,17 +62,11 @@ function UserActiveVideoCall({
             })}
         </div>
         <div className="videocall-buttons">
-          <button className="sharescreen-button">
-            <img src={shareScreen} alt="share-screen" />
-          </button>
           <button>
-            <img src={fullscreen} alt="full-screen" />
+            <img src={muteIcon} alt="mute" />
           </button>
           <button className="leave-button" onClick={leaveCall}>
             Leave
-          </button>
-          <button>
-            <img src={muteIcon} alt="mute" />
           </button>
           <button>
             <img src={noVideo} alt="no-video" />

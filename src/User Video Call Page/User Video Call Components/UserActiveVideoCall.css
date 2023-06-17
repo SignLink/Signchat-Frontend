@@ -53,7 +53,7 @@
     gap: .3rem;
     width: 100%;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     overflow: hidden;
 }
 
@@ -72,6 +72,9 @@
     cursor: pointer;
     width: 12.92rem;
     height: 12rem;
+    flex-shrink: 0;
+    /* Prevent the div from shrinking beyond its width */
+    margin-bottom: 0.5rem;
 }
 
 .main-user-video-player {

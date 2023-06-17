@@ -11,6 +11,7 @@ import AgoraRTC, {
   IAgoraRTCClient,
   IMicrophoneAudioTrack,
   ICameraVideoTrack,
+  IAgoraRTCRemoteUser,
 } from "agora-rtc-sdk-ng";
 import { appId, channelName, token } from "../Agora/Settings";
 
@@ -29,6 +30,7 @@ function UserVideoCallPage() {
   const [openCreateRoom, setOpenCreateRoom] = useState(false);
   const [inCall, setInCall] = useState(false);
   const [remoteUsers, setRemoteUsers] = useState<any[]>([]);
+  const [userCount, setUserCount] = useState<number>(1);
 
   const localTracks: localTracksTypes = {
     audioTrack: null,
@@ -62,13 +64,16 @@ function UserVideoCallPage() {
       localTracks.videoTrack,
     ]);
     localTracks.videoTrack.play(localUserRef.current!);
-    console.log("publish success for local!");
     client.current?.on("user-published", handleUserJoined);
+    client.current?.on("user-unpublished", handleUserUnpublished);
+    client.current?.on("user-left", handleUserLeft);
   }
 
-  async function handleUserJoined(user: any, mediaType: any) {
+  async function handleUserJoined(
+    user: IAgoraRTCRemoteUser | any,
+    mediaType: any
+  ) {
     await client.current?.subscribe(user, mediaType);
-    console.log("publish success for remote user!");
     if (mediaType === "video") {
       const newUser = {
         id: user.uid.toString(),
@@ -76,6 +81,7 @@ function UserVideoCallPage() {
         audioTrack: user.audioTrack,
       };
       setRemoteUsers((prevUsers) => [...prevUsers, newUser]);
+
       user.videoTrack.play();
     }
     if (mediaType === "audio") {
@@ -86,24 +92,36 @@ function UserVideoCallPage() {
       setRemoteUsers((prevUsers) => [...prevUsers, newUser]);
       user.audioTrack.play();
     }
+    setUserCount((prevCount) => prevCount + 1);
+  }
 
-    client.current?.on("user-unpublished", (user) => {
-      console.log(user.uid + " has left the channel");
+  async function handleUserUnpublished(
+    user: IAgoraRTCRemoteUser,
+    mediaType: any
+  ) {
+    if (mediaType === "audio") {
+      if (user.audioTrack) user.audioTrack.stop();
+    }
+    if (mediaType === "video") {
       setRemoteUsers((prevUsers) =>
         prevUsers.filter((remoteUser) => remoteUser.id !== user.uid.toString())
       );
-    });
+    }
+  }
+
+  async function handleUserLeft(user: IAgoraRTCRemoteUser) {
+    setRemoteUsers((prevUsers) =>
+      prevUsers.filter((remoteUser) => remoteUser.id !== user.uid.toString())
+    );
+    setUserCount((prevCount) => prevCount - 1);
   }
   async function leaveCall() {
-    localTracks.audioTrack?.close();
-    localTracks.videoTrack?.close();
     await client.current?.leave();
-    await client.current?.removeAllListeners();
-    remoteUserRef.current?.remove();
-    localUserRef.current?.remove();
+    client.current?.removeAllListeners();
+    localTracks.videoTrack?.close();
+    localTracks.audioTrack?.close();
     setOpenCreateRoom(false);
     setInCall(false);
-    console.log("left Channel");
   }
 
   return (
@@ -132,6 +150,7 @@ function UserVideoCallPage() {
               mainRemoteUserRef={mainRemoteUserRef}
               leaveCall={leaveCall}
               remoteUsers={remoteUsers}
+              userCount={userCount}
             />
           )}
           <VideoCallParticipants />
