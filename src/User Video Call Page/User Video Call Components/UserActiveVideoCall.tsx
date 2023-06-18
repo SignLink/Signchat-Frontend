@@ -1,7 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import muteIcon from "../../Icons/mute-unmute.svg";
-import fullscreen from "../../Icons/full-screen.svg";
-import shareScreen from "../../Icons/share-screen.svg";
 import noVideo from "../../Icons/no-video.svg";
 import "./UserActiveVideoCall.css";
 import people from "../../Icons/people.svg";
@@ -19,7 +17,6 @@ interface Props {
 
 function UserActiveVideoCall({
   localUserRef,
-  remoteUserRef,
   mainLocalUserRef,
   mainRemoteUserRef,
   leaveCall,

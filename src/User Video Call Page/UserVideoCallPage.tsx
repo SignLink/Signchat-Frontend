@@ -3,7 +3,7 @@ import UserNavigation from "../User Main Components/UserNavigation";
 import UserVideoCall from "./User Video Call Components/UserVideoCall";
 import "./UserVideoCallPage.css";
 import VideoCallParticipants from "./User Video Call Components/VideoCallParticipants";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import VideoCallPopup from "./User Video Call Components/VideoCallPopup";
 import Modal from "../Main Components/Modal";
 import UserActiveVideoCall from "./User Video Call Components/UserActiveVideoCall";
