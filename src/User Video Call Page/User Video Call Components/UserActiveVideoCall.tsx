@@ -5,23 +5,21 @@ import "./UserActiveVideoCall.css";
 import people from "../../Icons/people.svg";
 import addPeople from "../../Icons/add-user-group-woman-man.svg";
 import { AgoraVideoPlayer } from "agora-rtc-react";
+import { localTracksTypes } from "../UserVideoCallPage";
 interface Props {
-  localUserRef: React.MutableRefObject<HTMLDivElement | null>;
-  remoteUserRef: React.MutableRefObject<HTMLDivElement | null>;
-  mainLocalUserRef: React.MutableRefObject<HTMLDivElement | null>;
-  mainRemoteUserRef: React.MutableRefObject<HTMLDivElement | null>;
   leaveCall: () => void;
   remoteUsers: any[];
   userCount: number;
+  uid: number;
+  localTrack: localTracksTypes | null;
 }
 
 function UserActiveVideoCall({
-  localUserRef,
-  mainLocalUserRef,
-  mainRemoteUserRef,
   leaveCall,
   remoteUsers,
   userCount,
+  localTrack,
+  uid,
 }: Props) {
   //Function to handle clicking on a remote user's video player
   let peopleOrPerson = userCount === 1 ? "Person" : "People";
@@ -38,10 +36,18 @@ function UserActiveVideoCall({
             Add People
           </button>
         </div>
-        <div className="main-user" id="main-user" ref={mainLocalUserRef}>
-          <div className="main-user-video-player" ref={localUserRef}></div>
+        <div className="main-user" id="main-user">
+          {localTrack && (
+            <div className="main-user-video-player">
+              <AgoraVideoPlayer
+                videoTrack={localTrack?.videoTrack}
+                key={uid}
+                style={{ width: "100%", height: "100%" }}
+              />
+            </div>
+          )}
         </div>
-        <div className="video-chat" ref={mainRemoteUserRef}>
+        <div className="video-chat">
           {remoteUsers.length > 0 &&
             remoteUsers.map(function (remoteUser, index) {
               if (remoteUser.videoTrack) {

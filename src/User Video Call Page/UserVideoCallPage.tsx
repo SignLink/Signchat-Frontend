@@ -15,27 +15,20 @@ import AgoraRTC, {
 } from "agora-rtc-sdk-ng";
 import { appId, channelName, token } from "../Agora/Settings";
 
-interface localTracksTypes {
-  audioTrack: IMicrophoneAudioTrack | null;
-  videoTrack: ICameraVideoTrack | null;
+export interface localTracksTypes {
+  audioTrack: IMicrophoneAudioTrack;
+  videoTrack: ICameraVideoTrack;
 }
 
 function UserVideoCallPage() {
   const localUserRef = useRef<HTMLDivElement>(null);
-  const remoteUserRef = useRef<HTMLDivElement | null>(null);
-  const mainLocalUserRef = useRef<HTMLDivElement | null>(null);
-  const mainRemoteUserRef = useRef<HTMLDivElement | null>(null);
   const client = useRef<IAgoraRTCClient | null>(null);
 
   const [openCreateRoom, setOpenCreateRoom] = useState(false);
   const [inCall, setInCall] = useState(false);
   const [remoteUsers, setRemoteUsers] = useState<any[]>([]);
   const [userCount, setUserCount] = useState<number>(1);
-
-  const localTracks: localTracksTypes = {
-    audioTrack: null,
-    videoTrack: null,
-  };
+  const [localTrack, setLocalTrack] = useState<localTracksTypes | null>(null);
 
   function openStartVideoCall() {
     setOpenCreateRoom(true);
@@ -56,14 +49,10 @@ function UserVideoCallPage() {
     if (localUserRef.current) {
       localUserRef.current.id = uid.toString();
     }
-    localTracks.audioTrack = await AgoraRTC.createMicrophoneAudioTrack();
-    localTracks.videoTrack = await AgoraRTC.createCameraVideoTrack();
-    mainLocalUserRef.current?.appendChild(localUserRef.current!);
-    await client.current?.publish([
-      localTracks.audioTrack,
-      localTracks.videoTrack,
-    ]);
-    localTracks.videoTrack.play(localUserRef.current!);
+    const localTrack = await AgoraRTC.createMicrophoneAndCameraTracks();
+    await client.current?.publish(localTrack);
+    setLocalTrack({ audioTrack: localTrack[0], videoTrack: localTrack[1] });
+
     client.current?.on("user-published", handleUserJoined);
     client.current?.on("user-unpublished", handleUserUnpublished);
     client.current?.on("user-left", handleUserLeft);
@@ -118,8 +107,6 @@ function UserVideoCallPage() {
   async function leaveCall() {
     await client.current?.leave();
     client.current?.removeAllListeners();
-    localTracks.videoTrack?.close();
-    localTracks.audioTrack?.close();
     setOpenCreateRoom(false);
     setInCall(false);
   }
@@ -144,13 +131,13 @@ function UserVideoCallPage() {
             <UserVideoCall openCreateVideoCall={openStartVideoCall} />
           ) : (
             <UserActiveVideoCall
-              localUserRef={localUserRef}
-              remoteUserRef={remoteUserRef}
-              mainLocalUserRef={mainLocalUserRef}
-              mainRemoteUserRef={mainRemoteUserRef}
+              
               leaveCall={leaveCall}
               remoteUsers={remoteUsers}
               userCount={userCount}
+              uid={uid}
+              localTrack={localTrack}
+              
             />
           )}
           <VideoCallParticipants />
