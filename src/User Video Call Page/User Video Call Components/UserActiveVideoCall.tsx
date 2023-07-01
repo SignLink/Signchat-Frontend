@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import muteIcon from "../../Icons/mute-unmute.svg";
 import noVideo from "../../Icons/no-video.svg";
 import "./UserActiveVideoCall.css";
@@ -12,6 +12,9 @@ interface Props {
   userCount: number;
   uid: number;
   localTrack: localTracksTypes | null;
+  setRemoteUsers: React.Dispatch<React.SetStateAction<any>>;
+  activeTrack: any;
+  setActiveTrack: React.Dispatch<any>;
 }
 
 function UserActiveVideoCall({
@@ -20,9 +23,13 @@ function UserActiveVideoCall({
   userCount,
   localTrack,
   uid,
+  setRemoteUsers,
+  activeTrack,
+  setActiveTrack
 }: Props) {
   //Function to handle clicking on a remote user's video player
   let peopleOrPerson = userCount === 1 ? "Person" : "People";
+
   return (
     <>
       <div className="active-videocall-main">
@@ -37,11 +44,11 @@ function UserActiveVideoCall({
           </button>
         </div>
         <div className="main-user" id="main-user">
-          {localTrack && (
+          {activeTrack && (
             <div className="main-user-video-player">
               <AgoraVideoPlayer
-                videoTrack={localTrack?.videoTrack}
-                key={uid}
+                videoTrack={activeTrack?.videoTrack}
+                key={activeTrack.id}
                 style={{ width: "100%", height: "100%" }}
               />
             </div>
@@ -52,7 +59,17 @@ function UserActiveVideoCall({
             remoteUsers.map(function (remoteUser, index) {
               if (remoteUser.videoTrack) {
                 return (
-                  <div className="user-video-player" key={index}>
+                  <div
+                    className="user-video-player"
+                    key={index}
+                    onClick={() => {
+                      setRemoteUsers((prev: any) =>
+                        prev.filter((_user: any) => _user.id !== remoteUser.id)
+                      );
+                      setRemoteUsers((prev: any) => [...prev, activeTrack]); // Add the activeTrack to remoteUsers
+                      setActiveTrack(remoteUser); // Update the activeTrack
+                    }}
+                  >
                     <AgoraVideoPlayer
                       videoTrack={remoteUser.videoTrack}
                       key={remoteUser.id}

@@ -16,6 +16,7 @@ import AgoraRTC, {
 import { appId, channelName, token } from "../Agora/Settings";
 
 export interface localTracksTypes {
+  id: number;
   audioTrack: IMicrophoneAudioTrack;
   videoTrack: ICameraVideoTrack;
 }
@@ -29,7 +30,8 @@ function UserVideoCallPage() {
   const [remoteUsers, setRemoteUsers] = useState<any[]>([]);
   const [userCount, setUserCount] = useState<number>(1);
   const [localTrack, setLocalTrack] = useState<localTracksTypes | null>(null);
-
+  const[activeTrack, setActiveTrack] = useState<localTracksTypes | null>(null)
+ 
   function openStartVideoCall() {
     setOpenCreateRoom(true);
   }
@@ -51,7 +53,8 @@ function UserVideoCallPage() {
     }
     const localTrack = await AgoraRTC.createMicrophoneAndCameraTracks();
     await client.current?.publish(localTrack);
-    setLocalTrack({ audioTrack: localTrack[0], videoTrack: localTrack[1] });
+    setLocalTrack({ audioTrack: localTrack[0], videoTrack: localTrack[1], id: uid });
+    setActiveTrack({ audioTrack: localTrack[0], videoTrack: localTrack[1], id: uid });
 
     client.current?.on("user-published", handleUserJoined);
     client.current?.on("user-unpublished", handleUserUnpublished);
@@ -131,14 +134,16 @@ function UserVideoCallPage() {
             <UserVideoCall openCreateVideoCall={openStartVideoCall} />
           ) : (
             <UserActiveVideoCall
-              
               leaveCall={leaveCall}
               remoteUsers={remoteUsers}
               userCount={userCount}
               uid={uid}
               localTrack={localTrack}
-              
+              setRemoteUsers={setRemoteUsers}
+              activeTrack={activeTrack}
+              setActiveTrack={setActiveTrack}
             />
+            
           )}
           <VideoCallParticipants />
         </div>
