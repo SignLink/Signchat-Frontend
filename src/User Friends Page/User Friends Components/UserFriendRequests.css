@@ -1,0 +1,76 @@
+.user-friends-requests-main {
+    margin-top: 2.75rem;
+    margin-left: 6rem;
+    height: 45rem;
+    overflow-y: auto;
+}
+
+.user-friends-requests-main h1 {
+    font-size: 1.5rem;
+    color: var(--font-color);
+    position: sticky;
+}
+
+.friend-request {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    width: 60%;
+}
+
+.friend-profile img {
+    width: 70px;
+    height: 70px;
+}
+
+.friend-options {
+    font-weight: 700;
+    color: var(--font-color);
+}
+
+.friend-info {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.friend-options-buttons {
+    display: flex;
+    gap: 2rem;
+    padding-top: .6rem;
+}
+
+.friend-options-buttons button {
+    padding: 0.2rem 1rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: var(--nav-font-color);
+    color: white;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: .5rem;
+}
+.friend-options-buttons button img{
+    width: 25px;
+    height: 25px;
+    filter: brightness(0) invert(1);
+  
+}
+
+.friend-delete-button {
+    margin-right: 5rem;
+}
+
+.friend-delete-button button {
+    padding: 0.5rem 2rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: #A70000;
+    color: white;
+    font-weight: 700;
+}
