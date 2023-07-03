@@ -1,4 +1,4 @@
-import "./UserFriendRequests.css";
+import "./UserFriendLists.css";
 import profilePic from "../../Images/christina-morillo-profile.svg";
 import chat from "../../Icons/chat-icon.svg";
 import videoCall from "../../Icons/videocall-icon.svg";

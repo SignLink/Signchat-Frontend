@@ -1,12 +1,20 @@
-import UserFriendRequests from './UserFriendRequests';
-import './UserFriends.css'
+import UserFriendRequests from "./UserFriendsLists";
+import "./UserFriends.css";
 import UserFriendsButtons from "./UserFriendsButtons";
 
-function UserFriends() {
+interface Props {
+  openAddFriends: () => void;
+  openFriendRequests: () => void;
+}
+
+function UserFriends({ openAddFriends, openFriendRequests }: Props) {
   return (
     <div className="user-friends-main">
-      <UserFriendsButtons />
-      <UserFriendRequests/>
+      <UserFriendsButtons
+        openAddFriends={openAddFriends}
+        openFriendRequests={openFriendRequests}
+      />
+      <UserFriendRequests />
     </div>
   );
 }

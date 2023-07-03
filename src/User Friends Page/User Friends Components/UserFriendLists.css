@@ -70,7 +70,7 @@
     border-radius: 10px;
     border: none;
     cursor: pointer;
-    background-color: #A70000;
+    background-color: var(--red-color);
     color: white;
     font-weight: 700;
 }

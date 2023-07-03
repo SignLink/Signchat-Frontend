@@ -1,4 +1,3 @@
-import React from "react";
 import Navigation from "../Main Components/Navigation";
 import Introduction from "./Home Components/Introduction";
 import Descriptions from "./Home Components/Descriptions";
