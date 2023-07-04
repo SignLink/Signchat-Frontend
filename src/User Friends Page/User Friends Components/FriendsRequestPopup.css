@@ -40,7 +40,8 @@
     gap: 1.5rem;
     width: 90%;
 }
-.friend-requests-descriptions{
+
+.friend-requests-descriptions {
     width: 70%;
 }
 
@@ -50,7 +51,7 @@
     color: var(--font-color);
     font-weight: 700;
     padding: .3rem 0rem;
-   
+
 }
 
 .friend-requests-lists img {
@@ -74,9 +75,11 @@
     font-weight: 700;
     margin: 0rem .5rem;
 }
-.friend-request-buttons button:nth-child(1){
-        background-color: var(--nav-font-color);
+
+.friend-request-buttons button:nth-child(1) {
+    background-color: var(--nav-font-color);
 }
-.friend-request-buttons button:nth-child(2){
+
+.friend-request-buttons button:nth-child(2) {
     background-color: var(--red-color);
 }
