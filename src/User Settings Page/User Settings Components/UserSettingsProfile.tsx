@@ -6,7 +6,7 @@ import bigProfile from '../../Images/circled-user-male-skin-type.svg'
 function UserSettingsProfile() {
   return (
     <div className="user-settings-profile-main">
-      <span>Profile</span>
+      <span className="settings-profile-title">Profile</span>
       <div className="user-settings-profile">
         <div className="user-settings-profile-info">
           <div className="settings-profile">
