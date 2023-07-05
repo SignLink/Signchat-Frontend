@@ -42,6 +42,13 @@
     width: 100%;
 }
 
+.user-address-inputs span {
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--font-color);
+}
+
 .user-address-info input:focus {
     outline: none;
     border: 2px solid #008AB8;
