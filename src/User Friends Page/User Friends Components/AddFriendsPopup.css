@@ -2,23 +2,94 @@
     z-index: 11;
     position: fixed;
     width: 37rem;
-    height: 20rem;
+    min-height: 12rem;
     background-color: white;
     border-radius: 10px;
     border: 1px solid var(--popup-border-color);
 }
-.add-friends-header{
+
+.add-friends-header {
     text-align: center;
     border-bottom: 1px solid var(--popup-border-color);
     padding: 1rem;
 }
-.add-friends-header span{
+
+.add-friends-header span {
     font-size: 1.5rem;
     color: var(--font-color);
     font-weight: 700;
 }
-.add-friend-search input{
+
+.add-friend-search {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.add-friend-search input {
     width: 30rem;
     padding: 1rem;
     border-radius: 20px;
+    background-color: rgba(247, 247, 247, 1);
+    border: 1px solid rgb(187, 187, 187);
+}
+.add-friend-search input:focus {
+    outline: none;
+    border: 2px solid #008AB8;
+    background-color: white;
+}
+
+.searched-friends {
+    width: 95%;
+    margin: auto;
+    height: 20rem;
+    overflow-y: auto;
+}
+
+.searched-friend-requests-lists {
+    display: flex;
+    align-items: center;
+    margin: 1.5rem 1.5rem;
+    gap: 1.5rem;
+    width: 90%;
+    justify-content: center;
+}
+
+.searched-friend-requests-descriptions {
+    width: 70%;
+}
+
+.searched-friend-requests-descriptions span {
+    display: inline-block;
+    font-size: 1rem;
+    color: var(--font-color);
+    font-weight: 700;
+    padding: .3rem 0rem;
+
+}
+
+.searched-friend-requests-lists img {
+    width: 50px;
+    height: 50px;
+}
+
+.searched-friend-request-buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: .5rem;
+}
+
+.searched-friend-request-buttons button {
+    padding: 0.2rem 1rem;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-weight: 700;
+    margin: 0rem .5rem;
+}
+
+.searched-friend-request-buttons button:nth-child(1) {
+    background-color: var(--nav-font-color);
 }
