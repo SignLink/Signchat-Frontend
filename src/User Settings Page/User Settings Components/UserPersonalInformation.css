@@ -1,0 +1,83 @@
+.user-personal-information {
+    width: 90%;
+    border: 1px solid var(--popup-border-color);
+    border-radius: 10px;
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-personal-information input:focus {
+    outline: none;
+    border: 2px solid #008AB8;
+    background-color: white;
+}
+
+.user-personal-info-title {
+    margin-top: 1.5rem;
+    display: inline-block;
+    font-size: 1.5rem;
+    color: var(--font-color);
+    font-weight: 700;
+    margin-left: 3rem;
+}
+
+.user-personal-information-inputs {
+    width: 88%;
+}
+
+.user-personal-information-inputs-1 {
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+}
+
+.user-personal-information-inputs-1 input {
+    max-width: 15rem;
+    width: 100%;
+    min-width: 100%;
+    padding: 1rem;
+    border-radius: 20px;
+    background-color: rgba(247, 247, 247, 1);
+    border: 1px solid rgb(187, 187, 187);
+}
+
+.personal-info-firstname,
+.personal-info-lastname,
+.personal-info-sex {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 28%;
+}
+
+.user-personal-information-inputs-1 span {
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--font-color);
+}
+
+.user-personal-information-inputs-2 {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.user-personal-information-inputs-2 span {
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--font-color);
+}
+
+.user-personal-information-inputs-2 input {
+    max-width: 31.6rem;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 20px;
+    background-color: rgba(247, 247, 247, 1);
+    border: 1px solid rgb(187, 187, 187);
+}
