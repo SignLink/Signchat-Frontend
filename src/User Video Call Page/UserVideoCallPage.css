@@ -1,10 +1,11 @@
 .active-videocall-main {
-    width: 45%;
+    width: 50%;
 }
 
 .user-videocall-main {
     display: flex;
     justify-content: space-between;
+    width: 100%;
 }
 
 .videocall-buttons {
@@ -52,9 +53,3 @@
     width: 35px;
     height: 35px;
 }
-
-
-
-
-
-

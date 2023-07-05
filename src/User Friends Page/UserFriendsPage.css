@@ -1,3 +1,4 @@
-.user-friends-page-main{
+.user-friends-page-main {
     display: flex;
+    width: 100%;
 }

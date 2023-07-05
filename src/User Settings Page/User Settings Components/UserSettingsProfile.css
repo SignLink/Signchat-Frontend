@@ -1,0 +1,14 @@
+.user-settings-profile-main {
+    width: 100%;
+}
+
+.user-settings-profile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 70rem;
+    width: 100%;
+    height: 10rem;
+    border: 1px solid var(--popup-border-color);
+    border-radius: 10px;
+}
