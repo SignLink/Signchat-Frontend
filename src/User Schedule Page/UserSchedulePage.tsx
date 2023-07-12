@@ -7,7 +7,7 @@ import UserSchedule from "./User Schedule Components/UserSchedule";
 function UserSchedulePage() {
   return (
     <MainWrapper>
-      <div className="user-schedule-main">
+      <div className="user-schedule-page-main">
         <UserNavigation />
         <UserSchedule />
       </div>

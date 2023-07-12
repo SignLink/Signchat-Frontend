@@ -1,9 +1,18 @@
-import React from 'react'
+import React from "react";
+import { NavLink } from "react-router-dom";
+import './UserSchedule.css'
 
 function UserSchedule() {
   return (
-    <div>UserSchedule</div>
-  )
+    <div className="user-schedule-main">
+      <div className="user-schedule-1">
+        <span>No Active Schedule Yet</span>
+        <button>
+          <NavLink to={"/user/chat"}>Back to Chat</NavLink>
+        </button>
+      </div>
+    </div>
+  );
 }
 
-export default UserSchedule
+export default UserSchedule;
