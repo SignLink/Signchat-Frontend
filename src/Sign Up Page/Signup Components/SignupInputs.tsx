@@ -131,7 +131,9 @@ function SignupInputs() {
   const validFirstname = state.firstname.trim().length >= 2;
   const validLastname = state.lastname.trim().length >= 2;
   const validEmail = state.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
-  const validPassword = state.password.match(/\d/);
+  const validPassword = state.password.match(
+    /(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])/
+  );
   const validPasswordLength = state.password.trim().length >= 6;
   const matchingPassword = state.password === state.confirmPassword;
 
@@ -151,31 +153,31 @@ function SignupInputs() {
     }
   }
 
-  function validatePassword(password: string): boolean {
-    const regex = /^(?=.*\d)[a-zA-Z0-9]{6,}$/; // Password must contain at least one number and be 5 characters or longer
-    const isValid = regex.test(password);
+  function validatePassword(password: string) {
+    const passwordHasNumber = /\d/.test(password);
+    const passwordHasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    const passwordIsValid =
+      validPasswordLength && (passwordHasNumber || passwordHasSymbol);
 
-    if (isValid) {
+    if (!validPasswordLength) {
+      dispatch({
+        type: "warning",
+        payload: "Password must be 6 characters long",
+      });
+      dispatch({ type: "inputNotValid", payload: true });
+      dispatch({ type: "passwordNotValid", payload: true });
+    } else if (!passwordHasNumber || !passwordHasSymbol) {
+      dispatch({
+        type: "warning",
+        payload: "Password must have a number and symbol",
+      });
+      dispatch({ type: "inputNotValid", payload: true });
+      dispatch({ type: "passwordNotValid", payload: true });
+    } else if (passwordIsValid) {
       dispatch({ type: "passwordNotValid", payload: false });
       dispatch({ type: "inputNotValid", payload: false });
-    } else {
-      if (password.length < 6) {
-        dispatch({ type: "inputNotValid", payload: true });
-        dispatch({
-          type: "warning",
-          payload: "Password must be at least 6 characters",
-        });
-      } else {
-        dispatch({ type: "passwordNotValid", payload: true });
-        dispatch({
-          type: "warning",
-          payload: "Password requires a number",
-        });
-      }
-      dispatch({ type: "passwordNotValid", payload: true });
+      dispatch({ type: "passwordNotValid", payload: false });
     }
-
-    return isValid;
   }
 
   //onchange functions for inputs
@@ -260,6 +262,7 @@ function SignupInputs() {
       dispatch({ type: "inputNotValid", payload: true });
       return;
     }
+
     if (!validPasswordLength) {
       dispatch({
         type: "warning",
@@ -292,7 +295,7 @@ function SignupInputs() {
     try {
       setIsLoading(true);
       const response = await api.post(endpoints.signUp, data);
-      console.log(response.data);
+      // console.log(response.data);
       dispatchNotifications(setShowNotification(true));
       dispatchNotifications(setNotificationMessage("Successfully Signed Up"));
       dispatchNotifications(setNotificationIcon(valid));
@@ -310,6 +313,7 @@ function SignupInputs() {
         dispatchNotifications(setNotificationBackgroundColor("#ffc8c8"));
         dispatchNotifications(setNotificationTextColor("#800000"));
         dispatchNotifications(setNotificationBorderColor("#800000"));
+        return;
       }
     }
 
