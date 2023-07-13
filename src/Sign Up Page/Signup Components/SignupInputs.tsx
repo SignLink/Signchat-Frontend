@@ -285,7 +285,8 @@ function SignupInputs() {
     try {
       const response = await api.post(endpoints.signUp, data);
       console.log(response.data);
-      dispatch({ type: "inputNotValid", payload: false });
+      dispatchNotifications(setShowNotification(true));
+      dispatchNotifications(setNotificationMessage("Successfully signed up"));
     } catch (error: any) {
       console.log(error.message);
       dispatchNotifications(setShowNotification(true));
@@ -315,9 +316,7 @@ function SignupInputs() {
           {state.inputIsNotValid && (
             <WarningMessage warningMessage={state.warning} inlineWidth="100%" />
           )}
-          <h1 onClick={() => dispatchNotifications(setShowNotification(true))}>
-            Create An Account
-          </h1>
+          <h1>Create An Account</h1>
           <form onSubmit={submitNewAccountForm}>
             <input
               type="text"
