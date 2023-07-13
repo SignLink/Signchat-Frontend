@@ -1,0 +1,21 @@
+.notification-modal-main{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    z-index: 20;
+    top: .5rem;
+    border-radius: 10px;
+    background-color: rgb(200, 255, 200);
+    border: 2px solid #008000;
+    height: 4rem;
+    width: 20rem;
+}
+.notification-modal-main span{
+    color: green;
+}
+.notification-modal-main img{
+    width: 45px;
+    height: 45px;
+}

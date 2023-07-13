@@ -6,6 +6,8 @@ import WarningMessage from "../../Main Components/WarningMessage";
 import { useDispatch } from "react-redux";
 import { openLogin } from "../../Store-Redux/LoginReducer";
 import { closeSignup } from "../../Store-Redux/SignupReducer";
+import { api } from "../../API/Axios";
+import { endpoints } from "../../API/Endpoints";
 
 //TODO: Use validation for used email
 
@@ -204,7 +206,7 @@ function SignupInputs() {
   }
 
   //Submit New Account Form
-  function submitNewAccountForm(event: React.FormEvent<HTMLFormElement>) {
+  async function submitNewAccountForm(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     if (!validFirstname) {
@@ -252,7 +254,25 @@ function SignupInputs() {
     //   password: state.password,
     //   confirmPassword: state.confirmPassword,
     // };
-    // console.log(data);
+
+    const data = {
+      email: state.email,
+      password: state.password,
+      returnSecureToken: true,
+    };
+
+    try {
+      const response = await api.post(endpoints.signUp, data);
+      console.log(response.data);
+      dispatch({ type: "inputNotValid", payload: false });
+    } catch (error: any) {
+      console.log(error.message);
+      dispatch({ type: "inputNotValid", payload: true });
+      dispatch({
+        type: "warning",
+        payload: "Create an Account Failed. Please try again.",
+      });
+    }
 
     dispatch({ type: "firstname", payload: "" });
     dispatch({ type: "lastname", payload: "" });
@@ -328,7 +348,10 @@ function SignupInputs() {
             <Button buttonName="Create Account" />
           </form>
           <span>
-            Already have an account? <span className="login-link" onClick={openLoginPage}>Login</span>
+            Already have an account?{" "}
+            <span className="login-link" onClick={openLoginPage}>
+              Login
+            </span>
           </span>
         </div>
 

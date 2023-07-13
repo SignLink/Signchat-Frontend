@@ -11,8 +11,10 @@ import Login from "../Login Page/Login";
 import { closeLogin } from "../Store-Redux/LoginReducer";
 import { closeModal } from "../Store-Redux/ModalReducer";
 import { closeSignup } from "../Store-Redux/SignupReducer";
+import Notification from "../Main Components/Notification";
 
 function Home() {
+  
   const signupInitialState = useSelector(
     (state: any) => state.signup.signupIsOpen
   );
@@ -20,19 +22,22 @@ function Home() {
     (state: any) => state.login.loginIsOpen
   );
 
-  const dispatchModal = useDispatch()
+  const dispatchModal = useDispatch();
 
-function closeModalHandler() {
-  dispatchModal(closeModal());
-  dispatchModal(closeLogin());
-  dispatchModal(closeSignup());
-}
+  function closeModalHandler() {
+    dispatchModal(closeModal());
+    dispatchModal(closeLogin());
+    dispatchModal(closeSignup());
+  }
 
   return (
     <>
       {signupInitialState && (
         <Modal onClose={closeModalHandler}>
-          <Signup />
+          <>
+            <Notification message="Create Account Successfull" />
+            <Signup />
+          </>
         </Modal>
       )}
       {loginInitialState && (
