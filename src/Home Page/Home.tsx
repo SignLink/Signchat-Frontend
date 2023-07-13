@@ -6,6 +6,7 @@ import HowItWorks from "./Home Components/HowItWorks";
 import Footer from "../Main Components/Footer";
 import Modal from "../Main Components/Modal";
 import Signup from "../Sign Up Page/Signup";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Login from "../Login Page/Login";
 import { closeLogin } from "../Store-Redux/LoginReducer";
@@ -14,12 +15,15 @@ import { closeSignup } from "../Store-Redux/SignupReducer";
 import Notification from "../Main Components/Notification";
 
 function Home() {
-  
   const signupInitialState = useSelector(
     (state: any) => state.signup.signupIsOpen
   );
   const loginInitialState = useSelector(
     (state: any) => state.login.loginIsOpen
+  );
+
+  const notificationInitialState = useSelector(
+    (state: any) => state.notification.notificationIsOpen
   );
 
   const dispatchModal = useDispatch();
@@ -35,7 +39,7 @@ function Home() {
       {signupInitialState && (
         <Modal onClose={closeModalHandler}>
           <>
-            <Notification message="Create Account Successfull" />
+            {notificationInitialState && <Notification />}
             <Signup />
           </>
         </Modal>

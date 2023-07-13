@@ -1,34 +1,35 @@
 import React from "react";
 import "./Notification.css";
-import check from '../Icons/icons8-ok.svg'
+import { useSelector } from "react-redux";
 
-interface props {
-  message: string;
-  onClose?: () => void;
-  colorOfBorder?: string;
-  colorOfText?: string;
-  colorOfBackground?: string;
-  icon?: any
-}
+function Notification() {
+  const notificationborderColor = useSelector(
+    (state: any) => state.notification.notificationBorderColor
+  );
+  const notificationTextColor = useSelector(
+    (state: any) => state.notification.notificationTextColor
+  );
+  const notificationBackgroundColor = useSelector(
+    (state: any) => state.notification.notificationBackgroundColor
+  );
+  const notificationMessage = useSelector(
+    (state: any) => state.notification.notificationMessage
+  );
+  const notificationIcon = useSelector(
+    (state: any) => state.notification.notificationIcon
+  );
 
-function Notification({
-  message,
-  colorOfBorder,
-  colorOfText,
-  colorOfBackground,
-  icon,
-}: props) {
   return (
     <div
       className="notification-modal-main"
       style={{
-        borderColor: colorOfBorder,
-        color: colorOfText,
-        backgroundColor: colorOfBackground,
+        borderColor: notificationborderColor,
+        color: notificationTextColor,
+        backgroundColor: notificationBackgroundColor,
       }}
     >
-      <img src={check} alt="icon"/>
-      <span>{message}</span>
+      <img src={notificationIcon} alt="icon" />
+      <span>{notificationMessage}</span>
     </div>
   );
 }

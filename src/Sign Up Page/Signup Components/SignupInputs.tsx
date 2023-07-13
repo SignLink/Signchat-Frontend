@@ -1,13 +1,19 @@
 import "../Signup.css";
 import lady from "../../Images/gorgeous-smiling-female.svg";
 import Button from "../../Main Components/Button";
-import { useReducer } from "react";
+import { useReducer, useEffect } from "react";
 import WarningMessage from "../../Main Components/WarningMessage";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { openLogin } from "../../Store-Redux/LoginReducer";
 import { closeSignup } from "../../Store-Redux/SignupReducer";
 import { api } from "../../API/Axios";
 import { endpoints } from "../../API/Endpoints";
+import notValid from "../../Icons/icons8-close-colored.svg";
+import {
+  setNotificationIcon,
+  setNotificationMessage,
+  setShowNotification,
+} from "../../Store-Redux/NotificationReducer";
 
 //TODO: Use validation for used email
 
@@ -204,6 +210,21 @@ function SignupInputs() {
       "Password must match"
     );
   }
+  //Notification States
+  const dispatchNotifications = useDispatch();
+  const notificationIsOpen = useSelector(
+    (state: any) => state.notification.notificationIsOpen
+  );
+
+  useEffect(() => {
+    const closeNotificationAfterDelay = setTimeout(() => {
+      dispatchNotifications(setShowNotification(false));
+    }, 3000);
+
+    return () => {
+      clearTimeout(closeNotificationAfterDelay);
+    };
+  }, [notificationIsOpen]);
 
   //Submit New Account Form
   async function submitNewAccountForm(event: React.FormEvent<HTMLFormElement>) {
@@ -267,11 +288,9 @@ function SignupInputs() {
       dispatch({ type: "inputNotValid", payload: false });
     } catch (error: any) {
       console.log(error.message);
-      dispatch({ type: "inputNotValid", payload: true });
-      dispatch({
-        type: "warning",
-        payload: "Create an Account Failed. Please try again.",
-      });
+      dispatchNotifications(setShowNotification(true));
+      dispatchNotifications(setNotificationMessage("Create Account Failed"));
+      dispatchNotifications(setNotificationIcon(notValid));
     }
 
     dispatch({ type: "firstname", payload: "" });
@@ -296,7 +315,9 @@ function SignupInputs() {
           {state.inputIsNotValid && (
             <WarningMessage warningMessage={state.warning} inlineWidth="100%" />
           )}
-          <h1>Create An Account</h1>
+          <h1 onClick={() => dispatchNotifications(setShowNotification(true))}>
+            Create An Account
+          </h1>
           <form onSubmit={submitNewAccountForm}>
             <input
               type="text"
