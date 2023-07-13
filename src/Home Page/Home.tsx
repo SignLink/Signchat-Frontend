@@ -6,7 +6,6 @@ import HowItWorks from "./Home Components/HowItWorks";
 import Footer from "../Main Components/Footer";
 import Modal from "../Main Components/Modal";
 import Signup from "../Sign Up Page/Signup";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Login from "../Login Page/Login";
 import { closeLogin } from "../Store-Redux/LoginReducer";

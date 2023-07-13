@@ -227,6 +227,7 @@ function SignupInputs() {
     return () => {
       clearTimeout(closeNotificationAfterDelay);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [notificationIsOpen]);
 
   //Submit New Account Form
