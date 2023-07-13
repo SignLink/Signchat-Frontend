@@ -1,7 +1,7 @@
 import "../Signup.css";
 import lady from "../../Images/gorgeous-smiling-female.svg";
 import Button from "../../Main Components/Button";
-import { useReducer, useEffect } from "react";
+import { useReducer, useEffect, useState } from "react";
 import WarningMessage from "../../Main Components/WarningMessage";
 import { useDispatch, useSelector } from "react-redux";
 import { openLogin } from "../../Store-Redux/LoginReducer";
@@ -9,6 +9,7 @@ import { closeSignup } from "../../Store-Redux/SignupReducer";
 import { api } from "../../API/Axios";
 import { endpoints } from "../../API/Endpoints";
 import notValid from "../../Icons/icons8-close-colored.svg";
+import valid from "../../Icons/icons8-ok.svg";
 import {
   setNotificationBackgroundColor,
   setNotificationBorderColor,
@@ -124,13 +125,14 @@ function SignupInputs() {
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [isLoading, setIsLoading] = useState(false);
 
   //Valid Inputs
   const validFirstname = state.firstname.trim().length >= 2;
   const validLastname = state.lastname.trim().length >= 2;
   const validEmail = state.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
   const validPassword = state.password.match(/\d/);
-  const validPasswordLength = state.password.trim().length >= 5;
+  const validPasswordLength = state.password.trim().length >= 6;
   const matchingPassword = state.password === state.confirmPassword;
 
   //make input border red if input is invalid
@@ -150,18 +152,18 @@ function SignupInputs() {
   }
 
   function validatePassword(password: string): boolean {
-    const regex = /^(?=.*\d)[a-zA-Z0-9]{5,}$/; // Password must contain at least one number and be 5 characters or longer
+    const regex = /^(?=.*\d)[a-zA-Z0-9]{6,}$/; // Password must contain at least one number and be 5 characters or longer
     const isValid = regex.test(password);
 
     if (isValid) {
       dispatch({ type: "passwordNotValid", payload: false });
       dispatch({ type: "inputNotValid", payload: false });
     } else {
-      if (password.length < 5) {
+      if (password.length < 6) {
         dispatch({ type: "inputNotValid", payload: true });
         dispatch({
           type: "warning",
-          payload: "Password must be at least 5 characters",
+          payload: "Password must be at least 6 characters",
         });
       } else {
         dispatch({ type: "passwordNotValid", payload: true });
@@ -219,6 +221,7 @@ function SignupInputs() {
     (state: any) => state.notification.notificationIsOpen
   );
 
+  // notification closes after 4secs
   useEffect(() => {
     const closeNotificationAfterDelay = setTimeout(() => {
       dispatchNotifications(setShowNotification(false));
@@ -227,7 +230,7 @@ function SignupInputs() {
     return () => {
       clearTimeout(closeNotificationAfterDelay);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [notificationIsOpen]);
 
   //Submit New Account Form
@@ -260,7 +263,7 @@ function SignupInputs() {
     if (!validPasswordLength) {
       dispatch({
         type: "warning",
-        payload: "Password must be at least 5 characters",
+        payload: "Password must be at least 6 characters",
       });
       dispatch({ type: "inputNotValid", payload: true });
       return;
@@ -287,18 +290,27 @@ function SignupInputs() {
     };
 
     try {
+      setIsLoading(true);
       const response = await api.post(endpoints.signUp, data);
       console.log(response.data);
       dispatchNotifications(setShowNotification(true));
-      dispatchNotifications(setNotificationMessage("Successfully signed up"));
+      dispatchNotifications(setNotificationMessage("Successfully Signed Up"));
+      dispatchNotifications(setNotificationIcon(valid));
+      dispatchNotifications(setNotificationBackgroundColor("#c8ffc8"));
+      dispatchNotifications(setNotificationTextColor("#008000"));
+      dispatchNotifications(setNotificationBorderColor("#008000"));
+      setIsLoading(false);
     } catch (error: any) {
-      console.log(error.message);
-      dispatchNotifications(setShowNotification(true));
-      dispatchNotifications(setNotificationMessage("Create Account Failed"));
-      dispatchNotifications(setNotificationIcon(notValid));
-      dispatchNotifications(setNotificationBackgroundColor("#ffc8c8"));
-      dispatchNotifications(setNotificationTextColor("#800000"));
-      dispatchNotifications(setNotificationBorderColor("#800000"));
+      setIsLoading(false);
+      console.log(error.response.data.error.message);
+      if (error.response.data.error.message === "EMAIL_EXISTS") {
+        dispatchNotifications(setShowNotification(true));
+        dispatchNotifications(setNotificationMessage("Email Already Exists"));
+        dispatchNotifications(setNotificationIcon(notValid));
+        dispatchNotifications(setNotificationBackgroundColor("#ffc8c8"));
+        dispatchNotifications(setNotificationTextColor("#800000"));
+        dispatchNotifications(setNotificationBorderColor("#800000"));
+      }
     }
 
     dispatch({ type: "firstname", payload: "" });
@@ -372,7 +384,8 @@ function SignupInputs() {
               }
               value={state.confirmPassword}
             />
-            <Button buttonName="Create Account" />
+            {!isLoading && <Button buttonName="Create Account" />}
+            {isLoading && <Button buttonName="Signing Up..." />}
           </form>
           <span>
             Already have an account?{" "}
