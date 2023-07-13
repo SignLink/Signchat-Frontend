@@ -24,12 +24,13 @@ function Notification() {
       className="notification-modal-main"
       style={{
         borderColor: notificationborderColor,
-        color: notificationTextColor,
         backgroundColor: notificationBackgroundColor,
       }}
     >
       <img src={notificationIcon} alt="icon" />
-      <span>{notificationMessage}</span>
+      <span style={{ color: notificationTextColor }}>
+        {notificationMessage}
+      </span>
     </div>
   );
 }

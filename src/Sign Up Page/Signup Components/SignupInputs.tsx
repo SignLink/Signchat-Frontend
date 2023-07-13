@@ -10,8 +10,11 @@ import { api } from "../../API/Axios";
 import { endpoints } from "../../API/Endpoints";
 import notValid from "../../Icons/icons8-close-colored.svg";
 import {
+  setNotificationBackgroundColor,
+  setNotificationBorderColor,
   setNotificationIcon,
   setNotificationMessage,
+  setNotificationTextColor,
   setShowNotification,
 } from "../../Store-Redux/NotificationReducer";
 
@@ -219,7 +222,7 @@ function SignupInputs() {
   useEffect(() => {
     const closeNotificationAfterDelay = setTimeout(() => {
       dispatchNotifications(setShowNotification(false));
-    }, 3000);
+    }, 4000);
 
     return () => {
       clearTimeout(closeNotificationAfterDelay);
@@ -292,6 +295,9 @@ function SignupInputs() {
       dispatchNotifications(setShowNotification(true));
       dispatchNotifications(setNotificationMessage("Create Account Failed"));
       dispatchNotifications(setNotificationIcon(notValid));
+      dispatchNotifications(setNotificationBackgroundColor("#ffc8c8"));
+      dispatchNotifications(setNotificationTextColor("#800000"));
+      dispatchNotifications(setNotificationBorderColor("#800000"));
     }
 
     dispatch({ type: "firstname", payload: "" });
