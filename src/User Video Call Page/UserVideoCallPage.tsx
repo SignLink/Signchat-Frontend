@@ -14,6 +14,9 @@ import AgoraRTC, {
   IAgoraRTCRemoteUser,
 } from "agora-rtc-sdk-ng";
 import { appId, channelName, token } from "../Agora/Settings";
+import { useSelector, useDispatch } from "react-redux";
+import LogoutModal from "../Main Components/LogoutModal";
+import { setLogout } from "../Store-Redux/LogoutReducer";
 
 export interface localTracksTypes {
   id: number;
@@ -122,8 +125,19 @@ function UserVideoCallPage() {
     setInCall(false);
   }
 
+  //logout state
+  const logoutInitialState = useSelector(
+    (state: any) => state.logout.logoutIsOpen
+  );
+  const dispatchLogout = useDispatch();
+
   return (
     <>
+      {logoutInitialState && (
+        <Modal onClose={() => dispatchLogout(setLogout(false))}>
+          <LogoutModal />
+        </Modal>
+      )}
       {openCreateRoom && (
         <Modal onClose={() => setOpenCreateRoom(false)}>
           <VideoCallPopup
