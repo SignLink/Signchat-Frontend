@@ -8,6 +8,7 @@ import videocall from "../Icons/videocall-icon.svg";
 import schedule from "../Icons/schedule-icon.svg";
 import friends from "../Icons/add-user-male.svg";
 import settings from "../Icons/settings-icon.svg";
+import logout from '../Icons/log-out.png'
 
 function UserNavigation() {
   const [username, setUsername] = useState("Deborah Smith");
@@ -62,6 +63,10 @@ function UserNavigation() {
             <span>Settings</span>
           </button>
         </NavLink>
+        <button className="user-logout">
+          <img src={logout} alt="chat-icon" />
+          <span>Logout</span>
+        </button>
       </div>
     </div>
   );

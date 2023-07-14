@@ -24,6 +24,15 @@ function LoginInputs() {
   const notificationIsOpen = useSelector(
     (state: any) => state.notification.notificationIsOpen
   );
+  const authenticationInitialToken = useSelector(
+    (state: any) => state.authentication.token
+  );
+
+  //authentication
+  const dispatchAuthentication = useDispatch();
+  const userIsLoggedIn = !!authenticationInitialToken;
+
+
 
   // notification closes after 4secs
   useEffect(() => {

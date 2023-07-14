@@ -4,12 +4,14 @@ import ModalReducer from "./ModalReducer";
 import SignupReducer from "./SignupReducer";
 import LoginReducer from "./LoginReducer";
 import NotificationReducer from "./NotificationReducer";
+import AuthReducer from "./AuthReducer";
 
 const reducers = combineReducers({
   modal: ModalReducer,
   signup: SignupReducer,
   login: LoginReducer,
   notification: NotificationReducer,
+  authentication: AuthReducer,
 });
 
 const store = configureStore({
