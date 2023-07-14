@@ -83,7 +83,7 @@ function LoginInputs() {
         dispatchNotifications(setNotificationBorderColor("#800000"));
         return;
       }
-      
+
       setEmail("");
       setPassword("");
     }
@@ -119,7 +119,7 @@ function LoginInputs() {
             {isLoading && <Button buttonName="Logging in..." />}
           </form>
           <span>
-            Don't have an account?
+            Don't have an account?{' '}
             <span className="signup-link" onClick={openSignupPage}>
               Sign up
             </span>
