@@ -45,7 +45,10 @@ function Home() {
       )}
       {loginInitialState && (
         <Modal onClose={closeModalHandler}>
-          <Login />
+          <>
+            {notificationInitialState && <Notification />}
+            <Login />
+          </>
         </Modal>
       )}
       <MainWrapper>
