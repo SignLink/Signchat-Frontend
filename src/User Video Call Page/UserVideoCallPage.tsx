@@ -1,5 +1,5 @@
 import MainWrapper from "../Main Components/MainWrapper";
-import UserNavigation from "../User Main Components/UserNavigation";
+import UserNavigation from "../Main Components/UserNavigation";
 import UserVideoCall from "./User Video Call Components/UserVideoCall";
 import "./UserVideoCallPage.css";
 import VideoCallParticipants from "./User Video Call Components/VideoCallParticipants";
@@ -30,8 +30,8 @@ function UserVideoCallPage() {
   const [remoteUsers, setRemoteUsers] = useState<any[]>([]);
   const [userCount, setUserCount] = useState<number>(1);
   const [localTrack, setLocalTrack] = useState<localTracksTypes | null>(null);
-  const[activeTrack, setActiveTrack] = useState<localTracksTypes | null>(null)
- 
+  const [activeTrack, setActiveTrack] = useState<localTracksTypes | null>(null);
+
   function openStartVideoCall() {
     setOpenCreateRoom(true);
   }
@@ -53,8 +53,16 @@ function UserVideoCallPage() {
     }
     const localTrack = await AgoraRTC.createMicrophoneAndCameraTracks();
     await client.current?.publish(localTrack);
-    setLocalTrack({ audioTrack: localTrack[0], videoTrack: localTrack[1], id: uid });
-    setActiveTrack({ audioTrack: localTrack[0], videoTrack: localTrack[1], id: uid });
+    setLocalTrack({
+      audioTrack: localTrack[0],
+      videoTrack: localTrack[1],
+      id: uid,
+    });
+    setActiveTrack({
+      audioTrack: localTrack[0],
+      videoTrack: localTrack[1],
+      id: uid,
+    });
 
     client.current?.on("user-published", handleUserJoined);
     client.current?.on("user-unpublished", handleUserUnpublished);
@@ -143,7 +151,6 @@ function UserVideoCallPage() {
               activeTrack={activeTrack}
               setActiveTrack={setActiveTrack}
             />
-            
           )}
           <VideoCallParticipants />
         </div>

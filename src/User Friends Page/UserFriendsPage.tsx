@@ -1,6 +1,6 @@
 import { useState } from "react";
 import MainWrapper from "../Main Components/MainWrapper";
-import UserNavigation from "../User Main Components/UserNavigation";
+import UserNavigation from "../Main Components/UserNavigation";
 import "./UserFriendsPage.css";
 import UserFriends from "./User Friends Components/UserFriends";
 import Modal from "../Main Components/Modal";

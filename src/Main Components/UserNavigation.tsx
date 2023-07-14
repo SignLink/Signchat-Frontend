@@ -8,10 +8,14 @@ import videocall from "../Icons/videocall-icon.svg";
 import schedule from "../Icons/schedule-icon.svg";
 import friends from "../Icons/add-user-male.svg";
 import settings from "../Icons/settings-icon.svg";
-import logout from '../Icons/log-out.png'
+import logout from "../Icons/log-out.png";
+import { useDispatch } from "react-redux";
+import { setLogout } from "../Store-Redux/LogoutReducer";
 
 function UserNavigation() {
   const [username, setUsername] = useState("Deborah Smith");
+
+  const dispatchLogout = useDispatch();
 
   return (
     <div className="user-navigation-main">
@@ -63,7 +67,10 @@ function UserNavigation() {
             <span>Settings</span>
           </button>
         </NavLink>
-        <button className="user-logout">
+        <button
+          className="user-logout"
+          onClick={() => dispatchLogout(setLogout(true))}
+        >
           <img src={logout} alt="chat-icon" />
           <span>Logout</span>
         </button>
