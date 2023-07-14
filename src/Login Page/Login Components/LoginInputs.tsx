@@ -83,13 +83,21 @@ function LoginInputs() {
         dispatchNotifications(setNotificationBorderColor("#800000"));
         return;
       }
+      if (error.response.data.error.message === "INVALID_PASSWORD") {
+        dispatchNotifications(setShowNotification(true));
+        dispatchNotifications(
+          setNotificationMessage("Invalid Password. Try Again")
+        );
+        dispatchNotifications(setNotificationIcon(notValid));
+        dispatchNotifications(setNotificationBackgroundColor("#ffc8c8"));
+        dispatchNotifications(setNotificationTextColor("#800000"));
+        dispatchNotifications(setNotificationBorderColor("#800000"));
+        return;
+      }
 
       setEmail("");
       setPassword("");
     }
-
-    // setEmail("");
-    // setPassword("");
   }
   return (
     <>
@@ -119,7 +127,7 @@ function LoginInputs() {
             {isLoading && <Button buttonName="Logging in..." />}
           </form>
           <span>
-            Don't have an account?{' '}
+            Don't have an account?{" "}
             <span className="signup-link" onClick={openSignupPage}>
               Sign up
             </span>
