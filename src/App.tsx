@@ -28,11 +28,11 @@ function App() {
           )}
           {userIsLoggedIn && (
             <>
-              <Route path={`/user/chat`} element={<UserChatPage />} />
-              <Route path="/user/friends" element={<UserFriendsPage />} />
-              <Route path="/user/schedule" element={<UserSchedulePage />} />
-              <Route path="/user/settings" element={<UserSettingsPage />} />
-              <Route path="/user/videocall" element={<UserVideoCallPage />} />
+              <Route path={`/chat`} element={<UserChatPage />} />
+              <Route path="/friends" element={<UserFriendsPage />} />
+              <Route path="/schedule" element={<UserSchedulePage />} />
+              <Route path="/settings" element={<UserSettingsPage />} />
+              <Route path="/videocall" element={<UserVideoCallPage />} />
             </>
           )}
           <Route path="*" element={<InvalidPage />} />

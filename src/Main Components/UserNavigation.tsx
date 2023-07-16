@@ -28,7 +28,7 @@ function UserNavigation() {
       </div>
       <div className="user-navigation-buttons">
         <div className="user-chat">
-          <NavLink to="/user/chat">
+          <NavLink to="/chat">
             <button>
               <img src={chat} alt="chat-icon" />
               <span>Chat</span>
@@ -36,7 +36,7 @@ function UserNavigation() {
           </NavLink>
         </div>
         <div className="user-videocall">
-          <NavLink to="/user/videocall">
+          <NavLink to="/videocall">
             <button>
               <img src={videocall} alt="chat-icon" />
               <span>Video Call</span>
@@ -44,7 +44,7 @@ function UserNavigation() {
           </NavLink>
         </div>
         <div className="user-schedule">
-          <NavLink to="/user/schedule">
+          <NavLink to="/schedule">
             <button>
               <img src={schedule} alt="chat-icon" />
               <span>Schedule</span>
@@ -52,7 +52,7 @@ function UserNavigation() {
           </NavLink>
         </div>
         <div className="user-friends">
-          <NavLink to="/user/friends">
+          <NavLink to="/friends">
             <button>
               <img src={friends} alt="chat-icon" />
               <span>Friends</span>
@@ -61,7 +61,7 @@ function UserNavigation() {
         </div>
       </div>
       <div className="user-settings">
-        <NavLink to="/user/settings">
+        <NavLink to="/settings">
           <button>
             <img src={settings} alt="chat-icon" />
             <span>Settings</span>

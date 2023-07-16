@@ -8,7 +8,6 @@ import { closeLogin } from "../../Store-Redux/LoginReducer";
 import { api } from "../../API/Axios";
 import { endpoints } from "../../API/Endpoints";
 import notValid from "../../Icons/icons8-close-colored.svg";
-import valid from "../../Icons/icons8-ok.svg";
 import {
   setNotificationBackgroundColor,
   setNotificationBorderColor,
@@ -72,7 +71,7 @@ function LoginInputs() {
       dispatchAuthentication(setToken(response.data.idToken));
       localStorage.setItem("token", response.data.idToken);
       setIsLoading(false);
-      navigate(`/user/chat`);
+      navigate(`/chat`);
     } catch (error: any) {
       setIsLoading(false);
       console.log(error);
