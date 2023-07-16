@@ -7,20 +7,35 @@ import UserFriendsPage from "./User Friends Page/UserFriendsPage";
 import UserSchedulePage from "./User Schedule Page/UserSchedulePage";
 import UserSettingsPage from "./User Settings Page/UserSettingsPage";
 import UserVideoCallPage from "./User Video Call Page/UserVideoCallPage";
+import { useSelector } from "react-redux";
+import InvalidPage from "./Main Components/InvalidPage";
 
 function App() {
+  const userToken = useSelector(
+    (state: any) => state.authentication.token
+  );
+  const userIsLoggedIn = !!userToken;
   return (
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/user/chat" element={<UserChatPage />} />
-          <Route path="/user/friends" element={<UserFriendsPage />} />
-          <Route path="/user/schedule" element={<UserSchedulePage />} />
-          <Route path="/user/settings" element={<UserSettingsPage />} />
-          <Route path="/user/videocall" element={<UserVideoCallPage />} />
+          {!userIsLoggedIn && (
+            <>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+            </>
+          )}
+          {userIsLoggedIn && (
+            <>
+              <Route path={`/user/chat`} element={<UserChatPage />} />
+              <Route path="/user/friends" element={<UserFriendsPage />} />
+              <Route path="/user/schedule" element={<UserSchedulePage />} />
+              <Route path="/user/settings" element={<UserSettingsPage />} />
+              <Route path="/user/videocall" element={<UserVideoCallPage />} />
+            </>
+          )}
+          <Route path="*" element={<InvalidPage />} />
         </Routes>
       </Router>
     </>

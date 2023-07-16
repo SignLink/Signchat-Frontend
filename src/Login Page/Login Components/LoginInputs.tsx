@@ -17,6 +17,8 @@ import {
   setNotificationTextColor,
   setShowNotification,
 } from "../../Store-Redux/NotificationReducer";
+import { setToken } from "../../Store-Redux/AuthReducer";
+import { useNavigate } from "react-router";
 
 function LoginInputs() {
   //open signup page when you click signup
@@ -24,15 +26,11 @@ function LoginInputs() {
   const notificationIsOpen = useSelector(
     (state: any) => state.notification.notificationIsOpen
   );
-  const authenticationInitialToken = useSelector(
-    (state: any) => state.authentication.token
-  );
 
   //authentication
   const dispatchAuthentication = useDispatch();
-  const userIsLoggedIn = !!authenticationInitialToken;
-
-
+  const userToken = useSelector((state: any) => state.authentication.token);
+  const navigate = useNavigate();
 
   // notification closes after 4secs
   useEffect(() => {
@@ -71,13 +69,10 @@ function LoginInputs() {
       setIsLoading(true);
       const response = await api.post(endpoints.signIn, data);
       console.log(response.data);
-      dispatchNotifications(setShowNotification(true));
-      dispatchNotifications(setNotificationMessage("Login Successful"));
-      dispatchNotifications(setNotificationIcon(valid));
-      dispatchNotifications(setNotificationBackgroundColor("#c8ffc8"));
-      dispatchNotifications(setNotificationTextColor("#008000"));
-      dispatchNotifications(setNotificationBorderColor("#008000"));
+      dispatchAuthentication(setToken(response.data.idToken));
+      localStorage.setItem("token", response.data.idToken);
       setIsLoading(false);
+      navigate(`/user/chat`);
     } catch (error: any) {
       setIsLoading(false);
       console.log(error);

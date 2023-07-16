@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface authState {
-  token: string;
+  token: string | null;
   userIsLoggedIn: boolean;
 }
 
+const initialToken = localStorage.getItem("token");
 const initialState: authState = {
-  token: "",
+  token: initialToken,
   userIsLoggedIn: false,
 };
 
@@ -23,7 +24,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { setToken, setUserIsLoggedIn} =
-  authSlice.actions;
+export const { setToken, setUserIsLoggedIn } = authSlice.actions;
 
 export default authSlice.reducer;
