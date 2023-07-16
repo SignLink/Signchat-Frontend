@@ -3,12 +3,14 @@ import { createSlice } from "@reduxjs/toolkit";
 interface authState {
   token: string | null;
   userIsLoggedIn: boolean;
+  autoLogOut: boolean;
 }
 
 const initialToken = localStorage.getItem("token");
 const initialState: authState = {
   token: initialToken,
   userIsLoggedIn: false,
+  autoLogOut: false,
 };
 
 const authSlice = createSlice({
@@ -21,9 +23,12 @@ const authSlice = createSlice({
     setUserIsLoggedIn: (state, action) => {
       state.userIsLoggedIn = action.payload;
     },
+    setAutoLogout: (state, action) => {
+      state.autoLogOut = action.payload;
+    },
   },
 });
 
-export const { setToken, setUserIsLoggedIn } = authSlice.actions;
+export const { setToken, setUserIsLoggedIn, setAutoLogout } = authSlice.actions;
 
 export default authSlice.reducer;

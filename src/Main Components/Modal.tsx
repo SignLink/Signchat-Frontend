@@ -4,13 +4,15 @@ import { MouseEvent } from "react";
 
 interface props {
   children: React.ReactElement;
-  onClose: () => void;
+  onClose?: () => void;
 }
 
 function Modal({ children, onClose }: props) {
   function handleOverlayClick(event: MouseEvent<HTMLDivElement>) {
     if (event.target === event.currentTarget) {
-      onClose();
+      if (onClose) {
+        onClose();
+      }
     }
   }
 

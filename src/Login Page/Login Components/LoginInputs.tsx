@@ -16,7 +16,7 @@ import {
   setNotificationTextColor,
   setShowNotification,
 } from "../../Store-Redux/NotificationReducer";
-import { setToken } from "../../Store-Redux/AuthReducer";
+import { setAutoLogout, setToken } from "../../Store-Redux/AuthReducer";
 import { useNavigate } from "react-router";
 
 function LoginInputs() {
@@ -28,8 +28,10 @@ function LoginInputs() {
 
   //authentication
   const dispatchAuthentication = useDispatch();
-  const userToken = useSelector((state: any) => state.authentication.token);
   const navigate = useNavigate();
+  const [autoLogoutTimer, setAutoLogoutTimer] = useState<NodeJS.Timeout | null>(
+    null
+  );
 
   // notification closes after 4secs
   useEffect(() => {
@@ -42,6 +44,22 @@ function LoginInputs() {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [notificationIsOpen]);
+
+  //auto logout timers
+  function startAutoLogoutTimer() {
+    const timer = setTimeout(() => {
+      dispatchAuthentication(setAutoLogout(true));
+    }, 5000);
+    setAutoLogoutTimer(timer);
+  }
+
+  //reset when user is active
+  function resetAutoLogoutTimer(event: Event) {
+    if (autoLogoutTimer) {
+      clearTimeout(autoLogoutTimer);
+    }
+    console.log('Im active')
+  }
 
   //Input States
   const [email, setEmail] = useState("");
@@ -72,6 +90,7 @@ function LoginInputs() {
       localStorage.setItem("token", response.data.idToken);
       setIsLoading(false);
       navigate(`/chat`);
+      startAutoLogoutTimer();
     } catch (error: any) {
       setIsLoading(false);
       console.log(error);

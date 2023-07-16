@@ -7,7 +7,7 @@ import { useNavigate } from "react-router";
 
 function LogoutModal() {
   const dispatchLogout = useDispatch();
-  const dispatchAuthetication = useDispatch();
+  const dispatchAuthentication = useDispatch();
   const navigate = useNavigate();
   return (
     <div className="logout-modal-main">
@@ -15,7 +15,7 @@ function LogoutModal() {
       <div className="logout-buttons">
         <button
           onClick={() => {
-            dispatchAuthetication(setToken(null));
+            dispatchAuthentication(setToken(null));
             dispatchLogout(setLogout(false));
             localStorage.removeItem("token");
             navigate("/");

@@ -7,15 +7,25 @@ import { useSelector, useDispatch } from "react-redux";
 import { setLogout } from "../Store-Redux/LogoutReducer";
 import Modal from "../Main Components/Modal";
 import LogoutModal from "../Main Components/LogoutModal";
+import { stat } from "fs";
+import AutoLogoutModal from "../Main Components/AutoLogoutModal";
 
 function UserChatPage() {
   const logoutInitialState = useSelector(
     (state: any) => state.logout.logoutIsOpen
   );
-   const dispatchLogout = useDispatch();
+  const autoLogOut = useSelector(
+    (state: any) => state.authentication.autoLogOut
+  );
+  const dispatchLogout = useDispatch();
   return (
     <>
-     {logoutInitialState && (
+      {autoLogOut && (
+        <Modal>
+          <AutoLogoutModal />
+        </Modal>
+      )}
+      {logoutInitialState && (
         <Modal onClose={() => dispatchLogout(setLogout(false))}>
           <LogoutModal />
         </Modal>
