@@ -5,8 +5,7 @@ import { setLogout } from "../Store-Redux/LogoutReducer";
 import { useNavigate } from "react-router";
 
 function AutoLogoutModal() {
-  const dispatchAuthentication = useDispatch();
-  const dispatchLogout = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   return (
@@ -14,9 +13,9 @@ function AutoLogoutModal() {
       <span>You have been inactive for 10min. You have been logged out</span>
       <button
         onClick={() => {
-          dispatchAuthentication(setToken(null));
-          dispatchLogout(setLogout(false));
-          dispatchLogout(setAutoLogout(false));
+          dispatch(setToken(null));
+          dispatch(setLogout(false));
+          dispatch(setAutoLogout(false));
           localStorage.removeItem("token"); 
           navigate("/");
         }}
