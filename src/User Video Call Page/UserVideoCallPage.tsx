@@ -14,6 +14,7 @@ import AgoraRTC, {
   IAgoraRTCRemoteUser,
 } from "agora-rtc-sdk-ng";
 import { appId, channelName, token } from "../Agora/Settings";
+import { async } from "q";
 
 export interface localTracksTypes {
   id: number;
@@ -30,8 +31,10 @@ function UserVideoCallPage() {
   const [remoteUsers, setRemoteUsers] = useState<any[]>([]);
   const [userCount, setUserCount] = useState<number>(1);
   const [localTrack, setLocalTrack] = useState<localTracksTypes | null>(null);
-  const[activeTrack, setActiveTrack] = useState<localTracksTypes | null>(null)
- 
+  const [activeTrack, setActiveTrack] = useState<localTracksTypes | null>(null);
+  const [muteMic, setMuteMic] = useState(false);
+  const [muteCam, setMuteCam] = useState(false);
+
   function openStartVideoCall() {
     setOpenCreateRoom(true);
   }
@@ -53,8 +56,16 @@ function UserVideoCallPage() {
     }
     const localTrack = await AgoraRTC.createMicrophoneAndCameraTracks();
     await client.current?.publish(localTrack);
-    setLocalTrack({ audioTrack: localTrack[0], videoTrack: localTrack[1], id: uid });
-    setActiveTrack({ audioTrack: localTrack[0], videoTrack: localTrack[1], id: uid });
+    setLocalTrack({
+      audioTrack: localTrack[0],
+      videoTrack: localTrack[1],
+      id: uid,
+    });
+    setActiveTrack({
+      audioTrack: localTrack[0],
+      videoTrack: localTrack[1],
+      id: uid,
+    });
 
     client.current?.on("user-published", handleUserJoined);
     client.current?.on("user-unpublished", handleUserUnpublished);
@@ -114,6 +125,25 @@ function UserVideoCallPage() {
     setInCall(false);
   }
 
+  async function muteMicrophone() {
+    if (localTrack?.audioTrack.muted) {
+      localTrack.audioTrack.setMuted(false);
+      setMuteMic(false);
+    } else {
+      localTrack?.audioTrack.setMuted(true);
+      setMuteMic(true);
+    }
+  }
+
+  async function muteCamera() {
+    if (localTrack?.videoTrack.muted) {
+      localTrack.videoTrack.setMuted(false);
+      setMuteCam(false);
+    } else {
+      localTrack?.videoTrack.setMuted(true);
+      setMuteCam(true);
+    }
+  }
   return (
     <>
       {openCreateRoom && (
@@ -142,8 +172,11 @@ function UserVideoCallPage() {
               setRemoteUsers={setRemoteUsers}
               activeTrack={activeTrack}
               setActiveTrack={setActiveTrack}
+              muteMicrophone={muteMicrophone}
+              muteCamera={muteCamera}
+              muteCam={muteCam}
+              muteMic={muteMic}
             />
-            
           )}
           <VideoCallParticipants />
         </div>

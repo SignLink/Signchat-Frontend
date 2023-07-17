@@ -15,17 +15,23 @@ interface Props {
   setRemoteUsers: React.Dispatch<React.SetStateAction<any>>;
   activeTrack: any;
   setActiveTrack: React.Dispatch<any>;
+  muteMicrophone: () => void;
+  muteCamera: () => void;
+  muteCam: boolean;
+  muteMic: boolean;
 }
 
 function UserActiveVideoCall({
   leaveCall,
   remoteUsers,
   userCount,
-  localTrack,
-  uid,
   setRemoteUsers,
   activeTrack,
-  setActiveTrack
+  setActiveTrack,
+  muteCam,
+  muteCamera,
+  muteMic,
+  muteMicrophone,
 }: Props) {
   //Function to handle clicking on a remote user's video player
   let peopleOrPerson = userCount === 1 ? "Person" : "People";
@@ -51,7 +57,9 @@ function UserActiveVideoCall({
                 key={activeTrack.id}
                 style={{ width: "100%", height: "100%" }}
               />
-              <div className="video-call-subtitles"><span> I love subtitles yay</span></div>
+              <div className="video-call-subtitles">
+                <span> I love subtitles yay</span>
+              </div>
             </div>
           )}
         </div>
@@ -83,13 +91,19 @@ function UserActiveVideoCall({
             })}
         </div>
         <div className="videocall-buttons">
-          <button>
+          <button
+            onClick={muteMicrophone}
+            style={{ backgroundColor: muteMic ? "#C8471E" : "#fff" }}
+          >
             <img src={muteIcon} alt="mute" />
           </button>
           <button className="leave-button" onClick={leaveCall}>
             Leave
           </button>
-          <button>
+          <button
+            onClick={muteCamera}
+            style={{ backgroundColor: muteCam ? "#C8471E" : "#fff" }}
+          >
             <img src={noVideo} alt="no-video" />
           </button>
         </div>
