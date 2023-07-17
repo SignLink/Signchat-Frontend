@@ -1,5 +1,5 @@
 import MainWrapper from "../Main Components/MainWrapper";
-import UserNavigation from "../User Main Components/UserNavigation";
+import UserNavigation from "../Main Components/UserNavigation";
 import UserVideoCall from "./User Video Call Components/UserVideoCall";
 import "./UserVideoCallPage.css";
 import VideoCallParticipants from "./User Video Call Components/VideoCallParticipants";
@@ -14,7 +14,9 @@ import AgoraRTC, {
   IAgoraRTCRemoteUser,
 } from "agora-rtc-sdk-ng";
 import { appId, channelName, token } from "../Agora/Settings";
-import { async } from "q";
+import { useSelector, useDispatch } from "react-redux";
+import LogoutModal from "../Main Components/LogoutModal";
+import { setLogout } from "../Store-Redux/LogoutReducer";
 
 export interface localTracksTypes {
   id: number;
@@ -144,8 +146,19 @@ function UserVideoCallPage() {
       setMuteCam(true);
     }
   }
+  //logout state
+  const logoutInitialState = useSelector(
+    (state: any) => state.logout.logoutIsOpen
+  );
+  const dispatchLogout = useDispatch();
+
   return (
     <>
+      {logoutInitialState && (
+        <Modal onClose={() => dispatchLogout(setLogout(false))}>
+          <LogoutModal />
+        </Modal>
+      )}
       {openCreateRoom && (
         <Modal onClose={() => setOpenCreateRoom(false)}>
           <VideoCallPopup

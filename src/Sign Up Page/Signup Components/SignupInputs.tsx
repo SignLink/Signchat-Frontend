@@ -1,11 +1,23 @@
 import "../Signup.css";
 import lady from "../../Images/gorgeous-smiling-female.svg";
 import Button from "../../Main Components/Button";
-import { useReducer } from "react";
+import { useReducer, useEffect, useState } from "react";
 import WarningMessage from "../../Main Components/WarningMessage";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { openLogin } from "../../Store-Redux/LoginReducer";
 import { closeSignup } from "../../Store-Redux/SignupReducer";
+import { api } from "../../API/Axios";
+import { endpoints } from "../../API/Endpoints";
+import notValid from "../../Icons/icons8-close-colored.svg";
+import valid from "../../Icons/icons8-ok.svg";
+import {
+  setNotificationBackgroundColor,
+  setNotificationBorderColor,
+  setNotificationIcon,
+  setNotificationMessage,
+  setNotificationTextColor,
+  setShowNotification,
+} from "../../Store-Redux/NotificationReducer";
 
 //TODO: Use validation for used email
 
@@ -113,13 +125,16 @@ function SignupInputs() {
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [isLoading, setIsLoading] = useState(false);
 
   //Valid Inputs
   const validFirstname = state.firstname.trim().length >= 2;
   const validLastname = state.lastname.trim().length >= 2;
   const validEmail = state.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
-  const validPassword = state.password.match(/\d/);
-  const validPasswordLength = state.password.trim().length >= 5;
+  const validPassword = state.password.match(
+    /(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])/
+  );
+  const validPasswordLength = state.password.trim().length >= 6;
   const matchingPassword = state.password === state.confirmPassword;
 
   //make input border red if input is invalid
@@ -138,31 +153,31 @@ function SignupInputs() {
     }
   }
 
-  function validatePassword(password: string): boolean {
-    const regex = /^(?=.*\d)[a-zA-Z0-9]{5,}$/; // Password must contain at least one number and be 5 characters or longer
-    const isValid = regex.test(password);
+  function validatePassword(password: string) {
+    const passwordHasNumber = /\d/.test(password);
+    const passwordHasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    const passwordIsValid =
+      validPasswordLength && (passwordHasNumber || passwordHasSymbol);
 
-    if (isValid) {
+    if (!validPasswordLength) {
+      dispatch({
+        type: "warning",
+        payload: "Password must be 6 characters long",
+      });
+      dispatch({ type: "inputNotValid", payload: true });
+      dispatch({ type: "passwordNotValid", payload: true });
+    } else if (!passwordHasNumber || !passwordHasSymbol) {
+      dispatch({
+        type: "warning",
+        payload: "Password must have a number and symbol",
+      });
+      dispatch({ type: "inputNotValid", payload: true });
+      dispatch({ type: "passwordNotValid", payload: true });
+    } else if (passwordIsValid) {
       dispatch({ type: "passwordNotValid", payload: false });
       dispatch({ type: "inputNotValid", payload: false });
-    } else {
-      if (password.length < 5) {
-        dispatch({ type: "inputNotValid", payload: true });
-        dispatch({
-          type: "warning",
-          payload: "Password must be at least 5 characters",
-        });
-      } else {
-        dispatch({ type: "passwordNotValid", payload: true });
-        dispatch({
-          type: "warning",
-          payload: "Password requires a number",
-        });
-      }
-      dispatch({ type: "passwordNotValid", payload: true });
+      dispatch({ type: "passwordNotValid", payload: false });
     }
-
-    return isValid;
   }
 
   //onchange functions for inputs
@@ -202,9 +217,26 @@ function SignupInputs() {
       "Password must match"
     );
   }
+  //Notification States
+  const dispatchNotifications = useDispatch();
+  const notificationIsOpen = useSelector(
+    (state: any) => state.notification.notificationIsOpen
+  );
+
+  // notification closes after 4secs
+  useEffect(() => {
+    const closeNotificationAfterDelay = setTimeout(() => {
+      dispatchNotifications(setShowNotification(false));
+    }, 4000);
+
+    return () => {
+      clearTimeout(closeNotificationAfterDelay);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [notificationIsOpen]);
 
   //Submit New Account Form
-  function submitNewAccountForm(event: React.FormEvent<HTMLFormElement>) {
+  async function submitNewAccountForm(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     if (!validFirstname) {
@@ -230,10 +262,11 @@ function SignupInputs() {
       dispatch({ type: "inputNotValid", payload: true });
       return;
     }
+
     if (!validPasswordLength) {
       dispatch({
         type: "warning",
-        payload: "Password must be at least 5 characters",
+        payload: "Password must be at least 6 characters",
       });
       dispatch({ type: "inputNotValid", payload: true });
       return;
@@ -252,7 +285,37 @@ function SignupInputs() {
     //   password: state.password,
     //   confirmPassword: state.confirmPassword,
     // };
-    // console.log(data);
+
+    const data = {
+      email: state.email,
+      password: state.password,
+      returnSecureToken: true,
+    };
+
+    try {
+      setIsLoading(true);
+      const response = await api.post(endpoints.signUp, data);
+      // console.log(response.data);
+      dispatchNotifications(setShowNotification(true));
+      dispatchNotifications(setNotificationMessage("Successfully Signed Up"));
+      dispatchNotifications(setNotificationIcon(valid));
+      dispatchNotifications(setNotificationBackgroundColor("#c8ffc8"));
+      dispatchNotifications(setNotificationTextColor("#008000"));
+      dispatchNotifications(setNotificationBorderColor("#008000"));
+      setIsLoading(false);
+    } catch (error: any) {
+      setIsLoading(false);
+      console.log(error.response.data.error.message);
+      if (error.response.data.error.message === "EMAIL_EXISTS") {
+        dispatchNotifications(setShowNotification(true));
+        dispatchNotifications(setNotificationMessage("Email Already Exists"));
+        dispatchNotifications(setNotificationIcon(notValid));
+        dispatchNotifications(setNotificationBackgroundColor("#ffc8c8"));
+        dispatchNotifications(setNotificationTextColor("#800000"));
+        dispatchNotifications(setNotificationBorderColor("#800000"));
+        return;
+      }
+    }
 
     dispatch({ type: "firstname", payload: "" });
     dispatch({ type: "lastname", payload: "" });
@@ -325,10 +388,14 @@ function SignupInputs() {
               }
               value={state.confirmPassword}
             />
-            <Button buttonName="Create Account" />
+            {!isLoading && <Button buttonName="Create Account" />}
+            {isLoading && <Button buttonName="Signing Up..." />}
           </form>
           <span>
-            Already have an account? <span className="login-link" onClick={openLoginPage}>Login</span>
+            Already have an account?{" "}
+            <span className="login-link" onClick={openLoginPage}>
+              Login
+            </span>
           </span>
         </div>
 

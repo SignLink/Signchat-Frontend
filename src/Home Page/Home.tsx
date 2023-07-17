@@ -11,6 +11,7 @@ import Login from "../Login Page/Login";
 import { closeLogin } from "../Store-Redux/LoginReducer";
 import { closeModal } from "../Store-Redux/ModalReducer";
 import { closeSignup } from "../Store-Redux/SignupReducer";
+import Notification from "../Main Components/Notification";
 
 function Home() {
   const signupInitialState = useSelector(
@@ -20,24 +21,34 @@ function Home() {
     (state: any) => state.login.loginIsOpen
   );
 
-  const dispatchModal = useDispatch()
+  const notificationInitialState = useSelector(
+    (state: any) => state.notification.notificationIsOpen
+  );
 
-function closeModalHandler() {
-  dispatchModal(closeModal());
-  dispatchModal(closeLogin());
-  dispatchModal(closeSignup());
-}
+  const dispatchModal = useDispatch();
+
+  function closeModalHandler() {
+    dispatchModal(closeModal());
+    dispatchModal(closeLogin());
+    dispatchModal(closeSignup());
+  }
 
   return (
     <>
       {signupInitialState && (
         <Modal onClose={closeModalHandler}>
-          <Signup />
+          <>
+            {notificationInitialState && <Notification />}
+            <Signup />
+          </>
         </Modal>
       )}
       {loginInitialState && (
         <Modal onClose={closeModalHandler}>
-          <Login />
+          <>
+            {notificationInitialState && <Notification />}
+            <Login />
+          </>
         </Modal>
       )}
       <MainWrapper>

@@ -1,11 +1,14 @@
 import { useState } from "react";
 import MainWrapper from "../Main Components/MainWrapper";
-import UserNavigation from "../User Main Components/UserNavigation";
+import UserNavigation from "../Main Components/UserNavigation";
 import "./UserFriendsPage.css";
 import UserFriends from "./User Friends Components/UserFriends";
 import Modal from "../Main Components/Modal";
 import FriendRequestsPopups from "./User Friends Components/FriendRequestsPopups";
 import AddFriendsPopup from "./User Friends Components/AddFriendsPopup";
+import { useSelector, useDispatch } from "react-redux";
+import LogoutModal from "../Main Components/LogoutModal";
+import { setLogout } from "../Store-Redux/LogoutReducer";
 
 function UserFriendsPage() {
   const [openFriendRequests, setOpenFriendRequests] = useState(false);
@@ -19,8 +22,17 @@ function UserFriendsPage() {
     setOpenAddFriends(false);
   }
 
+   const logoutInitialState = useSelector(
+     (state: any) => state.logout.logoutIsOpen
+   );
+   const dispatchLogout = useDispatch();
   return (
     <>
+      {logoutInitialState && (
+        <Modal onClose={() => dispatchLogout(setLogout(false))}>
+          <LogoutModal />
+        </Modal>
+      )}
       {openFriendRequests && (
         <Modal onClose={closeFriendRequests}>
           <FriendRequestsPopups />
