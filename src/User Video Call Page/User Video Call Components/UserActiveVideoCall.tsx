@@ -51,6 +51,7 @@ function UserActiveVideoCall({
                 key={activeTrack.id}
                 style={{ width: "100%", height: "100%" }}
               />
+              <div className="video-call-subtitles"><span> I love subtitles yay</span></div>
             </div>
           )}
         </div>
