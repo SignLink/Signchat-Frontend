@@ -61,7 +61,7 @@
 .main-user {
     margin-top: 3rem;
     width: 100%;
-    height: 25rem;
+    height: 28rem;
     border-radius: 10px;
 }
 
@@ -84,7 +84,7 @@
 }
 
 .user-video-player>div>div,
-.main-user-video-player>div {
+.main-user-video-player>div>div {
     background-color: transparent !important;
 }
 
