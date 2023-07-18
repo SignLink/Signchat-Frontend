@@ -3,7 +3,7 @@ import UserNavigation from "../Main Components/UserNavigation";
 import UserVideoCall from "./User Video Call Components/UserVideoCall";
 import "./UserVideoCallPage.css";
 import VideoCallParticipants from "./User Video Call Components/VideoCallParticipants";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import VideoCallPopup from "./User Video Call Components/VideoCallPopup";
 import Modal from "../Main Components/Modal";
 import UserActiveVideoCall from "./User Video Call Components/UserActiveVideoCall";
@@ -12,14 +12,17 @@ import AgoraRTC, {
   IMicrophoneAudioTrack,
   ICameraVideoTrack,
   IAgoraRTCRemoteUser,
+  UID,
 } from "agora-rtc-sdk-ng";
-import { appId, channelName, token } from "../Agora/Settings";
+import { appId, token } from "../Agora/Settings";
 import { useSelector, useDispatch } from "react-redux";
 import LogoutModal from "../Main Components/LogoutModal";
 import { setLogout } from "../Store-Redux/LogoutReducer";
+import { useNavigate } from "react-router";
+import { join } from "path";
 
 export interface localTracksTypes {
-  id: number;
+  id: UID;
   audioTrack: IMicrophoneAudioTrack;
   videoTrack: ICameraVideoTrack;
 }
@@ -37,25 +40,21 @@ function UserVideoCallPage() {
   const [muteMic, setMuteMic] = useState(false);
   const [muteCam, setMuteCam] = useState(false);
 
+  const navigate = useNavigate();
+  const lobbyRoomName = useSelector((state: any) => state.lobby.lobbyRoomName);
+
   function openStartVideoCall() {
     setOpenCreateRoom(true);
   }
+  //room
+  const lobbyRoom = useSelector((state: any) => state.lobby.lobbyRoomName);
 
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  let roomId: any = urlParams.get("room");
-
-  if (!roomId) {
-    roomId = channelName;
-  }
-  let uid = 0;
+  let uid: UID;
 
   async function joinCall() {
     client.current = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
-    await client.current?.join(appId, roomId, token, uid);
-    if (localUserRef.current) {
-      localUserRef.current.id = uid.toString();
-    }
+    uid = await client.current?.join(appId, lobbyRoom, token, null);
+
     const localTrack = await AgoraRTC.createMicrophoneAndCameraTracks();
     await client.current?.publish(localTrack);
     setLocalTrack({
@@ -81,7 +80,7 @@ function UserVideoCallPage() {
     await client.current?.subscribe(user, mediaType);
     if (mediaType === "video") {
       const newUser = {
-        id: user.uid.toString(),
+        id: user.uid,
         videoTrack: user.videoTrack,
         audioTrack: user.audioTrack,
       };
@@ -91,7 +90,7 @@ function UserVideoCallPage() {
     }
     if (mediaType === "audio") {
       const newUser = {
-        id: user.uid.toString(),
+        id: user.uid,
         audioTrack: user.audioTrack,
       };
       setRemoteUsers((prevUsers) => [...prevUsers, newUser]);
@@ -114,6 +113,7 @@ function UserVideoCallPage() {
     }
   }
 
+
   async function handleUserLeft(user: IAgoraRTCRemoteUser) {
     setRemoteUsers((prevUsers) =>
       prevUsers.filter((remoteUser) => remoteUser.id !== user.uid.toString())
@@ -121,10 +121,13 @@ function UserVideoCallPage() {
     setUserCount((prevCount) => prevCount - 1);
   }
   async function leaveCall() {
+    localTrack?.audioTrack.stop();
+    localTrack?.videoTrack.stop();
     await client.current?.leave();
     client.current?.removeAllListeners();
     setOpenCreateRoom(false);
     setInCall(false);
+    navigate("/videocall");
   }
 
   async function muteMicrophone() {
@@ -163,6 +166,7 @@ function UserVideoCallPage() {
         <Modal onClose={() => setOpenCreateRoom(false)}>
           <VideoCallPopup
             openCall={() => {
+              navigate(`/videocall?room=${lobbyRoomName}`);
               setInCall(true);
               setOpenCreateRoom(false);
               joinCall();
@@ -180,7 +184,6 @@ function UserVideoCallPage() {
               leaveCall={leaveCall}
               remoteUsers={remoteUsers}
               userCount={userCount}
-              uid={uid}
               localTrack={localTrack}
               setRemoteUsers={setRemoteUsers}
               activeTrack={activeTrack}

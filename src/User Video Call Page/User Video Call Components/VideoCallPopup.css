@@ -1,6 +1,6 @@
 .videocall-popup-main{
     width: 35rem;
-    height: 16rem;
+    height: 17rem;
     background-color: white;
     border-radius: 10px;
     border: 1px solid #cacaca;
@@ -52,4 +52,11 @@
 .room-name{
     display: flex;
     flex-direction: column;
+}
+.lobby-error-message{
+    display: inline-block;
+    color: var(--red-color);
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }

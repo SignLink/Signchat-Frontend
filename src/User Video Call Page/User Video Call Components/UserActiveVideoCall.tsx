@@ -10,7 +10,6 @@ interface Props {
   leaveCall?: () => void;
   remoteUsers?: any[];
   userCount?: number;
-  uid?: number;
   localTrack?: localTracksTypes | null;
   setRemoteUsers?: React.Dispatch<React.SetStateAction<any>>;
   activeTrack?: any;

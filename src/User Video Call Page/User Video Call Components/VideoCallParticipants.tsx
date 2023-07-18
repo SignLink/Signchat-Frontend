@@ -54,9 +54,9 @@ function VideoCallParticipants() {
                 <img src={profile} alt="profile-pic" />
                 <div className="participants-name-and-mute">
                   <span>{names.name}</span>
-                  <button>
+                  {/* <button>
                     <img src={mute} alt="mute-button" />
-                  </button>
+                  </button> */}
                 </div>
               </div>
             );
