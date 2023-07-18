@@ -49,12 +49,19 @@ function UserVideoCallPage() {
   //room
   const lobbyRoom = useSelector((state: any) => state.lobby.lobbyRoomName);
 
-  let uid: UID;
+  let uid: UID | any;
+
+  useEffect(() => {
+    client.current = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
+
+    client.current?.on("user-published", handleUserJoined);
+    client.current?.on("user-unpublished", handleUserUnpublished);
+    client.current?.on("user-left", handleUserLeft);
+  }, []);
 
   async function joinCall() {
-    client.current = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
     uid = await client.current?.join(appId, lobbyRoom, token, null);
-
+    
     const localTrack = await AgoraRTC.createMicrophoneAndCameraTracks();
     await client.current?.publish(localTrack);
     setLocalTrack({
@@ -67,10 +74,6 @@ function UserVideoCallPage() {
       videoTrack: localTrack[1],
       id: uid,
     });
-
-    client.current?.on("user-published", handleUserJoined);
-    client.current?.on("user-unpublished", handleUserUnpublished);
-    client.current?.on("user-left", handleUserLeft);
   }
 
   async function handleUserJoined(
@@ -112,7 +115,6 @@ function UserVideoCallPage() {
       );
     }
   }
-
 
   async function handleUserLeft(user: IAgoraRTCRemoteUser) {
     setRemoteUsers((prevUsers) =>
