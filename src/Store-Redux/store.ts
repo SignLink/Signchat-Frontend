@@ -6,6 +6,7 @@ import LoginReducer from "./LoginReducer";
 import NotificationReducer from "./NotificationReducer";
 import AuthReducer from "./AuthReducer";
 import LogoutReducer from "./LogoutReducer";
+import LobbyReducer from "./LobbyReducer";
 
 const reducers = combineReducers({
   modal: ModalReducer,
@@ -13,7 +14,8 @@ const reducers = combineReducers({
   login: LoginReducer,
   notification: NotificationReducer,
   authentication: AuthReducer,
-  logout: LogoutReducer
+  logout: LogoutReducer,
+  lobby: LobbyReducer,
 });
 
 const store = configureStore({

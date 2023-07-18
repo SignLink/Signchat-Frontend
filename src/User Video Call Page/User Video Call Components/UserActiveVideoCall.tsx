@@ -7,27 +7,27 @@ import addPeople from "../../Icons/add-user-group-woman-man.svg";
 import { AgoraVideoPlayer } from "agora-rtc-react";
 import { localTracksTypes } from "../UserVideoCallPage";
 interface Props {
-  leaveCall: () => void;
-  remoteUsers: any[];
-  userCount: number;
-  uid: number;
-  localTrack: localTracksTypes | null;
-  setRemoteUsers: React.Dispatch<React.SetStateAction<any>>;
-  activeTrack: any;
-  setActiveTrack: React.Dispatch<any>;
-  muteMicrophone: () => void;
-  muteCamera: () => void;
-  muteCam: boolean;
-  muteMic: boolean;
+  leaveCall?: () => void;
+  remoteUsers?: any[];
+  userCount?: number;
+  uid?: number;
+  localTrack?: localTracksTypes | null;
+  setRemoteUsers?: React.Dispatch<React.SetStateAction<any>>;
+  activeTrack?: any;
+  setActiveTrack?: React.Dispatch<any>;
+  muteMicrophone?: () => void;
+  muteCamera?: () => void;
+  muteCam?: boolean;
+  muteMic?: boolean;
 }
 
 function UserActiveVideoCall({
   leaveCall,
-  remoteUsers,
+  remoteUsers = [],
   userCount,
-  setRemoteUsers,
+  setRemoteUsers = () => {},
   activeTrack,
-  setActiveTrack,
+  setActiveTrack = () => {},
   muteCam,
   muteCamera,
   muteMic,
@@ -65,7 +65,7 @@ function UserActiveVideoCall({
         </div>
         <div className="video-chat">
           {remoteUsers.length > 0 &&
-            remoteUsers.map(function (remoteUser, index) {
+            remoteUsers?.map(function (remoteUser, index) {
               if (remoteUser.videoTrack) {
                 return (
                   <div

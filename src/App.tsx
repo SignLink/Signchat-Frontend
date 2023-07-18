@@ -9,12 +9,14 @@ import UserSettingsPage from "./User Settings Page/UserSettingsPage";
 import UserVideoCallPage from "./User Video Call Page/UserVideoCallPage";
 import { useSelector } from "react-redux";
 import InvalidPage from "./Main Components/InvalidPage";
+import UserActiveVideoCall from "./User Video Call Page/User Video Call Components/UserActiveVideoCall";
 
 function App() {
-  const userToken = useSelector(
-    (state: any) => state.authentication.token
-  );
+  const userToken = useSelector((state: any) => state.authentication.token);
   const userIsLoggedIn = !!userToken;
+
+  //lobby details
+  const lobbyRoomName = useSelector((state: any) => state.lobby.lobbyRoomName);
   return (
     <>
       <Router>
@@ -33,6 +35,7 @@ function App() {
               <Route path="/schedule" element={<UserSchedulePage />} />
               <Route path="/settings" element={<UserSettingsPage />} />
               <Route path="/videocall" element={<UserVideoCallPage />} />
+              <Route path={`/videocall?room=${lobbyRoomName}`} element={<UserActiveVideoCall/>}/>
             </>
           )}
           <Route path="*" element={<InvalidPage />} />

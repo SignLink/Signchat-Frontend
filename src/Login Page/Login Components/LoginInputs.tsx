@@ -46,13 +46,7 @@ function LoginInputs() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [notificationIsOpen]);
 
-  //auto logout timers
-  function startAutoLogoutTimer() {
-    const timer = setTimeout(() => {
-      dispatchAuthentication(setAutoLogout(true));
-    }, 5000);
-    dispatchAuthentication(setAutoLogoutTimer(timer));
-  }
+
 
   //Input States
   const [email, setEmail] = useState("");
