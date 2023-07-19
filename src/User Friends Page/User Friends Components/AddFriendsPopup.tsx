@@ -7,27 +7,6 @@ function AddFriendsPopup() {
     {
       friendName: "Debbie Anderson",
     },
-    {
-      friendName: "Debbie Anderson",
-    },
-    {
-      friendName: "Debbie Anderson",
-    },
-    {
-      friendName: "Debbie Anderson",
-    },
-    {
-      friendName: "Debbie Anderson",
-    },
-    {
-      friendName: "Debbie Anderson",
-    },
-    {
-      friendName: "Debbie Anderson",
-    },
-    {
-      friendName: "Debbie Anderson",
-    },
   ];
   const [searchedPeople, setSetPeople] = useState(friendsPopup);
 

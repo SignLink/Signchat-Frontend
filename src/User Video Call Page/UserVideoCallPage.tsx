@@ -20,6 +20,8 @@ import LogoutModal from "../Main Components/LogoutModal";
 import { setLogout } from "../Store-Redux/LogoutReducer";
 import { useNavigate } from "react-router";
 import { join } from "path";
+import { RtmClient } from "agora-rtm-sdk";
+import AgoraRTM from "agora-rtm-sdk";
 
 export interface localTracksTypes {
   id: UID;
@@ -30,6 +32,7 @@ export interface localTracksTypes {
 function UserVideoCallPage() {
   const localUserRef = useRef<HTMLDivElement>(null);
   const client = useRef<IAgoraRTCClient | null>(null);
+  const RTMClient = useRef<RtmClient | null>(null);
 
   const [openCreateRoom, setOpenCreateRoom] = useState(false);
   const [inCall, setInCall] = useState(false);
@@ -49,19 +52,29 @@ function UserVideoCallPage() {
   //room
   const lobbyRoom = useSelector((state: any) => state.lobby.lobbyRoomName);
 
-  let uid: UID | any;
+  let uid: UID | any = sessionStorage.getItem("uid");
+  if (!uid) {
+    uid = String(Math.floor(Math.random() * 1000));
+    sessionStorage.setItem("uid", uid);
+  }
+  let channel;
 
   useEffect(() => {
+    RTMClient.current = AgoraRTM.createInstance(appId);
     client.current = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
 
     client.current?.on("user-published", handleUserJoined);
     client.current?.on("user-unpublished", handleUserUnpublished);
     client.current?.on("user-left", handleUserLeft);
-  }, []);
+  }, [client.current, RTMClient.current]);
 
   async function joinCall() {
+    channel = RTMClient.current?.createChannel(lobbyRoomName);
+    await RTMClient.current?.login({ uid });
+    await channel?.join();
+
     uid = await client.current?.join(appId, lobbyRoom, token, null);
-    
+
     const localTrack = await AgoraRTC.createMicrophoneAndCameraTracks();
     await client.current?.publish(localTrack);
     setLocalTrack({
