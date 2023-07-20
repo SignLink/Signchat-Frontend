@@ -9,13 +9,19 @@ import {
 
 interface Props {
   openCall: () => void;
+  setLobbyParticipants: React.Dispatch<
+    React.SetStateAction<
+      {
+        participantName: string;
+      }[]
+    >
+  >;
 }
 
-function VideoCallPopup({ openCall }: Props) {
+function VideoCallPopup({ openCall, setLobbyParticipants }: Props) {
   const dispatch = useDispatch();
   const lobbyUserName = useSelector((state: any) => state.lobby.lobbyUserName);
   const lobbyRoomName = useSelector((state: any) => state.lobby.lobbyRoomName);
-
   const [showErrorMessage, setShowErrorMessage] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -42,6 +48,11 @@ function VideoCallPopup({ openCall }: Props) {
       setErrorMessage("Room name should be at least 3 characters");
       return;
     }
+
+    // localStorage.setItem("displayName", lobbyUserName);
+
+    dispatch(setLobbyRoomName(""));
+    dispatch(setLobbyUserName(""));
 
     openCall();
   }
@@ -74,12 +85,16 @@ function VideoCallPopup({ openCall }: Props) {
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 dispatch(setLobbyUserName(event.target.value));
                 setShowErrorMessage(false);
+                //  setLobbyParticipants((prevParticipants) => [
+                //    ...prevParticipants,
+                //    { participantName: event.target.value },
+                //  ]);
               }}
               value={lobbyUserName}
             />
           </div>
           <div className="create-videocall-button-div">
-            <Button buttonName="Create Video Call" />
+            <Button buttonName="Join Video Call" />
           </div>
         </form>
       </div>

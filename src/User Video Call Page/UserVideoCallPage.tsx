@@ -19,8 +19,7 @@ import { useSelector, useDispatch } from "react-redux";
 import LogoutModal from "../Main Components/LogoutModal";
 import { setLogout } from "../Store-Redux/LogoutReducer";
 import { useNavigate } from "react-router";
-import { join } from "path";
-import { RtmClient } from "agora-rtm-sdk";
+import { RtmClient, RtmChannel } from "agora-rtm-sdk";
 import AgoraRTM from "agora-rtm-sdk";
 
 export interface localTracksTypes {
@@ -30,9 +29,9 @@ export interface localTracksTypes {
 }
 
 function UserVideoCallPage() {
-  const localUserRef = useRef<HTMLDivElement>(null);
   const client = useRef<IAgoraRTCClient | null>(null);
   const RTMClient = useRef<RtmClient | null>(null);
+  const channel = useRef<RtmChannel | null>(null);
 
   const [openCreateRoom, setOpenCreateRoom] = useState(false);
   const [inCall, setInCall] = useState(false);
@@ -42,22 +41,26 @@ function UserVideoCallPage() {
   const [activeTrack, setActiveTrack] = useState<localTracksTypes | null>(null);
   const [muteMic, setMuteMic] = useState(false);
   const [muteCam, setMuteCam] = useState(false);
+  const [lobbyParticipants, setLobbyParticipants] = useState<
+    { participantName: string }[]
+  >([]);
 
   const navigate = useNavigate();
-  const lobbyRoomName = useSelector((state: any) => state.lobby.lobbyRoomName);
+
+  const dispatch = useDispatch();
 
   function openStartVideoCall() {
     setOpenCreateRoom(true);
   }
   //room
-  const lobbyRoom = useSelector((state: any) => state.lobby.lobbyRoomName);
+  const lobbyRoomName = useSelector((state: any) => state.lobby.lobbyRoomName);
+  const lobbyName = useSelector((state: any) => state.lobby.lobbyUserName);
 
   let uid: UID | any = sessionStorage.getItem("uid");
   if (!uid) {
     uid = String(Math.floor(Math.random() * 1000));
     sessionStorage.setItem("uid", uid);
   }
-  let channel;
 
   useEffect(() => {
     RTMClient.current = AgoraRTM.createInstance(appId);
@@ -66,14 +69,21 @@ function UserVideoCallPage() {
     client.current?.on("user-published", handleUserJoined);
     client.current?.on("user-unpublished", handleUserUnpublished);
     client.current?.on("user-left", handleUserLeft);
-  }, [client.current, RTMClient.current]);
+  }, []);
 
   async function joinCall() {
-    channel = RTMClient.current?.createChannel(lobbyRoomName);
-    await RTMClient.current?.login({ uid });
-    await channel?.join();
+    if (RTMClient.current) {
+      channel.current = RTMClient.current?.createChannel(lobbyRoomName);
+    }
 
-    uid = await client.current?.join(appId, lobbyRoom, token, null);
+    await RTMClient.current?.login({ uid });
+    await channel.current?.join();
+
+    uid = await client.current?.join(appId, lobbyRoomName, token, null);
+    channel.current?.on("MemberJoined", handleParticipantJoined);
+    channel.current?.on("MemberLeft", handleParticipantLeft);
+
+    getParticipants();
 
     const localTrack = await AgoraRTC.createMicrophoneAndCameraTracks();
     await client.current?.publish(localTrack);
@@ -135,6 +145,31 @@ function UserVideoCallPage() {
     );
     setUserCount((prevCount) => prevCount - 1);
   }
+
+  async function handleParticipantJoined(memberId: string) {
+    setLobbyParticipants((prevParticipants) => [
+      ...prevParticipants,
+      { participantName: memberId },
+    ]);
+  }
+  async function handleParticipantLeft(memberId: string) {
+    const removeParticipant = lobbyParticipants.filter(
+      (participant) => participant.participantName !== memberId
+    );
+    setLobbyParticipants(removeParticipant);
+  }
+  async function getParticipants() {
+    let members: any = await channel.current?.getMembers();
+    if (members) {
+      for (let i = 0; i < members.length; i++) {
+        setLobbyParticipants((prev) => [
+          ...prev,
+          { participantName: members[i] },
+        ]);
+      }
+    }
+  }
+
   async function leaveCall() {
     localTrack?.audioTrack.stop();
     localTrack?.videoTrack.stop();
@@ -168,12 +203,11 @@ function UserVideoCallPage() {
   const logoutInitialState = useSelector(
     (state: any) => state.logout.logoutIsOpen
   );
-  const dispatchLogout = useDispatch();
 
   return (
     <>
       {logoutInitialState && (
-        <Modal onClose={() => dispatchLogout(setLogout(false))}>
+        <Modal onClose={() => dispatch(setLogout(false))}>
           <LogoutModal />
         </Modal>
       )}
@@ -186,6 +220,7 @@ function UserVideoCallPage() {
               setOpenCreateRoom(false);
               joinCall();
             }}
+            setLobbyParticipants={setLobbyParticipants}
           />
         </Modal>
       )}
@@ -209,7 +244,7 @@ function UserVideoCallPage() {
               muteMic={muteMic}
             />
           )}
-          <VideoCallParticipants />
+          <VideoCallParticipants lobbyParticipants={lobbyParticipants} />
         </div>
       </MainWrapper>
     </>

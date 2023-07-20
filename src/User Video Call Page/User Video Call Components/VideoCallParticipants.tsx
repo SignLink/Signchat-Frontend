@@ -1,26 +1,19 @@
-import { ReactElement, useRef, useState, useEffect } from "react";
+import { ReactElement } from "react";
 import "./VideoCallParticipants.css";
 import line from "../../Images/Line.svg";
 import profile from "../../Icons/male-user.svg";
-import mute from "../../Icons/mute-unmute.svg";
 import send from "../../Icons/sent.svg";
-
 
 let participants: ReactElement;
 
-function VideoCallParticipants() {
+interface props {
+  lobbyParticipants: {
+    participantName: string;
+  }[];
+}
 
-  const [participantsLists, setParticipantsLists] = useState<
-    {
-      name: string;
-    }[]
-  >([
-    // {
-    //   name: "Deborah Smith",
-    // },
-  ]);
-
-  if (participantsLists.length === 0) {
+function VideoCallParticipants({ lobbyParticipants }: props) {
+  if (lobbyParticipants.length === 0) {
     participants = (
       <>
         <div className="empty-message">
@@ -31,15 +24,12 @@ function VideoCallParticipants() {
   } else {
     participants = (
       <>
-        {participantsLists.map(function (names, index) {
+        {lobbyParticipants.map(function (names: any, index: any) {
           return (
             <div key={index} className="participants-box">
               <img src={profile} alt="profile-pic" />
               <div className="participants-name-and-mute">
-                <span>{names.name}</span>
-                {/* <button>
-                    <img src={mute} alt="mute-button" />
-                  </button> */}
+                <span>{names.participantName}</span>
               </div>
             </div>
           );
@@ -55,7 +45,7 @@ function VideoCallParticipants() {
           <h2>Participants</h2>
           <button
             style={{
-              color: participantsLists.length === 0 ? "#ddd" : "#008ab8",
+              color: lobbyParticipants.length === 0 ? "#ddd" : "#008ab8",
             }}
           >
             View All

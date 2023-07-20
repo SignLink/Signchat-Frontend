@@ -43,10 +43,6 @@ function UserActiveVideoCall({
             <img src={people} alt="people" />
             {`${userCount + " " + peopleOrPerson}`}
           </span>
-          <button className="add-people-button">
-            <img src={addPeople} alt="add-people" />
-            Add People
-          </button>
         </div>
         <div className="main-user" id="main-user">
           {activeTrack && (
