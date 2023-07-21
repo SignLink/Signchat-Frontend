@@ -81,17 +81,19 @@ function VideoCallParticipants({
               </div>
             </>
           ) : (
-            <div className="chat-info">
-              <img src={profile} alt="profile-pic" />
+            <>
               {displayMessages.map(function (sender, index) {
                 return (
-                  <div className="chat" key={index}>
-                    <span>{sender.userName}</span>
-                    <div className="chat-message">{sender.userMessage}</div>
+                  <div className="chat-info" key={index}>
+                    <img src={profile} alt="profile-pic" />
+                    <div className="chat">
+                      <span>{sender.userName}</span>
+                      <div className="chat-message">{sender.userMessage}</div>
+                    </div>
                   </div>
                 );
               })}
-            </div>
+            </>
           )}
         </div>
         <div className="videocall-send">

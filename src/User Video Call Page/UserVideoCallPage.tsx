@@ -187,7 +187,12 @@ function UserVideoCallPage() {
     if (channel.current) {
       channel.current
         .sendMessage({ text: channelMessage })
-        .then(() => {})
+        .then(() => {
+          setDisplayMessages([
+            ...displayMessages,
+            { userName: "Debe", userMessage: channelMessage },
+          ]);
+        })
         .catch((error) => {
           console.error("Failed to send message:", error);
         });
