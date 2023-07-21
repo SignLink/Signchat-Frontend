@@ -10,9 +10,22 @@ interface props {
   lobbyParticipants: {
     participantName: string;
   }[];
+  sendMessage: (event: React.FormEvent<HTMLFormElement>) => void;
+  setChannelMessage: React.Dispatch<React.SetStateAction<string>>;
+  channelMessage: string;
+  displayMessages: {
+    userName: string;
+    userMessage: string;
+  }[];
 }
 
-function VideoCallParticipants({ lobbyParticipants }: props) {
+function VideoCallParticipants({
+  lobbyParticipants,
+  sendMessage,
+  setChannelMessage,
+  channelMessage,
+  displayMessages,
+}: props) {
   if (lobbyParticipants.length === 0) {
     participants = (
       <>
@@ -61,34 +74,43 @@ function VideoCallParticipants({ lobbyParticipants }: props) {
       </span>
       <div className="videocall-chat-main">
         <div className="videocall-chat-box">
-          <div className="chat-info">
-            <img src={profile} alt="profile-pic" />
-            <div className="chat">
-              <span>Deborah Smith</span>
-              <div className="chat-message">
-                Hi, you guys. Glad u are here 😁
+          {displayMessages.length === 0 ? (
+            <>
+              <div className="empty-message">
+                <span>No Messages</span>
               </div>
+            </>
+          ) : (
+            <div className="chat-info">
+              <img src={profile} alt="profile-pic" />
+              {displayMessages.map(function (sender, index) {
+                return (
+                  <div className="chat" key={index}>
+                    <span>{sender.userName}</span>
+                    <div className="chat-message">{sender.userMessage}</div>
+                  </div>
+                );
+              })}
             </div>
-          </div>
-          <div className="chat-info">
-            <img src={profile} alt="profile-pic" />
-            <div className="chat">
-              <span>John Smith</span>
-              <div className="chat-message">
-                That sounds fascinating! I'll be presenting a case study on the
-                use of technology in sign language interpretation. I think our
-                presentations will complement each other well.
-              </div>
-            </div>
-          </div>
+          )}
         </div>
         <div className="videocall-send">
-          <input type="text" placeholder="Send..." id="Send-input" />
-          <div className="videocall-send-div">
-            <button>
-              <img src={send} alt="send" />
-            </button>
-          </div>
+          <form onSubmit={sendMessage}>
+            <input
+              type="text"
+              placeholder="Send..."
+              id="Send-input"
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                setChannelMessage(event.target.value)
+              }
+              value={channelMessage}
+            />
+            <div className="videocall-send-div">
+              <button>
+                <img src={send} alt="send" />
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

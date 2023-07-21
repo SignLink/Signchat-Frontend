@@ -3,7 +3,6 @@ import muteIcon from "../../Icons/mute-unmute.svg";
 import noVideo from "../../Icons/no-video.svg";
 import "./UserActiveVideoCall.css";
 import people from "../../Icons/people.svg";
-import addPeople from "../../Icons/add-user-group-woman-man.svg";
 import { AgoraVideoPlayer } from "agora-rtc-react";
 import { localTracksTypes } from "../UserVideoCallPage";
 interface Props {

@@ -44,6 +44,10 @@ function UserVideoCallPage() {
   const [lobbyParticipants, setLobbyParticipants] = useState<
     { participantName: string }[]
   >([]);
+  const [channelMessage, setChannelMessage] = useState("");
+  const [displayMessages, setDisplayMessages] = useState<
+    { userName: string; userMessage: string }[]
+  >([]);
 
   const navigate = useNavigate();
 
@@ -82,6 +86,14 @@ function UserVideoCallPage() {
     uid = await client.current?.join(appId, lobbyRoomName, token, null);
     channel.current?.on("MemberJoined", handleParticipantJoined);
     channel.current?.on("MemberLeft", handleParticipantLeft);
+    channel.current?.on("ChannelMessage", (message, peerId) => {
+      if (message.text) {
+        setDisplayMessages((p) => [
+          ...p,
+          { userName: peerId, userMessage: message.text },
+        ]);
+      }
+    });
 
     getParticipants();
 
@@ -149,7 +161,7 @@ function UserVideoCallPage() {
   async function handleParticipantJoined(memberId: string) {
     setLobbyParticipants((prevParticipants) => [
       ...prevParticipants,
-      { participantName: memberId },
+      { participantName: `${memberId}` },
     ]);
   }
   async function handleParticipantLeft(memberId: string) {
@@ -170,10 +182,24 @@ function UserVideoCallPage() {
     }
   }
 
+  async function sendMessage(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (channel.current) {
+      channel.current
+        .sendMessage({ text: channelMessage })
+        .then(() => {})
+        .catch((error) => {
+          console.error("Failed to send message:", error);
+        });
+    }
+
+    setChannelMessage("");
+  }
+
   async function leaveCall() {
+    await client.current?.leave();
     localTrack?.audioTrack.stop();
     localTrack?.videoTrack.stop();
-    await client.current?.leave();
     client.current?.removeAllListeners();
     setOpenCreateRoom(false);
     setInCall(false);
@@ -244,7 +270,13 @@ function UserVideoCallPage() {
               muteMic={muteMic}
             />
           )}
-          <VideoCallParticipants lobbyParticipants={lobbyParticipants} />
+          <VideoCallParticipants
+            lobbyParticipants={lobbyParticipants}
+            sendMessage={sendMessage}
+            setChannelMessage={setChannelMessage}
+            channelMessage={channelMessage}
+            displayMessages={displayMessages}
+          />
         </div>
       </MainWrapper>
     </>
