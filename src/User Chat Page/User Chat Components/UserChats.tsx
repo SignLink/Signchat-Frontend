@@ -1,15 +1,9 @@
 import { ReactElement, useState } from "react";
 import "./UserChats.css";
-import profilePic from "../../Images/christina-morillo-profile.svg";
+import profilePic from "../../Icons/male-user.svg";
 
 function UserChats() {
   const chatsOject = [
-    {
-      chatName: "Bejamin Wilson",
-    },
-    {
-      chatName: "Bejamin Wilson",
-    },
     {
       chatName: "Bejamin Wilson",
     },

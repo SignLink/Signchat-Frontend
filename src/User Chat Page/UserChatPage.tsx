@@ -8,7 +8,6 @@ import { setLogout } from "../Store-Redux/LogoutReducer";
 import Modal from "../Main Components/Modal";
 import LogoutModal from "../Main Components/LogoutModal";
 import AutoLogoutModal from "../Main Components/AutoLogoutModal";
-import { setAutoLogout } from "../Store-Redux/AuthReducer";
 
 function UserChatPage() {
   const logoutInitialState = useSelector(
@@ -17,22 +16,8 @@ function UserChatPage() {
   const autoLogOut = useSelector(
     (state: any) => state.authentication.autoLogOut
   );
-
-  const autoLogoutTimer = useSelector(
-    (state: any) => state.authentication.autoLogoutTimer
-  );
   const dispatch = useDispatch();
 
-  //reset timer when user is active
-  function resetLogoutTimer() {
-    if (autoLogoutTimer) {
-      clearTimeout(autoLogoutTimer);
-      console.log('clicked')
-    }
-    setTimeout(() => {
-      dispatch(setAutoLogout(true));
-    }, 5000);
-  }
   return (
     <>
       {autoLogOut && (
@@ -46,7 +31,7 @@ function UserChatPage() {
         </Modal>
       )}
       <MainWrapper>
-        <div className="user-chat-main" onClick={resetLogoutTimer}>
+        <div className="user-chat-main">
           <UserNavigation />
           <UserChatBox />
           <UserChats />

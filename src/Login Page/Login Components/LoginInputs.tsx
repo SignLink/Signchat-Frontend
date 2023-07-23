@@ -17,8 +17,6 @@ import {
   setShowNotification,
 } from "../../Store-Redux/NotificationReducer";
 import {
-  setAutoLogout,
-  setAutoLogoutTimer,
   setToken,
 } from "../../Store-Redux/AuthReducer";
 import { useNavigate } from "react-router";

@@ -1,6 +1,6 @@
 import React, { JSXElementConstructor, ReactElement, useState } from "react";
 import "./AddFriendsPopup.css";
-import profilePic from "../../Images/christina-morillo-profile.svg";
+import profilePic from "../../Icons/male-user.svg";
 
 function AddFriendsPopup() {
   const friendsPopup = [
@@ -27,7 +27,7 @@ function AddFriendsPopup() {
                 <img src={profilePic} alt="profile-pic" />
               </div>
               <div className="searched-friend-requests-descriptions">
-                <span>{`${searchedFriends.friendName} send you a friend request`}</span>
+                <span>{`Send ${searchedFriends.friendName} a friend request`}</span>
                 <div className="searched-friend-request-buttons">
                   <button>Send Friend Request</button>
                 </div>

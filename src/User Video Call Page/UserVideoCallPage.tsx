@@ -71,8 +71,10 @@ function UserVideoCallPage() {
     client.current = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
 
     client.current?.on("user-published", handleUserJoined);
-    client.current?.on("user-unpublished", handleUserUnpublished);
-    client.current?.on("user-left", handleUserLeft);
+    return () => {
+      client.current?.on("user-unpublished", handleUserUnpublished);
+      client.current?.on("user-left", handleUserLeft);
+    };
   }, []);
 
   async function joinCall() {

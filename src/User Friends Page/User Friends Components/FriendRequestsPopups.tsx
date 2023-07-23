@@ -1,6 +1,6 @@
 import React, { ReactElement, useState } from "react";
 import "./FriendsRequestPopup.css";
-import profilePic from "../../Images/christina-morillo-profile.svg";
+import profilePic from "../../Icons/male-user.svg";
 
 function FriendRequestsPopups() {
   const listsOfFriendRequests = [
@@ -37,7 +37,7 @@ function FriendRequestsPopups() {
                 <img src={profilePic} alt="profile-pic" />
               </div>
               <div className="friend-requests-descriptions">
-                <span>{`${friendRequest.friendName} send you a friend request`}</span>
+                <span>{`${friendRequest.friendName} sent you a friend request`}</span>
                 <div className="friend-request-buttons">
                   <button>Accept</button>
                   <button>Decline</button>
