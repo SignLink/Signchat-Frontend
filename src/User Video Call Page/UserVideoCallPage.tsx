@@ -45,7 +45,7 @@ function UserVideoCallPage() {
     { participantName: string }[]
   >([]);
   const [channelMessage, setChannelMessage] = useState("");
-  const [channelNameId, setChannelNameId] = useState("");
+  const [channelUserName, setChannelUserName] = useState("");
   const [displayMessages, setDisplayMessages] = useState<
     { userName: string; userMessage: string }[]
   >([]);
@@ -94,7 +94,6 @@ function UserVideoCallPage() {
       );
       if (namePromise) {
         const nameResult = await namePromise;
-        console.log(nameResult.name);
         setLobbyParticipants((prevParticipants) => [
           ...prevParticipants,
           { participantName: `${nameResult.name}` },
@@ -103,10 +102,9 @@ function UserVideoCallPage() {
     });
     channel.current?.on("MemberLeft", handleParticipantLeft);
     getParticipants();
-    channel.current?.on("ChannelMessage", async (message, peerId) => {
+    channel.current?.on("ChannelMessage", async (message) => {
       if (message.text) {
         let data = JSON.parse(message.text);
-        console.log(data);
         setDisplayMessages((p) => [
           ...p,
           { userName: data.displayName, userMessage: data.message },
@@ -176,27 +174,27 @@ function UserVideoCallPage() {
   }
 
   async function handleParticipantLeft(memberId: string) {
-    const removeParticipant = lobbyParticipants.filter(
-      (participant) => participant.participantName !== memberId
+    setLobbyParticipants((prevParticipants) =>
+      prevParticipants.filter(
+        (participant) => participant.participantName !== lobbyName
+      )
     );
-    setLobbyParticipants(removeParticipant);
   }
   async function getParticipants() {
     let members: any = await channel.current?.getMembers();
     if (members) {
-
       for (let i = 0; i < members.length; i++) {
-         const namePromise = RTMClient.current?.getUserAttributesByKeys(
-           members[i],
-           ["name"]
-         );
-         if(namePromise){
-           const nameResult = await namePromise;
-           setLobbyParticipants((prev) => [
-             ...prev,
-             { participantName: nameResult.name },
-           ]);
-         }
+        const namePromise = RTMClient.current?.getUserAttributesByKeys(
+          members[i],
+          ["name"]
+        );
+        if (namePromise) {
+          const nameResult = await namePromise;
+          setLobbyParticipants((prev) => [
+            ...prev,
+            { participantName: nameResult.name },
+          ]);
+        }
       }
     }
   }
@@ -215,7 +213,7 @@ function UserVideoCallPage() {
         .then(() => {
           setDisplayMessages([
             ...displayMessages,
-            { userName: "Debe", userMessage: channelMessage },
+            { userName: lobbyName, userMessage: channelMessage },
           ]);
         })
         .catch((error) => {

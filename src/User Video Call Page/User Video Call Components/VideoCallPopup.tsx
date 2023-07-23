@@ -49,10 +49,7 @@ function VideoCallPopup({ openCall, setLobbyParticipants }: Props) {
       return;
     }
 
-    // localStorage.setItem("displayName", lobbyUserName);
-
     dispatch(setLobbyRoomName(""));
-    dispatch(setLobbyUserName(""));
 
     openCall();
   }
