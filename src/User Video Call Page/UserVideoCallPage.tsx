@@ -45,6 +45,7 @@ function UserVideoCallPage() {
     { participantName: string }[]
   >([]);
   const [channelMessage, setChannelMessage] = useState("");
+  const [channelNameId, setChannelNameId] = useState("");
   const [displayMessages, setDisplayMessages] = useState<
     { userName: string; userMessage: string }[]
   >([]);
@@ -79,23 +80,39 @@ function UserVideoCallPage() {
     if (RTMClient.current) {
       channel.current = RTMClient.current?.createChannel(lobbyRoomName);
     }
-
     await RTMClient.current?.login({ uid });
     await channel.current?.join();
+    await RTMClient.current?.addOrUpdateLocalUserAttributes({
+      name: lobbyName,
+    });
 
     uid = await client.current?.join(appId, lobbyRoomName, token, null);
-    channel.current?.on("MemberJoined", handleParticipantJoined);
-    channel.current?.on("MemberLeft", handleParticipantLeft);
-    channel.current?.on("ChannelMessage", (message, peerId) => {
-      if (message.text) {
-        setDisplayMessages((p) => [
-          ...p,
-          { userName: peerId, userMessage: message.text },
+    channel.current?.on("MemberJoined", async (memberId: string) => {
+      const namePromise = await RTMClient.current?.getUserAttributesByKeys(
+        memberId,
+        ["name"]
+      );
+      if (namePromise) {
+        const nameResult = await namePromise;
+        console.log(nameResult.name);
+        setLobbyParticipants((prevParticipants) => [
+          ...prevParticipants,
+          { participantName: `${nameResult.name}` },
         ]);
       }
     });
-
+    channel.current?.on("MemberLeft", handleParticipantLeft);
     getParticipants();
+    channel.current?.on("ChannelMessage", async (message, peerId) => {
+      if (message.text) {
+        let data = JSON.parse(message.text);
+        console.log(data);
+        setDisplayMessages((p) => [
+          ...p,
+          { userName: data.displayName, userMessage: data.message },
+        ]);
+      }
+    });
 
     const localTrack = await AgoraRTC.createMicrophoneAndCameraTracks();
     await client.current?.publish(localTrack);
@@ -158,12 +175,6 @@ function UserVideoCallPage() {
     setUserCount((prevCount) => prevCount - 1);
   }
 
-  async function handleParticipantJoined(memberId: string) {
-    setLobbyParticipants((prevParticipants) => [
-      ...prevParticipants,
-      { participantName: `${memberId}` },
-    ]);
-  }
   async function handleParticipantLeft(memberId: string) {
     const removeParticipant = lobbyParticipants.filter(
       (participant) => participant.participantName !== memberId
@@ -173,11 +184,19 @@ function UserVideoCallPage() {
   async function getParticipants() {
     let members: any = await channel.current?.getMembers();
     if (members) {
+
       for (let i = 0; i < members.length; i++) {
-        setLobbyParticipants((prev) => [
-          ...prev,
-          { participantName: members[i] },
-        ]);
+         const namePromise = RTMClient.current?.getUserAttributesByKeys(
+           members[i],
+           ["name"]
+         );
+         if(namePromise){
+           const nameResult = await namePromise;
+           setLobbyParticipants((prev) => [
+             ...prev,
+             { participantName: nameResult.name },
+           ]);
+         }
       }
     }
   }
@@ -186,7 +205,13 @@ function UserVideoCallPage() {
     event.preventDefault();
     if (channel.current) {
       channel.current
-        .sendMessage({ text: channelMessage })
+        .sendMessage({
+          text: JSON.stringify({
+            type: "chat",
+            message: channelMessage,
+            displayName: lobbyName,
+          }),
+        })
         .then(() => {
           setDisplayMessages([
             ...displayMessages,

@@ -37,7 +37,7 @@ function VideoCallParticipants({
   } else {
     participants = (
       <>
-        {lobbyParticipants.map(function (names: any, index: any) {
+        {lobbyParticipants.map(function (names: any, index: number) {
           return (
             <div key={index} className="participants-box">
               <img src={profile} alt="profile-pic" />

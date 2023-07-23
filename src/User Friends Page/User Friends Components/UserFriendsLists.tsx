@@ -1,5 +1,5 @@
 import "./UserFriendLists.css";
-import profilePic from "../../Images/christina-morillo-profile.svg";
+import profilePic from "../../Icons/male-user.svg";
 import chat from "../../Icons/chat-icon.svg";
 import videoCall from "../../Icons/videocall-icon.svg";
 
@@ -7,31 +7,7 @@ function UserFriendRequests() {
   const friendRequest = [
     {
       friendName: "Sofia Anderson",
-    },
-    {
-      friendName: "Sofia Anderson",
-    },
-    {
-      friendName: "Sofia Anderson",
-    },
-    {
-      friendName: "Sofia Anderson",
-    },
-    {
-      friendName: "Sofia Anderson",
-    },
-    {
-      friendName: "Sofia Anderson",
-    },
-    {
-      friendName: "Sofia Anderson",
-    },
-    {
-      friendName: "Sofia Anderson",
-    },
-    {
-      friendName: "Sofia Anderson",
-    },
+    }
   ];
   return (
     <div className="user-friends-requests-main">
