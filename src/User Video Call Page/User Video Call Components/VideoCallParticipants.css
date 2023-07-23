@@ -25,7 +25,8 @@
 .participants-title {
     display: flex;
     gap: 3rem;
-    justify-content: center;
+    justify-content: flex-start;
+    margin-left: 3rem;
 }
 
 .participants-title h2 {

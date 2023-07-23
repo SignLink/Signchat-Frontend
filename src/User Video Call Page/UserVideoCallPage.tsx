@@ -42,10 +42,9 @@ function UserVideoCallPage() {
   const [muteMic, setMuteMic] = useState(false);
   const [muteCam, setMuteCam] = useState(false);
   const [lobbyParticipants, setLobbyParticipants] = useState<
-    { participantName: string }[]
+    { participantId: string; participantName: string }[]
   >([]);
   const [channelMessage, setChannelMessage] = useState("");
-  const [channelUserName, setChannelUserName] = useState("");
   const [displayMessages, setDisplayMessages] = useState<
     { userName: string; userMessage: string }[]
   >([]);
@@ -96,11 +95,18 @@ function UserVideoCallPage() {
         const nameResult = await namePromise;
         setLobbyParticipants((prevParticipants) => [
           ...prevParticipants,
-          { participantName: `${nameResult.name}` },
+          { participantId: memberId, participantName: `${nameResult.name}` },
         ]);
       }
     });
-    channel.current?.on("MemberLeft", handleParticipantLeft);
+    channel.current?.on("MemberLeft", async (memberId: string) => {
+      console.log("someone left the call");
+      setLobbyParticipants((prevUsers) =>
+        prevUsers.filter(
+          (participant) => participant.participantId !== memberId
+        )
+      );
+    });
     getParticipants();
     channel.current?.on("ChannelMessage", async (message) => {
       if (message.text) {
@@ -125,6 +131,21 @@ function UserVideoCallPage() {
       id: uid,
     });
   }
+
+  //trigger participant leaving the call function
+  useEffect(() => {
+    async function leaveChannel() {
+      await channel.current?.leave();
+      await RTMClient.current?.logout();
+    }
+
+    window.addEventListener("beforeunload", leaveChannel);
+
+    // cleanup this component
+    return () => {
+      window.removeEventListener("beforeunload", leaveChannel);
+    };
+  }, []);
 
   async function handleUserJoined(
     user: IAgoraRTCRemoteUser | any,
@@ -173,13 +194,6 @@ function UserVideoCallPage() {
     setUserCount((prevCount) => prevCount - 1);
   }
 
-  async function handleParticipantLeft(memberId: string) {
-    setLobbyParticipants((prevParticipants) =>
-      prevParticipants.filter(
-        (participant) => participant.participantName !== lobbyName
-      )
-    );
-  }
   async function getParticipants() {
     let members: any = await channel.current?.getMembers();
     if (members) {
@@ -192,7 +206,7 @@ function UserVideoCallPage() {
           const nameResult = await namePromise;
           setLobbyParticipants((prev) => [
             ...prev,
-            { participantName: nameResult.name },
+            { participantId: members[i], participantName: nameResult.name },
           ]);
         }
       }
@@ -274,7 +288,6 @@ function UserVideoCallPage() {
               setOpenCreateRoom(false);
               joinCall();
             }}
-            setLobbyParticipants={setLobbyParticipants}
           />
         </Modal>
       )}

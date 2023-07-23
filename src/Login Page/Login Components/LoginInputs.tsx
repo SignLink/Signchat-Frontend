@@ -76,7 +76,7 @@ function LoginInputs() {
       dispatchAuthentication(setToken(response.data.idToken));
       localStorage.setItem("token", response.data.idToken);
       setIsLoading(false);
-      navigate(`/chat`);
+      navigate(`/videocall`);
     } catch (error: any) {
       setIsLoading(false);
       console.log(error);

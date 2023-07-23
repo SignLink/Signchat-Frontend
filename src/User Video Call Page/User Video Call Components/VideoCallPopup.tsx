@@ -9,16 +9,9 @@ import {
 
 interface Props {
   openCall: () => void;
-  setLobbyParticipants: React.Dispatch<
-    React.SetStateAction<
-      {
-        participantName: string;
-      }[]
-    >
-  >;
 }
 
-function VideoCallPopup({ openCall, setLobbyParticipants }: Props) {
+function VideoCallPopup({ openCall }: Props) {
   const dispatch = useDispatch();
   const lobbyUserName = useSelector((state: any) => state.lobby.lobbyUserName);
   const lobbyRoomName = useSelector((state: any) => state.lobby.lobbyRoomName);
@@ -48,8 +41,6 @@ function VideoCallPopup({ openCall, setLobbyParticipants }: Props) {
       setErrorMessage("Room name should be at least 3 characters");
       return;
     }
-
-    dispatch(setLobbyRoomName(""));
 
     openCall();
   }

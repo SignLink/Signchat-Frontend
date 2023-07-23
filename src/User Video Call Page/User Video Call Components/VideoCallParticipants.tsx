@@ -8,6 +8,7 @@ let participants: ReactElement;
 
 interface props {
   lobbyParticipants: {
+    participantId: string;
     participantName: string;
   }[];
   sendMessage: (event: React.FormEvent<HTMLFormElement>) => void;
@@ -56,13 +57,6 @@ function VideoCallParticipants({
       <div className="participants">
         <div className="participants-title">
           <h2>Participants</h2>
-          <button
-            style={{
-              color: lobbyParticipants.length === 0 ? "#ddd" : "#008ab8",
-            }}
-          >
-            View All
-          </button>
         </div>
         <div className="participants-lists">
           {participants}
