@@ -236,15 +236,15 @@ function UserVideoCallPage() {
   }
 
   async function leaveCall() {
-    await client.current?.leave();
-    localTrack?.audioTrack.stop();
-    localTrack?.videoTrack.stop();
-    client.current?.removeAllListeners();
+    await localTrack?.audioTrack.close();
+    await localTrack?.videoTrack.close();
+    client.current?.leave();
     await channel.current?.leave();
     await RTMClient.current?.logout();
-    setOpenCreateRoom(false);
+    setRemoteUsers([]);
+    setLobbyParticipants([]);
+    setDisplayMessages([]);
     setInCall(false);
-    navigate("/videocall");
   }
 
   async function muteMicrophone() {
