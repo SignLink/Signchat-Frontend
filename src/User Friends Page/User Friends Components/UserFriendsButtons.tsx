@@ -1,6 +1,5 @@
 import Button from "../../Main Components/Button";
 import "./UserFriendsButtons.css";
-import { useDispatch } from "react-redux";
 
 interface Props {
   openAddFriends: () => void;

@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import muteIcon from "../../Icons/mute-unmute.svg";
 import noVideo from "../../Icons/no-video.svg";
 import "./UserActiveVideoCall.css";
