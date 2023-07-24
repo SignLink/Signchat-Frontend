@@ -8,7 +8,7 @@ function UserSchedule() {
       <div className="user-schedule-1">
         <span>No Active Schedule Yet</span>
         <button>
-          <NavLink to={"/chat"}>Back to Chat</NavLink>
+          <NavLink to={"/videocall"}>Back to Videocall</NavLink>
         </button>
       </div>
     </div>
