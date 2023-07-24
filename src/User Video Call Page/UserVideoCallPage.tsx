@@ -71,10 +71,8 @@ function UserVideoCallPage() {
     client.current = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
 
     client.current?.on("user-published", handleUserJoined);
-    return () => {
-      client.current?.on("user-unpublished", handleUserUnpublished);
-      client.current?.on("user-left", handleUserLeft);
-    };
+    client.current?.on("user-unpublished", handleUserUnpublished);
+    client.current?.on("user-left", handleUserLeft);
   }, []);
 
   async function joinCall() {
@@ -100,9 +98,9 @@ function UserVideoCallPage() {
           { participantId: memberId, participantName: `${nameResult.name}` },
         ]);
       }
+      setUserCount((prevCount) => prevCount + 1);
     });
     channel.current?.on("MemberLeft", async (memberId: string) => {
-      console.log("someone left the call");
       setLobbyParticipants((prevUsers) =>
         prevUsers.filter(
           (participant) => participant.participantId !== memberId
@@ -156,23 +154,20 @@ function UserVideoCallPage() {
     await client.current?.subscribe(user, mediaType);
     if (mediaType === "video") {
       const newUser = {
-        id: user.uid,
+        id: user.uid.toString(),
         videoTrack: user.videoTrack,
         audioTrack: user.audioTrack,
       };
       setRemoteUsers((prevUsers) => [...prevUsers, newUser]);
-
-      user.videoTrack.play();
     }
     if (mediaType === "audio") {
       const newUser = {
-        id: user.uid,
+        id: user.uid.toString(),
         audioTrack: user.audioTrack,
       };
       setRemoteUsers((prevUsers) => [...prevUsers, newUser]);
       user.audioTrack.play();
     }
-    setUserCount((prevCount) => prevCount + 1);
   }
 
   async function handleUserUnpublished(
@@ -245,6 +240,8 @@ function UserVideoCallPage() {
     localTrack?.audioTrack.stop();
     localTrack?.videoTrack.stop();
     client.current?.removeAllListeners();
+    await channel.current?.leave();
+    await RTMClient.current?.logout();
     setOpenCreateRoom(false);
     setInCall(false);
     navigate("/videocall");

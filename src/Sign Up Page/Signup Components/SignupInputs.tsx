@@ -278,14 +278,6 @@ function SignupInputs() {
     }
     dispatch({ type: "inputNotValid", payload: false });
 
-    // const data = {
-    //   firstname: state.firstname,
-    //   lastname: state.lastname,
-    //   email: state.email,
-    //   password: state.password,
-    //   confirmPassword: state.confirmPassword,
-    // };
-
     const data = {
       email: state.email,
       password: state.password,

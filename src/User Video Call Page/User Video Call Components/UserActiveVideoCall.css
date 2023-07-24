@@ -48,14 +48,15 @@
 
 .video-chat {
     margin-top: .2rem;
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
     display: flex;
     flex-wrap: wrap;
     gap: .3rem;
     width: 100%;
     justify-content: center;
     align-items: flex-start;
-    overflow: hidden;
+    overflow-y: auto;
+    max-height: 14rem;
 }
 
 .main-user {
@@ -83,7 +84,8 @@
     width: 100%;
     position: relative;
 }
-.video-call-subtitles{
+
+.video-call-subtitles {
     position: absolute;
     bottom: 1rem;
     padding: .5rem;
@@ -94,7 +96,8 @@
     display: flex;
     align-items: center;
 }
-.video-call-subtitles span{
+
+.video-call-subtitles span {
     color: white;
     font-weight: 700;
     font-size: 1rem;

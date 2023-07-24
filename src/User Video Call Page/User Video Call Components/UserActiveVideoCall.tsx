@@ -64,7 +64,7 @@ function UserActiveVideoCall({
                 return (
                   <div
                     className="user-video-player"
-                    key={index}
+                    key={remoteUser.id}
                     onClick={() => {
                       setRemoteUsers((prev: any) =>
                         prev.filter((_user: any) => _user.id !== remoteUser.id)
