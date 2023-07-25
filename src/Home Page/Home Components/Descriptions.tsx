@@ -1,8 +1,8 @@
 import React from "react";
 import "../Home Components/Descriptions.css";
-import messageIcon from '../../Icons/icons8-messaging.png'
-import videocall from '../../Icons/icons8-videocall.png'
-import signLanguage from '../../Icons/icons8-sign-language.png'
+import messageIcon from "../../Icons/icons8-messaging.png";
+import videocall from "../../Icons/icons8-videocall.png";
+import signLanguage from "../../Icons/icons8-sign-language.png";
 
 function Descriptions() {
   return (
@@ -24,8 +24,8 @@ function Descriptions() {
           </div>
           <h1>Real-Time Video Chat</h1>
           <p>
-            SignChat includes a messaging feature that allows users to engage in
-            real-time text-based conversation
+            SignChat allows users to engage in real-time video conversations
+            using sign language.
           </p>
         </div>
         <div className="signlanguage-description">
@@ -34,8 +34,9 @@ function Descriptions() {
           </div>
           <h1>Sign Language Translation</h1>
           <p>
-            SignChat includes a messaging feature that allows users to engage in
-            real-time text-based conversation
+            Sign language translation feature that enables users to translate
+            sign language gestures or signs into written text or spoken
+            language.
           </p>
         </div>
       </div>

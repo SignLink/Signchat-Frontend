@@ -16,9 +16,7 @@ import {
   setNotificationTextColor,
   setShowNotification,
 } from "../../Store-Redux/NotificationReducer";
-import {
-  setToken,
-} from "../../Store-Redux/AuthReducer";
+import { setToken } from "../../Store-Redux/AuthReducer";
 import { useNavigate } from "react-router";
 
 function LoginInputs() {
@@ -43,8 +41,6 @@ function LoginInputs() {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [notificationIsOpen]);
-
-
 
   //Input States
   const [email, setEmail] = useState("");
@@ -73,6 +69,7 @@ function LoginInputs() {
       console.log(response.data);
       dispatchAuthentication(setToken(response.data.idToken));
       localStorage.setItem("token", response.data.idToken);
+      localStorage.setItem("user", response.data);
       setIsLoading(false);
       navigate(`/videocall`);
     } catch (error: any) {

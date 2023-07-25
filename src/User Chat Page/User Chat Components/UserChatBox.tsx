@@ -1,6 +1,6 @@
 import React from "react";
 import "./UserChatBox.css";
-import profile from '../../Images/christina-morillo-profile.svg'
+import profile from '../../Icons/male-user.svg'
 import send from '../../Icons/sent.svg'
 
 function UserChatBox() {

@@ -7,40 +7,24 @@
     z-index: 15;
     border-radius: 10px;
     transition: transform 0.3s ease;
-}
-
-.signup-logo {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.close-icon img {
-    margin-right: 1rem;
-}
-
-.mainlogo-div img {
-    width: 150px;
-    height: 55px;
-    margin-left: 1rem;
-}
-
-.close-icon img {
-    cursor: pointer;
-    width: 25px;
-    height: 25px;
+    justify-content: center;
 }
 
 .signup-inputs-main {
     display: flex;
     justify-content: center;
-    gap: 3.5rem;
+    gap: 2rem;
     align-items: center;
+    width: 100%;
 }
-
-.signup-image img {
-    width: 450px;
-    height: 600px;
+.signup-image{
+    height: 100%;
+    width: 45%;
+}
+#lady-image {
+    width: 466px;
+    height: 100%;
 }
 
 .signup-inputs,

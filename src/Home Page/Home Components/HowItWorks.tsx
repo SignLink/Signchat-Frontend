@@ -4,8 +4,8 @@ import laptopimg from "../../Images/pexels-cottonbro-studio.svg";
 
 const howItWorksDescriptions = [
   {
-    title: "Choose User Type",
-    description: "Select whether you are deaf or not deaf when signing up",
+    title: "Sign Up",
+    description: "Enter your details to sign up to signchat",
   },
   {
     title: "Start Video Chat",
