@@ -24,6 +24,10 @@
     width: 40px;
     height: 40px;
 }
+.user-logout img{
+    width: 40px;
+    height: 40px;
+}
 
 .user-name {
     display: flex;
@@ -44,7 +48,7 @@
     align-items: center;
     cursor: pointer;
     margin-bottom: 2.3rem;
-    border-radius: 10px;
+    border-radius: 7px;
     padding-left: 1rem;
 }
 
@@ -75,6 +79,6 @@
     filter: brightness(0) invert(1);
 }
 
-.user-settings {
+.user-logout-div {
     margin-top: 5rem;
 }

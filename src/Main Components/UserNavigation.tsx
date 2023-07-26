@@ -59,14 +59,16 @@ function UserNavigation() {
             </button>
           </NavLink>
         </div>
+        <div className="user-settings">
+          <NavLink to="/settings">
+            <button>
+              <img src={settings} alt="chat-icon" />
+              <span>Settings</span>
+            </button>
+          </NavLink>
+        </div>
       </div>
-      <div className="user-settings">
-        <NavLink to="/settings">
-          <button>
-            <img src={settings} alt="chat-icon" />
-            <span>Settings</span>
-          </button>
-        </NavLink>
+      <div className="user-logout-div">
         <button
           className="user-logout"
           onClick={() => dispatchLogout(setLogout(true))}
