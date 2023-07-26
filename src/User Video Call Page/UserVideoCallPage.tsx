@@ -140,11 +140,15 @@ function UserVideoCallPage() {
       volumes.forEach((volume) => {
         if (volume.level > maxVolume) {
           maxVolume = volume.level;
-          setSpeakerId(volume.uid)
+          setSpeakerId(volume.uid);
+        } else if (volume.level < maxVolume) {
+          maxVolume = volume.level;
+          setSpeakerId(0);
         }
       });
     });
   }
+  console.log(speakerId);
 
   //trigger participant leaving the call function
   useEffect(() => {
