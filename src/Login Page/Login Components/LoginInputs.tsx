@@ -1,6 +1,7 @@
 import Button from "../../Main Components/Button";
 import { useState, useEffect } from "react";
 import man from "../../Images/medium-shot-man-with-laptop.svg";
+import mainLogo from '../../Images/signchat-logo.png'
 import "../Login.css";
 import { useDispatch, useSelector } from "react-redux";
 import { openSignup } from "../../Store-Redux/SignupReducer";
@@ -106,6 +107,9 @@ function LoginInputs() {
     <>
       <div className="login-inputs-main">
         <div className="login-inputs">
+          <div className="signup-inputs-logo">
+            <img src={mainLogo} alt="main-logo" />
+          </div>
           <h1>Welcome Back</h1>
           <form onSubmit={submitLoginDetails}>
             <input

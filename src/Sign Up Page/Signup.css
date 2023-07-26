@@ -18,10 +18,17 @@
     align-items: center;
     width: 100%;
 }
-.signup-image{
+
+.signup-inputs-logo img {
+    width: 80px;
+    height: 80px;
+}
+
+.signup-image {
     height: 100%;
     width: 45%;
 }
+
 #lady-image {
     width: 466px;
     height: 100%;
@@ -31,7 +38,7 @@
 .signup-inputs form {
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
+    gap: 2rem;
     align-items: center;
 }
 

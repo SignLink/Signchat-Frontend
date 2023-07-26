@@ -1,5 +1,6 @@
 import "../Signup.css";
 import lady from "../../Images/gorgeous-smiling-female.svg";
+import mainLogo from "../../Images/signchat-logo.png";
 import Button from "../../Main Components/Button";
 import { useReducer, useEffect, useState } from "react";
 import WarningMessage from "../../Main Components/WarningMessage";
@@ -20,15 +21,11 @@ import {
 } from "../../Store-Redux/NotificationReducer";
 
 interface signupState {
-  // firstname: string;
-  // lastname: string;
   email: string;
   password: string;
   confirmPassword: string;
   inputIsNotValid: boolean;
   warning: string;
-  // firstnameNotValid: boolean;
-  // lastnameNotValid: boolean;
   emailNotValid: boolean;
   passwordNotValid: boolean;
 }
@@ -39,18 +36,6 @@ interface signupAction {
 }
 
 function reducer(state: signupState, action: signupAction): signupState {
-  // if (action.type === "firstname") {
-  //   return {
-  //     ...state,
-  //     firstname: action.payload,
-  //   };
-  // }
-  // if (action.type === "lastname") {
-  //   return {
-  //     ...state,
-  //     lastname: action.payload,
-  //   };
-  // }
   if (action.type === "email") {
     return {
       ...state,
@@ -75,18 +60,6 @@ function reducer(state: signupState, action: signupAction): signupState {
       inputIsNotValid: action.payload,
     };
   }
-  // if (action.type === "firstnameNotValid") {
-  //   return {
-  //     ...state,
-  //     firstnameNotValid: action.payload,
-  //   };
-  // }
-  // if (action.type === "lastnameNotValid") {
-  //   return {
-  //     ...state,
-  //     lastnameNotValid: action.payload,
-  //   };
-  // }
   if (action.type === "emailNotValid") {
     return {
       ...state,
@@ -109,13 +82,9 @@ function reducer(state: signupState, action: signupAction): signupState {
 
 function SignupInputs() {
   const initialState: signupState = {
-    // firstname: "",
-    // lastname: "",
     email: "",
     password: "",
     confirmPassword: "",
-    // firstnameNotValid: false,
-    // lastnameNotValid: false,
     emailNotValid: false,
     passwordNotValid: false,
     inputIsNotValid: false,
@@ -126,8 +95,6 @@ function SignupInputs() {
   const [isLoading, setIsLoading] = useState(false);
 
   //Valid Inputs
-  // const validFirstname = state.firstname.trim().length >= 2;
-  // const validLastname = state.lastname.trim().length >= 2;
   const validEmail = state.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
   const validPassword = state.password.match(
     /(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])/
@@ -178,23 +145,6 @@ function SignupInputs() {
     }
   }
 
-  //onchange functions for inputs
-  // function firstnameHandler(event: React.ChangeEvent<HTMLInputElement>) {
-  //   dispatch({ type: "firstname", payload: event.target.value });
-  //   onFocusValidInputs(
-  //     !validFirstname,
-  //     "firstnameNotValid",
-  //     "Please enter a valid firstname"
-  //   );
-  // }
-  // function lastnameHandler(event: React.ChangeEvent<HTMLInputElement>) {
-  //   dispatch({ type: "lastname", payload: event.target.value });
-  //   onFocusValidInputs(
-  //     !validLastname,
-  //     "lastnameNotValid",
-  //     "Please enter a valid lastname"
-  //   );
-  // }
   function emailHandler(event: React.ChangeEvent<HTMLInputElement>) {
     dispatch({ type: "email", payload: event.target.value });
     onFocusValidInputs(
@@ -237,16 +187,6 @@ function SignupInputs() {
   async function submitNewAccountForm(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    // if (!validFirstname) {
-    //   dispatch({ type: "warning", payload: "Please enter a valid firstname" });
-    //   dispatch({ type: "inputNotValid", payload: true });
-    //   return;
-    // }
-    // if (!validLastname) {
-    //   dispatch({ type: "warning", payload: "Please enter a valid lastname" });
-    //   dispatch({ type: "inputNotValid", payload: true });
-    //   return;
-    // }
     if (!validEmail) {
       dispatch({ type: "warning", payload: "Please enter a valid email" });
       dispatch({ type: "inputNotValid", payload: true });
@@ -306,9 +246,6 @@ function SignupInputs() {
         return;
       }
     }
-
-    // dispatch({ type: "firstname", payload: "" });
-    // dispatch({ type: "lastname", payload: "" });
     dispatch({ type: "email", payload: "" });
     dispatch({ type: "password", payload: "" });
     dispatch({ type: "confirmPassword", payload: "" });
@@ -329,28 +266,11 @@ function SignupInputs() {
           {state.inputIsNotValid && (
             <WarningMessage warningMessage={state.warning} inlineWidth="100%" />
           )}
+          <div className="signup-inputs-logo">
+            <img src={mainLogo} alt="main-logo" />
+          </div>
           <h1>Create An Account</h1>
           <form onSubmit={submitNewAccountForm}>
-            {/* <input
-              type="text"
-              placeholder="Enter your firstname"
-              onChange={firstnameHandler}
-              className={
-                state.firstnameNotValid
-                  ? "firstname-invalid"
-                  : "firstname-valid"
-              }
-              value={state.firstname}
-            />
-            <input
-              type="text"
-              placeholder="Enter your lastname"
-              onChange={lastnameHandler}
-              className={
-                state.lastnameNotValid ? "lastname-invalid" : "lastname-valid"
-              }
-              value={state.lastname}
-            /> */}
             <input
               type="text"
               placeholder="Enter your email"

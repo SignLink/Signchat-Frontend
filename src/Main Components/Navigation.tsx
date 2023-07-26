@@ -1,5 +1,5 @@
 import "./Navigations.css";
-import logo from "../Images/logo.svg";
+import logo from "../Images/signchat-logo.png";
 import Button from "./Button";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
