@@ -3,6 +3,7 @@ import noVideo from "../../Icons/no-video.svg";
 import "./UserActiveVideoCall.css";
 import people from "../../Icons/people.svg";
 import { AgoraVideoPlayer } from "agora-rtc-react";
+import { UID } from "agora-rtc-sdk-ng";
 import { localTracksTypes } from "../UserVideoCallPage";
 interface Props {
   leaveCall?: () => void;
@@ -16,6 +17,8 @@ interface Props {
   muteCamera?: () => void;
   muteCam?: boolean;
   muteMic?: boolean;
+  speakerId?: UID | null;
+  localTracks?: localTracksTypes | null;
 }
 
 function UserActiveVideoCall({
@@ -29,6 +32,7 @@ function UserActiveVideoCall({
   muteCamera,
   muteMic,
   muteMicrophone,
+  speakerId,
 }: Props) {
   //Function to handle clicking on a remote user's video player
   let peopleOrPerson = userCount === 1 ? "Person" : "People";
@@ -44,7 +48,11 @@ function UserActiveVideoCall({
         </div>
         <div className="main-user" id="main-user">
           {activeTrack && (
-            <div className="main-user-video-player">
+            <div
+              className={`main-user-video-player${
+                speakerId === activeTrack.id ? "-highlight" : ""
+              }`}
+            >
               <AgoraVideoPlayer
                 videoTrack={activeTrack?.videoTrack}
                 key={activeTrack.id}
@@ -59,10 +67,13 @@ function UserActiveVideoCall({
         <div className="video-chat">
           {remoteUsers.length > 0 &&
             remoteUsers?.map(function (remoteUser, index) {
+              console.log(remoteUser.id)
               if (remoteUser.videoTrack) {
                 return (
                   <div
-                    className="user-video-player"
+                    className={`user-video-player${
+                      speakerId?.toString() === remoteUser.id ? "-highlight" : ""
+                    }`}
                     key={remoteUser.id}
                     onClick={() => {
                       setRemoteUsers((prev: any) =>

@@ -66,7 +66,8 @@
     border-radius: 10px;
 }
 
-.user-video-player {
+.user-video-player,
+.user-video-player-highlight {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -79,10 +80,22 @@
     margin-bottom: 0.5rem;
 }
 
-.main-user-video-player {
+.user-video-player-highlight {
+    border: 3px solid var(--nav-font-color);
+    border-radius: 5px;
+}
+
+.main-user-video-player,
+.main-user-video-player-highlight {
     height: 100%;
     width: 100%;
     position: relative;
+
+}
+
+.main-user-video-player-highlight {
+    border: 3px solid var(--nav-font-color);
+    border-radius: 5px;
 }
 
 .video-call-subtitles {
@@ -115,6 +128,6 @@
 
 .user-video-player video,
 .main-user-video-player video {
-    border-radius: 10px;
+    border-radius: 5px;
     background-color: white;
 }

@@ -48,6 +48,7 @@ function UserVideoCallPage() {
   const [displayMessages, setDisplayMessages] = useState<
     { userName: string; userMessage: string }[]
   >([]);
+  const [speakerId, setSpeakerId] = useState<UID | null>(null);
 
   const navigate = useNavigate();
 
@@ -86,6 +87,7 @@ function UserVideoCallPage() {
     });
 
     uid = await client.current?.join(appId, lobbyRoomName, token, null);
+
     channel.current?.on("MemberJoined", async (memberId: string) => {
       const namePromise = await RTMClient.current?.getUserAttributesByKeys(
         memberId,
@@ -130,6 +132,18 @@ function UserVideoCallPage() {
       videoTrack: localTrack[1],
       id: uid,
     });
+    //@ts-ignore
+    AgoraRTC.setParameter("AUDIO_VOLUME_INDICATION_INTERVAL", 200);
+    client.current?.enableAudioVolumeIndicator();
+    client.current?.on("volume-indicator", (volumes) => {
+      let maxVolume: number = 30;
+      volumes.forEach((volume) => {
+        if (volume.level > maxVolume) {
+          maxVolume = volume.level;
+          setSpeakerId(volume.uid)
+        }
+      });
+    });
   }
 
   //trigger participant leaving the call function
@@ -159,6 +173,7 @@ function UserVideoCallPage() {
         audioTrack: user.audioTrack,
       };
       setRemoteUsers((prevUsers) => [...prevUsers, newUser]);
+      console.log(speakerId === newUser.id);
     }
     if (mediaType === "audio") {
       const newUser = {
@@ -308,6 +323,8 @@ function UserVideoCallPage() {
               muteCamera={muteCamera}
               muteCam={muteCam}
               muteMic={muteMic}
+              speakerId={speakerId}
+              localTracks={localTrack}
             />
           )}
           <VideoCallParticipants
