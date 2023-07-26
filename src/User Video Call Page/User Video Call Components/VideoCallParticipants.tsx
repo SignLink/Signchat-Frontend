@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 import "./VideoCallParticipants.css";
 import line from "../../Images/Line.svg";
 import profile from "../../Icons/male-user.svg";
-import send from "../../Icons/sent.svg";
+import send from "../../Icons/send-30.svg";
 
 let participants: ReactElement;
 
@@ -101,11 +101,9 @@ function VideoCallParticipants({
               }
               value={channelMessage}
             />
-            <div className="videocall-send-div">
-              <button>
-                <img src={send} alt="send" />
-              </button>
-            </div>
+            <button>
+              <img src={send} alt="send" />
+            </button>
           </form>
         </div>
       </div>

@@ -60,7 +60,7 @@
     align-items: center;
     gap: .7rem;
     padding: .7rem;
-    border-radius: 10px;
+    border-radius: 5px;
     background-color: #008ab834;
     font-weight: 700;
     color: var(--font-color);
@@ -99,8 +99,7 @@
     width: 20rem;
     border: 1px solid #cacaca;
     height: 20rem;
-    border-radius: 10px;
-    background-color: #fbfbfb;
+    border-radius: 5px;
     padding: 1rem;
     display: flex;
     flex-direction: column;
@@ -116,42 +115,39 @@
 }
 
 .videocall-send {
+    position: relative;
     margin-top: .5rem;
     width: 20rem;
     height: 2.5rem;
-
+    width: 100%;
 }
 
-.videocall-send button {
-    border-radius: 50px;
-    padding: .3rem;
-    border: none;
-    background-color: var(--nav-font-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
 
 .videocall-send button img {
-    width: 25px;
-    height: 25px;
-}
-
-.videocall-send-div {
-    width: 15%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 20px;
+    height: 20px;
 }
 
 .videocall-send input {
-    width: 15rem;
+    width: 19.5rem;
     height: 2rem;
     padding: 1rem;
     border-radius: 10px;
     border: 1px solid #cacaca;
     background-color: #fafafa;
+    font-weight: 500;
+    color: var(--font-color);
+}
+
+.videocall-send button {
+    border: none;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: absolute;
+    right: 1rem;
 }
 
 .videocall-send input:focus {
