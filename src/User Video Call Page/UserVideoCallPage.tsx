@@ -36,7 +36,7 @@ function UserVideoCallPage() {
   const [openCreateRoom, setOpenCreateRoom] = useState(false);
   const [inCall, setInCall] = useState(false);
   const [remoteUsers, setRemoteUsers] = useState<any[]>([]);
-  const [userCount, setUserCount] = useState<number>(1);
+  const [userCount, setUserCount] = useState<number>(0);
   const [localTrack, setLocalTrack] = useState<localTracksTypes | null>(null);
   const [activeTrack, setActiveTrack] = useState<localTracksTypes | null>(null);
   const [muteMic, setMuteMic] = useState(false);
@@ -225,6 +225,7 @@ function UserVideoCallPage() {
             { participantId: members[i], participantName: nameResult.name },
           ]);
         }
+        setUserCount((prevCount) => prevCount + 1);
       }
     }
   }
