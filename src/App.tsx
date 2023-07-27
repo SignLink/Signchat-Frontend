@@ -1,4 +1,10 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+  Navigate,
+} from "react-router-dom";
 import Home from "./Home Page/Home";
 import About from "./About Page/About";
 import Contact from "./Contact Page/Contact";
@@ -18,6 +24,7 @@ function App() {
 
   //lobby details
   const lobbyRoomName = useSelector((state: any) => state.lobby.lobbyRoomName);
+
   return (
     <>
       <Router>
@@ -25,15 +32,17 @@ function App() {
           <>
             <Route
               path="/"
-              element={isLoggedIn ? <UserVideoCallPage /> : <Home />}
+              element={isLoggedIn ? <Navigate to={"/videocall"} /> : <Home />}
             />
             <Route
               path="/about"
-              element={isLoggedIn ? <UserVideoCallPage /> : <About />}
+              element={isLoggedIn ? <Navigate to={"/videocall"} /> : <About />}
             />
             <Route
               path="/contact"
-              element={isLoggedIn ? <UserVideoCallPage /> : <Contact />}
+              element={
+                isLoggedIn ? <Navigate to={"/videocall"} /> : <Contact />
+              }
             />
           </>
           {userIsLoggedIn && (
