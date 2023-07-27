@@ -14,6 +14,7 @@ import UserActiveVideoCall from "./User Video Call Page/User Video Call Componen
 function App() {
   const userToken = useSelector((state: any) => state.authentication.token);
   const userIsLoggedIn = !!userToken;
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
 
   //lobby details
   const lobbyRoomName = useSelector((state: any) => state.lobby.lobbyRoomName);
@@ -21,13 +22,20 @@ function App() {
     <>
       <Router>
         <Routes>
-          {!userIsLoggedIn && (
-            <>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-            </>
-          )}
+          <>
+            <Route
+              path="/"
+              element={isLoggedIn ? <UserVideoCallPage /> : <Home />}
+            />
+            <Route
+              path="/about"
+              element={isLoggedIn ? <UserVideoCallPage /> : <About />}
+            />
+            <Route
+              path="/contact"
+              element={isLoggedIn ? <UserVideoCallPage /> : <Contact />}
+            />
+          </>
           {userIsLoggedIn && (
             <>
               <Route path={`/chat`} element={<UserChatPage />} />
@@ -35,7 +43,10 @@ function App() {
               <Route path="/schedule" element={<UserSchedulePage />} />
               <Route path="/settings" element={<UserSettingsPage />} />
               <Route path="/videocall" element={<UserVideoCallPage />} />
-              <Route path={`/videocall?room=${lobbyRoomName}`} element={<UserActiveVideoCall/>}/>
+              <Route
+                path={`/videocall?room=${lobbyRoomName}`}
+                element={<UserActiveVideoCall />}
+              />
             </>
           )}
           <Route path="*" element={<InvalidPage />} />

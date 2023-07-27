@@ -1,7 +1,7 @@
 import Button from "../../Main Components/Button";
 import { useState, useEffect } from "react";
 import man from "../../Images/medium-shot-man-with-laptop.svg";
-import mainLogo from '../../Images/signchat-logo.svg'
+import mainLogo from "../../Images/signchat-logo.svg";
 import "../Login.css";
 import { useDispatch, useSelector } from "react-redux";
 import { openSignup } from "../../Store-Redux/SignupReducer";
@@ -71,6 +71,7 @@ function LoginInputs() {
       dispatchAuthentication(setToken(response.data.idToken));
       localStorage.setItem("token", response.data.idToken);
       localStorage.setItem("user", response.data);
+      localStorage.setItem("isLoggedIn", "true");
       setIsLoading(false);
       navigate(`/videocall`);
     } catch (error: any) {

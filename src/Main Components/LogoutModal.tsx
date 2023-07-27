@@ -19,6 +19,7 @@ function LogoutModal() {
             dispatchLogout(setLogout(false));
             localStorage.removeItem("token");
             navigate("/");
+            localStorage.removeItem("isLoggedIn");
           }}
         >
           Yes
