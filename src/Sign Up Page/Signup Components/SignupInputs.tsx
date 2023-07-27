@@ -235,7 +235,7 @@ function SignupInputs() {
       setIsLoading(false);
     } catch (error: any) {
       setIsLoading(false);
-      console.log(error.response.data.error.message);
+      console.log(error);
       if (error.response.data.error.message === "EMAIL_EXISTS") {
         dispatchNotifications(setShowNotification(true));
         dispatchNotifications(setNotificationMessage("Email Already Exists"));
