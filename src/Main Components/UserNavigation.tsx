@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./UserNavigation.css";
-import logo from "../Images/logo-navigation.svg";
+import logo from "../Images/signchat-logo.svg";
 import maleUser from "../Icons/male-user.svg";
 import { NavLink } from "react-router-dom";
 import chat from "../Icons/chat-icon.svg";
@@ -13,7 +13,6 @@ import { useDispatch } from "react-redux";
 import { setLogout } from "../Store-Redux/LogoutReducer";
 
 function UserNavigation() {
-  const [username, setUsername] = useState("Deborah Smith");
 
   const dispatchLogout = useDispatch();
 
@@ -21,10 +20,6 @@ function UserNavigation() {
     <div className="user-navigation-main">
       <div className="user-navigation-logo">
         <img src={logo} alt="main-logo" />
-      </div>
-      <div className="user-name">
-        <img src={maleUser} alt="" />
-        <span>{username}</span>
       </div>
       <div className="user-navigation-buttons">
         <div className="user-chat">

@@ -49,6 +49,10 @@
     display: inline-flex;
     padding-right: 4.25rem;
 }
+.footer-logo img{
+    width: 130px;
+    height: 130px;
+}
 
 @media(min-height:2500px) {
     .footer-main {

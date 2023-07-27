@@ -7,13 +7,16 @@
 }
 
 .main-logo img {
-   width: 100px;
-   height: 100px;
+    margin-top: -1rem;
+   width: 110px;
+   height: 110px;
 }
 
 .nav-buttons {
     font-weight: 700;
     cursor: pointer;
+    align-self: flex-start;
+    padding-top: .7rem;
 }
 
 .nav-buttons a {

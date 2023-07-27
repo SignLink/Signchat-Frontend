@@ -7,15 +7,15 @@
 }
 
 .user-navigation-logo {
-    margin-top: 2rem;
+    margin-top: 1.5rem;
 }
 
 .user-navigation-logo img {
-    height: 50px;
+    height: 80px;
 }
 
 .user-navigation-buttons {
-    margin-top: 5rem;
+    margin-top: 6rem;
 }
 
 .username img,
@@ -24,7 +24,8 @@
     width: 40px;
     height: 40px;
 }
-.user-logout img{
+
+.user-logout img {
     width: 40px;
     height: 40px;
 }
@@ -34,12 +35,11 @@
     justify-content: center;
     gap: 1rem;
     align-items: center;
-    margin-top: 2.3rem;
 }
 
 .user-navigation-main button {
     width: 12rem;
-    height: 3.2rem;
+    height: 3rem;
     display: flex;
     justify-content: flex-start;
     background-color: #fff;
@@ -47,8 +47,8 @@
     gap: 1rem;
     align-items: center;
     cursor: pointer;
-    margin-bottom: 2.3rem;
-    border-radius: 7px;
+    margin-bottom: 1.8rem;
+    border-radius: 10px;
     padding-left: 1rem;
 }
 
@@ -80,5 +80,7 @@
 }
 
 .user-logout-div {
-    margin-top: 5rem;
+    height: 30vh;
+    display: flex;
+    align-items: flex-end;
 }

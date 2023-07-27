@@ -1,6 +1,6 @@
 import React from "react";
 import "../Main Components/Footer.css";
-import footerlogo from "../Images/image 3.svg";
+import footerlogo from "../Images/signchat-footer.svg";
 import twitter from "../Icons/icons8-twitter-50.svg";
 import instagram from "../Icons/icons8-instagram-50.svg";
 import linkedin from "../Icons/icons8-linkedin-50.svg";

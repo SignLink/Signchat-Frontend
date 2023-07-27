@@ -1,6 +1,6 @@
 import "../Signup.css";
 import lady from "../../Images/gorgeous-smiling-female.svg";
-import mainLogo from "../../Images/signchat-logo.png";
+import mainLogo from "../../Images/signchat-logo.svg";
 import Button from "../../Main Components/Button";
 import { useReducer, useEffect, useState } from "react";
 import WarningMessage from "../../Main Components/WarningMessage";
@@ -308,7 +308,6 @@ function SignupInputs() {
             </span>
           </span>
         </div>
-
         <div className="signup-image">
           <img src={lady} alt="lady-smiling" id="lady-image"></img>
         </div>

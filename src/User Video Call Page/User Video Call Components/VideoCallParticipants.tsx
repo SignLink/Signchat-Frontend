@@ -1,6 +1,5 @@
 import { ReactElement } from "react";
 import "./VideoCallParticipants.css";
-import line from "../../Images/Line.svg";
 import profile from "../../Icons/male-user.svg";
 import send from "../../Icons/send-30.svg";
 
@@ -54,6 +53,10 @@ function VideoCallParticipants({
 
   return (
     <div className="videocall-participants-main">
+      <div className="user-name">
+        <img src={profile} alt="" />
+        <span>Ama Osaba Odoom</span>
+      </div>
       <div className="participants">
         <div className="participants-title">
           <h2>Participants</h2>
@@ -63,9 +66,7 @@ function VideoCallParticipants({
           <div></div>
         </div>
       </div>
-      <span className="line">
-        <img src={line} alt="line" />
-      </span>
+      <span className="line"></span>
       <div className="videocall-chat-main">
         <div className="videocall-chat-box">
           {displayMessages.length === 0 ? (

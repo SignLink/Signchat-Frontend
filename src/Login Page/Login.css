@@ -23,7 +23,13 @@
     height: 100%;
     width: 49%;
 }
-
+.login-inputs-logo{
+justify-self: baseline;
+}
+.login-inputs-logo img{
+    width: 100px;
+    height: 100px;
+}
 .login-image img {
     width: 500px;
     height: 100%;
@@ -35,9 +41,12 @@
     flex-direction: column;
     gap: 1.5rem;
     align-items: center;
+    justify-self: baseline;
 }
 
 .login-inputs {
+    justify-self: baseline;
+    gap: 1rem;
     width: 35%;
 }
 
@@ -80,7 +89,7 @@
 .login-inputs span {
     color: rgba(177, 177, 177, 1);
     display: inline-block;
-    margin-top: 2rem;
+    margin-top: .5rem;
 }
 
 .login-inputs .signup-link {
