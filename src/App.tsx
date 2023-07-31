@@ -27,13 +27,12 @@ function App() {
   //lobby details
   const lobbyRoomName = useSelector((state: any) => state.lobby.lobbyRoomName);
 
-
-    useEffect(() => {
-      const storedEmail = localStorage.getItem("userEmail");
-      if (storedEmail) {
-        dispatch(setUserInfo(storedEmail));
-      }
-    }, [dispatch]);
+  useEffect(() => {
+    const storedEmail = localStorage.getItem("userEmail");
+    if (storedEmail) {
+      dispatch(setUserInfo(storedEmail));
+    }
+  }, [dispatch]);
   return (
     <>
       <Router>

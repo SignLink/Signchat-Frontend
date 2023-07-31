@@ -26,9 +26,9 @@
 }
 
 .search-chat input:focus {
+    border: 2px solid var(--nav-font-color);
     outline: none;
-    border: 2px solid #008AB8;
-    background-color: white;
+    background-color: #fff;
 }
 
 .chats {

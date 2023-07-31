@@ -152,7 +152,7 @@
 }
 
 .videocall-send input:focus {
-    border: 2px solid #008ab8;
+    border: 2px solid var(--nav-font-color);
     outline: none;
     background-color: #fff;
 }
