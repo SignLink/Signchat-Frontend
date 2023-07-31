@@ -1,7 +1,7 @@
 import React from "react";
 import editIcon from "../../Icons/edit-30.png";
 import './UserSettingsProfile.css'
-import bigProfile from '../../Images/circled-user-male-skin-type.svg'
+import bigProfile from '../../Icons/male-user-100.png'
 
 function UserSettingsProfile() {
   return (

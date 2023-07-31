@@ -1,6 +1,6 @@
 import React, { JSXElementConstructor, ReactElement, useState } from "react";
 import "./AddFriendsPopup.css";
-import profilePic from "../../Icons/male-user.svg";
+import profilePic from "../../Icons/male-user.png";
 
 function AddFriendsPopup() {
   const friendsPopup = [

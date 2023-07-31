@@ -1,5 +1,5 @@
 import "./UserFriendLists.css";
-import profilePic from "../../Icons/male-user.svg";
+import profilePic from "../../Icons/male-user.png";
 import chat from "../../Icons/chat-icon.svg";
 import videoCall from "../../Icons/videocall-icon.svg";
 

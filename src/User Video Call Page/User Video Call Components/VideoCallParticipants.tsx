@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import "./VideoCallParticipants.css";
-import profile from "../../Icons/male-user.svg";
-import send from "../../Icons/send-30.svg";
+import profile from "../../Icons/male-user.png";
+import send from "../../Icons/send.svg";
 
 let participants: ReactElement;
 

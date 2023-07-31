@@ -1,6 +1,6 @@
 import { ReactElement, useState } from "react";
 import "./UserChats.css";
-import profilePic from "../../Icons/male-user.svg";
+import profilePic from "../../Icons/male-user.png";
 
 function UserChats() {
   const chatsOject = [

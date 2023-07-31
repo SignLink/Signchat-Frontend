@@ -1,8 +1,8 @@
 import React from "react";
 import "../Home Components/Descriptions.css";
-import messageIcon from "../../Icons/icons8-messaging.png";
-import videocall from "../../Icons/icons8-videocall.png";
-import signLanguage from "../../Icons/icons8-sign-language.png";
+import messageIcon from "../../Icons/message.png";
+import videocall from "../../Icons/videoChat.png";
+import signLanguage from "../../Icons/signlanguage.png";
 
 function Descriptions() {
   return (

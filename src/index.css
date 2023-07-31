@@ -15,7 +15,7 @@
 } */
 
 *::-webkit-scrollbar-thumb {
-  background: linear-gradient(#00a8e8, #007ea7);
+  background: linear-gradient(#1C20A6, #2643ec);
   /* color of the scroll thumb */
   border-radius: 50px;
   /* roundness of the scroll thumb */
@@ -23,11 +23,11 @@
 }
 
 :root {
-  --nav-font-color: #2127d5;
+  --nav-font-color: #1C20A6;
   --active-color: #2643ec;
   --font-color: #0a0c41;
   --popup-border-color: #cacaca;
-  --red-color:#A70000;
+  --red-color: #A70000;
 }
 
 body {

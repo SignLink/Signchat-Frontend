@@ -1,7 +1,7 @@
 import React from "react";
 import "./UserChatBox.css";
-import profile from '../../Icons/male-user.svg'
-import send from '../../Icons/send-30.svg'
+import profile from '../../Icons/male-user.png'
+import send from '../../Icons/send.svg'
 
 function UserChatBox() {
   return (

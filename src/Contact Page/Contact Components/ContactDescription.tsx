@@ -1,6 +1,6 @@
 import React, { useReducer } from "react";
 import "../Contact Components/ContactDescription.css";
-import contactUs from "../../Images/undraw_contact_us.svg";
+import contactUs from "../../Images/contact_us.svg";
 import Button from "../../Main Components/Button";
 import WarningMessage from "../../Main Components/WarningMessage";
 
