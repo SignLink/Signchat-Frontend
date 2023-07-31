@@ -17,18 +17,17 @@ import {
   setNotificationTextColor,
   setShowNotification,
 } from "../../Store-Redux/NotificationReducer";
-import { setToken } from "../../Store-Redux/AuthReducer";
+import { setToken, setUserInfo } from "../../Store-Redux/AuthReducer";
 import { useNavigate } from "react-router";
 
 function LoginInputs() {
   //open signup page when you click signup
-  const dispatchSignup = useDispatch();
   const notificationIsOpen = useSelector(
     (state: any) => state.notification.notificationIsOpen
   );
 
   //authentication
-  const dispatchAuthentication = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   // notification closes after 4secs
@@ -49,8 +48,8 @@ function LoginInputs() {
   const [isLoading, setIsLoading] = useState(false);
 
   function openSignupPage() {
-    dispatchSignup(openSignup());
-    dispatchSignup(closeLogin());
+    dispatch(openSignup());
+    dispatch(closeLogin());
   }
 
   const dispatchNotifications = useDispatch();
@@ -68,9 +67,10 @@ function LoginInputs() {
       setIsLoading(true);
       const response = await api.post(endpoints.signIn, data);
       console.log(response.data);
-      dispatchAuthentication(setToken(response.data.idToken));
+      dispatch(setToken(response.data.idToken));
       localStorage.setItem("token", response.data.idToken);
       localStorage.setItem("user", response.data);
+      localStorage.setItem('userEmail', response.data.email)
       localStorage.setItem("isLoggedIn", "true");
       setIsLoading(false);
       navigate(`/videocall`);

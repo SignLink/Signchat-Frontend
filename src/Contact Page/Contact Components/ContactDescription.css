@@ -28,7 +28,7 @@
 .email-input:focus,
 .inputs .text-area:focus {
     outline: none;
-    border: 2px solid #008AB8;
+    border: 2px solid #1C20A6;
     background-color: white;
 }
 

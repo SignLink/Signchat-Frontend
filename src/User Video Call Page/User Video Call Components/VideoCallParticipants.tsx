@@ -2,6 +2,7 @@ import { ReactElement } from "react";
 import "./VideoCallParticipants.css";
 import profile from "../../Icons/male-user.png";
 import send from "../../Icons/send.svg";
+import { useSelector } from "react-redux";
 
 let participants: ReactElement;
 
@@ -26,6 +27,10 @@ function VideoCallParticipants({
   channelMessage,
   displayMessages,
 }: props) {
+
+  const userInfo = useSelector((state: any) => state.authentication.userInfo);
+
+
   if (lobbyParticipants.length === 0) {
     participants = (
       <>
@@ -55,7 +60,7 @@ function VideoCallParticipants({
     <div className="videocall-participants-main">
       <div className="user-name">
         <img src={profile} alt="" />
-        <span>Ama Osaba Odoom</span>
+        <span>{userInfo}</span>
       </div>
       <div className="participants">
         <div className="participants-title">

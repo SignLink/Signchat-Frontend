@@ -4,6 +4,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+import { useEffect } from "react";
 import Home from "./Home Page/Home";
 import About from "./About Page/About";
 import Contact from "./Contact Page/Contact";
@@ -12,11 +13,13 @@ import UserFriendsPage from "./User Friends Page/UserFriendsPage";
 import UserSchedulePage from "./User Schedule Page/UserSchedulePage";
 import UserSettingsPage from "./User Settings Page/UserSettingsPage";
 import UserVideoCallPage from "./User Video Call Page/UserVideoCallPage";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import InvalidPage from "./Main Components/InvalidPage";
 import UserActiveVideoCall from "./User Video Call Page/User Video Call Components/UserActiveVideoCall";
+import { setUserInfo } from "./Store-Redux/AuthReducer";
 
 function App() {
+  const dispatch = useDispatch();
   const userToken = useSelector((state: any) => state.authentication.token);
   const userIsLoggedIn = !!userToken;
   const isLoggedIn = localStorage.getItem("isLoggedIn");
@@ -24,6 +27,13 @@ function App() {
   //lobby details
   const lobbyRoomName = useSelector((state: any) => state.lobby.lobbyRoomName);
 
+
+    useEffect(() => {
+      const storedEmail = localStorage.getItem("userEmail");
+      if (storedEmail) {
+        dispatch(setUserInfo(storedEmail));
+      }
+    }, [dispatch]);
   return (
     <>
       <Router>
