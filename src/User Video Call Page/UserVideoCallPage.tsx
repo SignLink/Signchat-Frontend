@@ -148,7 +148,7 @@ function UserVideoCallPage() {
       });
     });
   }
-  console.log(speakerId);
+  
 
   //trigger participant leaving the call function
   useEffect(() => {

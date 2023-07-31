@@ -37,8 +37,8 @@
 
 .nav-buttons a.active,
 .nav-buttons a:hover {
-    color: #00a8e8;
-    border-bottom: 3px solid #00a8e8;
+    color: var(--active-color);
+    border-bottom: 3px solid var(--active-color);
     padding-bottom: .3rem;
 }
 
@@ -54,5 +54,5 @@
 }
 
 .blue-button:hover {
-    background-color: #00a8e8;
+    background-color: var(--active-color);
 }
