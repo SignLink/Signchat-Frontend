@@ -49,6 +49,7 @@ function UserVideoCallPage() {
     { userName: string; userMessage: string }[]
   >([]);
   const [speakerId, setSpeakerId] = useState<UID | null>(null);
+  const [remoteSpeakerId, setRemoteSpeakerId] = useState<UID | null>(null);
 
   const navigate = useNavigate();
 
@@ -141,9 +142,11 @@ function UserVideoCallPage() {
         if (volume.level > maxVolume) {
           maxVolume = volume.level;
           setSpeakerId(volume.uid);
+          setRemoteSpeakerId(volume.uid);
         } else if (volume.level < maxVolume) {
           maxVolume = volume.level;
           setSpeakerId(0);
+          setRemoteSpeakerId(0)
         }
       });
     });
@@ -329,7 +332,10 @@ function UserVideoCallPage() {
               muteCam={muteCam}
               muteMic={muteMic}
               speakerId={speakerId}
+              setSpeakerId={setSpeakerId}
+              remoteSpeakerId={remoteSpeakerId}
               localTracks={localTrack}
+              setRemoteSpeakerId={setRemoteSpeakerId}
             />
           )}
           <VideoCallParticipants

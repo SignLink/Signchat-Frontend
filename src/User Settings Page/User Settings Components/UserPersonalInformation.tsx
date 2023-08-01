@@ -14,7 +14,7 @@ function UserPersonalInformation() {
               <input type="text" placeholder="Deborah"/>
             </div>
             <div className="personal-info-lastname">
-              <span>lastname</span>
+              <span>Lastname</span>
               <input type="text" placeholder="Smith" />
             </div>
             <div className="personal-info-sex">

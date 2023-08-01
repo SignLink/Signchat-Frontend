@@ -6,7 +6,6 @@ import { AgoraVideoPlayer } from "agora-rtc-react";
 import { UID } from "agora-rtc-sdk-ng";
 import { localTracksTypes } from "../UserVideoCallPage";
 import { useRef, useEffect, useState } from "react";
-import * as tf from "@tensorflow/tfjs";
 interface Props {
   leaveCall?: () => void;
   remoteUsers?: any[];
@@ -21,6 +20,9 @@ interface Props {
   muteMic?: boolean;
   speakerId?: UID | null;
   localTracks?: localTracksTypes | null;
+  remoteSpeakerId?: UID | null;
+  setSpeakerId?: React.Dispatch<React.SetStateAction<UID | null>>;
+  setRemoteSpeakerId?: React.Dispatch<React.SetStateAction<UID | null>>;
 }
 
 function UserActiveVideoCall({
@@ -35,6 +37,9 @@ function UserActiveVideoCall({
   muteMic,
   muteMicrophone,
   speakerId,
+  remoteSpeakerId,
+  setSpeakerId,
+  setRemoteSpeakerId,
 }: Props) {
   //Function to handle clicking on a remote user's video player
   let peopleOrPerson = userCount === 1 ? "Person" : "People";
@@ -59,9 +64,11 @@ function UserActiveVideoCall({
         <div className="main-user" id="main-user">
           {activeTrack && (
             <div
-              className={`main-user-video-player${
-                speakerId === activeTrack.id ? "-highlight" : ""
-              }`}
+              className={
+                speakerId === activeTrack.id
+                  ? "main-user-video-player-highlight"
+                  : "main-user-video-player"
+              }
               ref={videoRef}
             >
               <AgoraVideoPlayer
@@ -77,22 +84,29 @@ function UserActiveVideoCall({
         </div>
         <div className="video-chat">
           {remoteUsers.length > 0 &&
-            remoteUsers?.map(function (remoteUser, index) {
+            remoteUsers?.map(function (remoteUser) {
               if (remoteUser.videoTrack) {
                 return (
                   <div
-                    className={`user-video-player${
+                    className={
+                      remoteSpeakerId?.toString() ||
                       speakerId?.toString() === remoteUser.id
-                        ? "-highlight"
-                        : ""
-                    }`}
+                        ? "user-video-player-highlight"
+                        : "user-video-player"
+                    }
                     key={remoteUser.id}
                     onClick={() => {
-                      setRemoteUsers((prev: any) =>
-                        prev.filter((_user: any) => _user.id !== remoteUser.id)
-                      );
-                      setRemoteUsers((prev: any) => [...prev, activeTrack]); // Add the activeTrack to remoteUsers
-                      setActiveTrack(remoteUser); // Update the activeTrack
+                      if (setRemoteSpeakerId) setRemoteSpeakerId(remoteUser.id);
+                      const previousActiveTrack = activeTrack; // Store the activeTrack before setting a new one
+                      setActiveTrack(remoteUser);
+                      if (setSpeakerId) setSpeakerId(remoteUser.id);
+                      setRemoteUsers((prev: any) => {
+                        const newRemoteUsers = prev.filter(
+                          (_user: any) => _user.id !== remoteUser.id
+                        ); // Remove clicked user from remote users
+                        newRemoteUsers.push(previousActiveTrack); // Add the previous active user back to the remote users
+                        return newRemoteUsers;
+                      });
                     }}
                   >
                     <AgoraVideoPlayer

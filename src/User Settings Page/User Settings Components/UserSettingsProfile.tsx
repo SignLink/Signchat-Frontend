@@ -1,5 +1,3 @@
-import React from "react";
-import editIcon from "../../Icons/edit-30.png";
 import './UserSettingsProfile.css'
 import bigProfile from '../../Icons/male-user-100.png'
 
@@ -17,11 +15,6 @@ function UserSettingsProfile() {
             <span className="user-residence">Accra, Ghana</span>
             <span className="user-sex">Female</span>
           </div>
-        </div>
-        <div className="settings-edit-button">
-          <button>
-            Edit <img src={editIcon} alt="edit-icon" />
-          </button>
         </div>
       </div>
     </div>
