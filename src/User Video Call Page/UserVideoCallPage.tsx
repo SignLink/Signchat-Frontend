@@ -268,6 +268,7 @@ function UserVideoCallPage() {
     setLobbyParticipants([]);
     setDisplayMessages([]);
     setInCall(false);
+    navigate('/videocall')
   }
 
   async function muteMicrophone() {
