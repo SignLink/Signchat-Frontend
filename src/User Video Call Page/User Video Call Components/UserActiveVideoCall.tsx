@@ -75,7 +75,7 @@ function UserActiveVideoCall({
                 : setShowSubtitles(false);
             }}
           >
-            {showSubtitles === false ? "Show subtitles" : "Hide Subtitles"}
+            {showSubtitles === false ? "Show Subtitles" : "Hide Subtitles"}
           </button>
         </div>
         </div>
