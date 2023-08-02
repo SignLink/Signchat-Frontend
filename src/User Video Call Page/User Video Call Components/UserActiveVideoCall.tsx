@@ -45,7 +45,6 @@ function UserActiveVideoCall({
   let peopleOrPerson = userCount === 1 ? "Person" : "People";
 
   const videoRef = useRef<any>();
-  // const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [signSubtitles, setSignSubtitles] = useState("");
   const [showSubtitles, setShowSubtitles] = useState(false);
 
@@ -67,17 +66,24 @@ function UserActiveVideoCall({
             <img src={people} alt="people" />
             {`${userCount + " " + peopleOrPerson}`}
           </span>
-        <div className="show-subtitle-button">
-          <button
-            onClick={() => {
-              showSubtitles === false
-                ? setShowSubtitles(true)
-                : setShowSubtitles(false);
-            }}
-          >
-            {showSubtitles === false ? "Show Subtitles" : "Hide Subtitles"}
-          </button>
-        </div>
+          <div className="show-subtitle-button">
+            <button
+              onClick={() => {
+                showSubtitles === false
+                  ? setShowSubtitles(true)
+                  : setShowSubtitles(false);
+              }}
+            >
+              {showSubtitles === false ? "Show Subtitles" : "Hide Subtitles"}
+            </button>
+          </div>
+          <div className="clear-subtitle-button">
+            <button
+              onClick={() => {
+                setSignSubtitles("");
+              }}
+            >Clear Subtitles</button>
+          </div>
         </div>
         <div className="main-user" id="main-user">
           {activeTrack && (

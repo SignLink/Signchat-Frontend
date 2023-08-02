@@ -70,9 +70,10 @@ function LoginInputs() {
       dispatch(setToken(response.data.idToken));
       localStorage.setItem("token", response.data.idToken);
       localStorage.setItem("user", response.data);
-      localStorage.setItem('userEmail', response.data.email)
+      localStorage.setItem("userEmail", response.data.email);
       localStorage.setItem("isLoggedIn", "true");
       setIsLoading(false);
+      setUserInfo(response.data.email);
       navigate(`/videocall`);
     } catch (error: any) {
       setIsLoading(false);

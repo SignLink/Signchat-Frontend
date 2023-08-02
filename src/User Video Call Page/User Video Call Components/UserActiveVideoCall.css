@@ -131,7 +131,8 @@
     background-color: white;
 }
 
-.show-subtitle-button button{
+.show-subtitle-button button,
+.clear-subtitle-button button {
     border-radius: 5px;
     padding: .5rem 1rem;
 }
