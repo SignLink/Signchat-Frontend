@@ -47,11 +47,18 @@ function UserActiveVideoCall({
   const videoRef = useRef<any>();
   // const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [signSubtitles, setSignSubtitles] = useState("");
+  const [showSubtitles, setShowSubtitles] = useState(false);
 
   if (videoRef.current) {
     const videoElement = videoRef.current?.querySelector("div div div video");
   }
 
+  let subtitleText: string;
+  if (signSubtitles === "") {
+    subtitleText = "No Sign Words Yet";
+  } else {
+    subtitleText = signSubtitles;
+  }
   return (
     <>
       <div className="active-videocall-main">
@@ -60,6 +67,17 @@ function UserActiveVideoCall({
             <img src={people} alt="people" />
             {`${userCount + " " + peopleOrPerson}`}
           </span>
+        <div className="show-subtitle-button">
+          <button
+            onClick={() => {
+              showSubtitles === false
+                ? setShowSubtitles(true)
+                : setShowSubtitles(false);
+            }}
+          >
+            {showSubtitles === false ? "Show subtitles" : "Hide Subtitles"}
+          </button>
+        </div>
         </div>
         <div className="main-user" id="main-user">
           {activeTrack && (
@@ -76,9 +94,11 @@ function UserActiveVideoCall({
                 key={activeTrack.id}
                 style={{ width: "100%", height: "100%" }}
               />
-              <div className="video-call-subtitles">
-                <span>{signSubtitles}</span>
-              </div>
+              {showSubtitles && (
+                <div className="video-call-subtitles">
+                  <span>{subtitleText}</span>
+                </div>
+              )}
             </div>
           )}
         </div>
