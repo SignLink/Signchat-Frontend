@@ -1,7 +1,5 @@
-import React, { useState } from "react";
 import "./UserNavigation.css";
 import logo from "../Images/signchat-logo.svg";
-import maleUser from "../Icons/male-user.svg";
 import { NavLink } from "react-router-dom";
 import chat from "../Icons/chat-icon.svg";
 import videocall from "../Icons/videocall-icon.svg";

@@ -10,11 +10,11 @@ function UserAddress() {
         <div className="user-address-inputs">
           <div className="country-input">
             <span>Country</span>
-            <input type="text" placeholder="Ghana" />
+            <input type="text" placeholder="Country" />
           </div>
           <div className="city-state-input">
             <span>City/State</span>
-            <input type="text" placeholder="Accra" />
+            <input type="text" placeholder="Address" />
           </div>
         </div>
         <div className="settings-edit-button">

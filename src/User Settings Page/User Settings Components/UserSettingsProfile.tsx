@@ -11,9 +11,9 @@ function UserSettingsProfile() {
             <img src={bigProfile} alt="main-profile-pic" />
           </div>
           <div className="user-settings-profile-1">
-            <span className="user-profile-name">Deborah Smith</span>
-            <span className="user-residence">Accra, Ghana</span>
-            <span className="user-sex">Female</span>
+            <span className="user-profile-name">Firstname Lastname</span>
+            <span className="user-residence">State, Country</span>
+            <span className="user-sex">Sex</span>
           </div>
         </div>
       </div>
