@@ -264,7 +264,12 @@ function SignupInputs() {
       <div className="signup-inputs-main">
         <div className="signup-inputs">
           {state.inputIsNotValid && (
-            <WarningMessage warningMessage={state.warning} inlineWidth="100%" />
+            <div className="warning-message-div">
+              <WarningMessage
+                warningMessage={state.warning}
+                inlineWidth="100%"
+              />
+            </div>
           )}
           <div className="signup-inputs-logo">
             <img src={mainLogo} alt="main-logo" />

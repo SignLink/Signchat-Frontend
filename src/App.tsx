@@ -15,7 +15,7 @@ import UserSettingsPage from "./User Settings Page/UserSettingsPage";
 import UserVideoCallPage from "./User Video Call Page/UserVideoCallPage";
 import { useDispatch, useSelector } from "react-redux";
 import InvalidPage from "./Main Components/InvalidPage";
-import UserActiveVideoCall from "./User Video Call Page/User Video Call Components/UserActiveVideoCall";
+import UserActiveVideoCall from "./User Video Call Page/User Video Call Components//UserActiveVideoCall";
 import { setUserInfo } from "./Store-Redux/AuthReducer";
 
 function App() {

@@ -1,8 +1,9 @@
-import { ReactElement } from "react";
+import { ReactElement, useEffect } from "react";
 import "./VideoCallParticipants.css";
 import profile from "../../Icons/male-user.png";
 import send from "../../Icons/send.svg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserInfo } from "../../Store-Redux/AuthReducer";
 
 let participants: ReactElement;
 
@@ -29,6 +30,14 @@ function VideoCallParticipants({
 }: props) {
 
   const userInfo = useSelector((state: any) => state.authentication.userInfo);
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    const storedEmail = localStorage.getItem("userEmail");
+    if (storedEmail) {
+      dispatch(setUserInfo(storedEmail));
+    }
+  }, [dispatch]);
 
 
   if (lobbyParticipants.length === 0) {

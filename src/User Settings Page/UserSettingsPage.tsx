@@ -7,12 +7,14 @@ import { useDispatch, useSelector } from "react-redux";
 import Modal from "../Main Components/Modal";
 import { setLogout } from "../Store-Redux/LogoutReducer";
 import LogoutModal from "../Main Components/LogoutModal";
+import Notification from "../Main Components/Notification";
 
 function UserSettingsPage() {
   const logoutInitialState = useSelector(
     (state: any) => state.logout.logoutIsOpen
   );
   const dispatchLogout = useDispatch();
+ 
   return (
     <>
       {logoutInitialState && (
