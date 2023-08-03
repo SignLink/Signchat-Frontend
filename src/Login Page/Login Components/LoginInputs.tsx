@@ -52,6 +52,8 @@ function LoginInputs() {
     dispatch(closeLogin());
   }
 
+   console.log(notificationIsOpen);
+
   const dispatchNotifications = useDispatch();
 
   async function submitLoginDetails(event: React.FormEvent<HTMLFormElement>) {
