@@ -6,6 +6,8 @@ import { AgoraVideoPlayer } from "agora-rtc-react";
 import { UID } from "agora-rtc-sdk-ng";
 import { localTracksTypes } from "../UserVideoCallPage";
 import { useRef, useEffect, useState } from "react";
+import { client } from "@gradio/client";
+import axios from "axios";
 interface Props {
   leaveCall?: () => void;
   remoteUsers?: any[];
@@ -48,9 +50,22 @@ function UserActiveVideoCall({
   const [signSubtitles, setSignSubtitles] = useState("");
   const [showSubtitles, setShowSubtitles] = useState(false);
 
-  if (videoRef.current) {
-    const videoElement = videoRef.current?.querySelector("div div div video");
-  }
+  useEffect(() => {
+    // Function to fetch the video file
+    const fetchVideoAndPredict = async () => {
+      try {
+        const videoElement =
+          videoRef.current?.querySelector("div div div video");
+        // const app = await client("https://a9532372b4dd36f02c.gradio.live/");
+        // const result: any = await app.predict("/predict", [videoElement]);
+        // console.log(result.data);
+      } catch (error) {
+        console.error("Error occurred:", error);
+      }
+    };
+
+    fetchVideoAndPredict();
+  }, []);
 
   let subtitleText: string;
   if (signSubtitles === "") {
@@ -82,7 +97,9 @@ function UserActiveVideoCall({
               onClick={() => {
                 setSignSubtitles("");
               }}
-            >Clear Subtitles</button>
+            >
+              Clear Subtitles
+            </button>
           </div>
         </div>
         <div className="main-user" id="main-user">
