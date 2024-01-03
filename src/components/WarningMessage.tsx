@@ -1,5 +1,5 @@
 import warning from "../assets/Icons/icons8-warning.png";
-import "../Contact Page/Contact Components/ContactDescription.css";
+import "../features/Contact Page/Contact Components/ContactDescription.css";
 
 interface Props {
   warningMessage: string;

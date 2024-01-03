@@ -3,7 +3,7 @@ import logo from "../assets/Images/signchat-logo.svg";
 import Button from "./Button";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { openLogin } from "../Store-Redux/LoginReducer";
+import { openLogin } from "../store/reducers/LoginReducer";
 
 function Navigation() {
   const dispatchModal = useDispatch();

@@ -1,8 +1,8 @@
 import React from "react";
 import "./LogoutModal.css";
 import { useDispatch } from "react-redux";
-import { setLogout } from "../Store-Redux/LogoutReducer";
-import { setToken } from "../Store-Redux/AuthReducer";
+import { setLogout } from "../store/reducers/LogoutReducer";
+import { setToken } from "../store/reducers/AuthReducer";
 import { useNavigate } from "react-router";
 
 function LogoutModal() {

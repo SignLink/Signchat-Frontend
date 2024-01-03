@@ -5,18 +5,14 @@ import {
   Navigate,
 } from "react-router-dom";
 import { useEffect } from "react";
-import Home from "./Home Page/Home";
-import About from "./About Page/About";
-import Contact from "./Contact Page/Contact";
-import UserChatPage from "./User Chat Page/UserChatPage";
-import UserFriendsPage from "./User Friends Page/UserFriendsPage";
-import UserSchedulePage from "./User Schedule Page/UserSchedulePage";
-import UserSettingsPage from "./User Settings Page/UserSettingsPage";
-import UserVideoCallPage from "./User Video Call Page/UserVideoCallPage";
+import Home from "./features/Home Page/Home";
+import About from "./features/About Page/About";
+import Contact from "./features/Contact Page/Contact";
+import UserVideoCallPage from "./features/User Video Call Page/UserVideoCallPage";
 import { useDispatch, useSelector } from "react-redux";
 import InvalidPage from "./components/InvalidPage";
-import UserActiveVideoCall from "./User Video Call Page/User Video Call Components//UserActiveVideoCall";
-import { setUserInfo } from "./Store-Redux/AuthReducer";
+import UserActiveVideoCall from "./features/User Video Call Page/User Video Call Components//UserActiveVideoCall";
+import { setUserInfo } from "./store/reducers/AuthReducer";
 
 function App() {
   const dispatch = useDispatch();
@@ -55,10 +51,6 @@ function App() {
           </>
           {userIsLoggedIn && (
             <>
-              <Route path={`/chat`} element={<UserChatPage />} />
-              <Route path="/friends" element={<UserFriendsPage />} />
-              <Route path="/schedule" element={<UserSchedulePage />} />
-              <Route path="/settings" element={<UserSettingsPage />} />
               <Route path="/videocall" element={<UserVideoCallPage />} />
               <Route
                 path={`/videocall?room=${lobbyRoomName}`}
