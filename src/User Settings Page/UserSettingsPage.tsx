@@ -1,20 +1,20 @@
 import React from "react";
-import MainWrapper from "../Main Components/MainWrapper";
-import UserNavigation from "../Main Components/UserNavigation";
+import MainWrapper from "../components/MainWrapper";
+import UserNavigation from "../components/UserNavigation";
 import UserSettings from "./User Settings Components/UserSettings";
 import "./UserSettingsPage.css";
 import { useDispatch, useSelector } from "react-redux";
-import Modal from "../Main Components/Modal";
+import Modal from "../components/Modal";
 import { setLogout } from "../Store-Redux/LogoutReducer";
-import LogoutModal from "../Main Components/LogoutModal";
-import Notification from "../Main Components/Notification";
+import LogoutModal from "../components/LogoutModal";
+import Notification from "../components/Notification";
 
 function UserSettingsPage() {
   const logoutInitialState = useSelector(
     (state: any) => state.logout.logoutIsOpen
   );
   const dispatchLogout = useDispatch();
- 
+
   return (
     <>
       {logoutInitialState && (

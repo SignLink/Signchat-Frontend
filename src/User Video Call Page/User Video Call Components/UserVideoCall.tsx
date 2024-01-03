@@ -1,4 +1,4 @@
-import Button from "../../Main Components/Button";
+import Button from "../../components/Button";
 import "./UserVideoCall.css";
 import meeting from "../../Images/Remote-meeting.svg";
 

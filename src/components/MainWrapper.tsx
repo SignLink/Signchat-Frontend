@@ -1,5 +1,5 @@
 import React from "react";
-import "../Main Components/MainWrapper.css";
+import "./MainWrapper.css";
 
 interface props {
   children: React.ReactNode;

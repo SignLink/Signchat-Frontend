@@ -1,10 +1,10 @@
-import Navigation from "../Main Components/Navigation";
-import MainWrapper from "../Main Components/MainWrapper";
-import Footer from "../Main Components/Footer";
+import Navigation from "../components/Navigation";
+import MainWrapper from "../components/MainWrapper";
+import Footer from "../components/Footer";
 import ContactDescription from "./Contact Components/ContactDescription";
 import Login from "../Login Page/Login";
 import { useDispatch, useSelector } from "react-redux";
-import Modal from "../Main Components/Modal";
+import Modal from "../components/Modal";
 import Signup from "../Sign Up Page/Signup";
 import { closeLogin } from "../Store-Redux/LoginReducer";
 import { closeModal } from "../Store-Redux/ModalReducer";
@@ -18,7 +18,7 @@ function Contact() {
     (state: any) => state.signup.signupIsOpen
   );
 
-  const dispatchModal = useDispatch()
+  const dispatchModal = useDispatch();
 
   function closeModalHandler() {
     dispatchModal(closeModal());

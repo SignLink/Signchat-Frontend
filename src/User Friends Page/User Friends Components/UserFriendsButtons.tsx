@@ -1,4 +1,4 @@
-import Button from "../../Main Components/Button";
+import Button from "../../components/Button";
 import "./UserFriendsButtons.css";
 
 interface Props {

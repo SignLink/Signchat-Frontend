@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Button from "../../Main Components/Button";
+import Button from "../../components/Button";
 import "./VideoCallPopup.css";
 import { useDispatch, useSelector } from "react-redux";
 import {

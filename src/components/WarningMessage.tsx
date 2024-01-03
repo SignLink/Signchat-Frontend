@@ -1,4 +1,4 @@
-import warning from "../Icons/icons8-warning.png";
+import warning from "../assets/Icons/icons8-warning.png";
 import "../Contact Page/Contact Components/ContactDescription.css";
 
 interface Props {

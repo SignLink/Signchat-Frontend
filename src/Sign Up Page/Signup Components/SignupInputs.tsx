@@ -1,9 +1,9 @@
 import "../Signup.css";
 import lady from "../../Images/gorgeous-smiling-female.svg";
 import mainLogo from "../../Images/signchat-logo.svg";
-import Button from "../../Main Components/Button";
+import Button from "../../components/Button";
 import { useReducer, useEffect, useState } from "react";
-import WarningMessage from "../../Main Components/WarningMessage";
+import WarningMessage from "../../components/WarningMessage";
 import { useDispatch, useSelector } from "react-redux";
 import { openLogin } from "../../Store-Redux/LoginReducer";
 import { closeSignup } from "../../Store-Redux/SignupReducer";

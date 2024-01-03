@@ -1,8 +1,8 @@
 import React, { useReducer } from "react";
 import "../Contact Components/ContactDescription.css";
 import contactUs from "../../Images/contact_us.svg";
-import Button from "../../Main Components/Button";
-import WarningMessage from "../../Main Components/WarningMessage";
+import Button from "../../components/Button";
+import WarningMessage from "../../components/WarningMessage";
 
 interface contactState {
   firstName: string;
@@ -153,7 +153,6 @@ function ContactDescription() {
     onFocusValidInputs(validIssue, "issueNotValid", "Please type a message");
   }
 
-  
   //submit form
   function submitContactForm(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();

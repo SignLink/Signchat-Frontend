@@ -1,4 +1,4 @@
-import "../Main Components/Navigations.css";
+import "./Navigations.css";
 
 interface props {
   buttonName: string;

@@ -1,11 +1,11 @@
-import MainWrapper from "../Main Components/MainWrapper";
-import UserNavigation from "../Main Components/UserNavigation";
+import MainWrapper from "../components/MainWrapper";
+import UserNavigation from "../components/UserNavigation";
 import UserVideoCall from "./User Video Call Components/UserVideoCall";
 import "./UserVideoCallPage.css";
 import VideoCallParticipants from "./User Video Call Components/VideoCallParticipants";
 import { useState, useRef, useEffect } from "react";
 import VideoCallPopup from "./User Video Call Components/VideoCallPopup";
-import Modal from "../Main Components/Modal";
+import Modal from "../components/Modal";
 import UserActiveVideoCall from "./User Video Call Components/UserActiveVideoCall";
 import AgoraRTC, {
   IAgoraRTCClient,
@@ -16,7 +16,7 @@ import AgoraRTC, {
 } from "agora-rtc-sdk-ng";
 import { appId, token } from "../Agora/Settings";
 import { useSelector, useDispatch } from "react-redux";
-import LogoutModal from "../Main Components/LogoutModal";
+import LogoutModal from "../components/LogoutModal";
 import { setLogout } from "../Store-Redux/LogoutReducer";
 import { useNavigate } from "react-router";
 import { RtmClient, RtmChannel } from "agora-rtm-sdk";
@@ -146,12 +146,11 @@ function UserVideoCallPage() {
         } else if (volume.level < maxVolume) {
           maxVolume = volume.level;
           setSpeakerId(0);
-          setRemoteSpeakerId(0)
+          setRemoteSpeakerId(0);
         }
       });
     });
   }
-  
 
   //trigger participant leaving the call function
   useEffect(() => {
@@ -268,7 +267,7 @@ function UserVideoCallPage() {
     setLobbyParticipants([]);
     setDisplayMessages([]);
     setInCall(false);
-    navigate('/videocall')
+    navigate("/videocall");
   }
 
   async function muteMicrophone() {

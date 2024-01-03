@@ -1,4 +1,4 @@
-import Button from "../../Main Components/Button";
+import Button from "../../components/Button";
 import { useState, useEffect } from "react";
 import man from "../../Images/medium-shot-man-with-laptop.svg";
 import mainLogo from "../../Images/signchat-logo.svg";
@@ -52,7 +52,7 @@ function LoginInputs() {
     dispatch(closeLogin());
   }
 
-   console.log(notificationIsOpen);
+  console.log(notificationIsOpen);
 
   const dispatchNotifications = useDispatch();
 

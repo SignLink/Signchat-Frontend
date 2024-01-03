@@ -1,6 +1,6 @@
 import introPerson from "../../Images/Person-Sign-Language-Classes.png";
 import "../Home Components/Introduction.css";
-import Button from "../../Main Components/Button";
+import Button from "../../components/Button";
 import { useDispatch } from "react-redux";
 import { openSignup } from "../../Store-Redux/SignupReducer";
 

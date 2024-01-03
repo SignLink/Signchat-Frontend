@@ -4,7 +4,7 @@ import "./UserSettings.css";
 import UserPersonalInformation from "./UserPersonalInformation";
 import UserAddress from "./UserAddress";
 import { useSelector } from "react-redux";
-import Notification from "../../Main Components/Notification";
+import Notification from "../../components/Notification";
 
 function UserSettings() {
   const notificationInitialState = useSelector(

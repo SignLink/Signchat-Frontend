@@ -1,10 +1,10 @@
 import React from "react";
-import Navigation from "../Main Components/Navigation";
-import MainWrapper from "../Main Components/MainWrapper";
+import Navigation from "../components/Navigation";
+import MainWrapper from "../components/MainWrapper";
 import AboutUsDescription from "./About Components/AboutUsDescription";
-import Footer from "../Main Components/Footer";
+import Footer from "../components/Footer";
 import Login from "../Login Page/Login";
-import Modal from "../Main Components/Modal";
+import Modal from "../components/Modal";
 import { useSelector } from "react-redux";
 import Signup from "../Sign Up Page/Signup";
 import { useDispatch } from "react-redux";
@@ -24,8 +24,8 @@ function About() {
 
   function closeModalHandler() {
     dispatchModal(closeModal());
-    dispatchModal(closeLogin())
-    dispatchModal(closeSignup())
+    dispatchModal(closeLogin());
+    dispatchModal(closeSignup());
   }
 
   return (

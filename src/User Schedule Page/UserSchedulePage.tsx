@@ -1,10 +1,10 @@
 import React from "react";
-import MainWrapper from "../Main Components/MainWrapper";
-import UserNavigation from "../Main Components/UserNavigation";
+import MainWrapper from "../components/MainWrapper";
+import UserNavigation from "../components/UserNavigation";
 import "./UserSchedulePage.css";
 import UserSchedule from "./User Schedule Components/UserSchedule";
-import Modal from "../Main Components/Modal";
-import LogoutModal from "../Main Components/LogoutModal";
+import Modal from "../components/Modal";
+import LogoutModal from "../components/LogoutModal";
 import { useSelector, useDispatch } from "react-redux";
 import { setLogout } from "../Store-Redux/LogoutReducer";
 
