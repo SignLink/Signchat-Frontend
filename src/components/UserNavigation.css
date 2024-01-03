@@ -1,13 +1,16 @@
 .user-navigation-main {
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: 20%;
     height: 100vh;
+    align-content: space-between;
+    justify-content: space-between;
 }
 
 .user-navigation-logo {
     margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
 }
 
 .user-navigation-logo img {
@@ -47,9 +50,8 @@
     gap: 1rem;
     align-items: center;
     cursor: pointer;
-    margin-bottom: 1.8rem;
     border-radius: 10px;
-    padding-left: 1rem;
+    padding: 1.7rem 1.5rem;
 }
 
 .user-navigation-main button span,
@@ -78,9 +80,14 @@
 .user-logout:hover img {
     filter: brightness(0) invert(1);
 }
+.user-logout{
+    margin-left: 3rem;
+}
 
 .user-logout-div {
-    height: 30vh;
+    width: 100%;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4rem;
 }

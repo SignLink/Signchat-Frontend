@@ -19,16 +19,6 @@ function UserNavigation() {
       <div className="user-navigation-logo">
         <img src={logo} alt="main-logo" />
       </div>
-      <div className="user-navigation-buttons">
-        <div className="user-videocall">
-          <NavLink to="/videocall">
-            <button>
-              <img src={videocall} alt="chat-icon" />
-              <span>Video Call</span>
-            </button>
-          </NavLink>
-        </div>
-      </div>
       <div className="user-logout-div">
         <button
           className="user-logout"
