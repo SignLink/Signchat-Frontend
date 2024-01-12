@@ -31,7 +31,8 @@
 .descriptions-reverse {
     flex-direction: row-reverse;
 }
-.description-main h2{
+
+.description-main h2 {
     font-size: 1.5rem;
     font-weight: 700;
     width: 100%;
@@ -42,4 +43,54 @@
     color: var(--font-color);
     padding-top: 4rem;
     padding-bottom: 7.25rem;
+}
+
+/*Responsiveness*/
+@media (max-width: 1400px) {
+    .description-main h1 {
+        font-size: 2rem;
+    }
+
+    .description-image img {
+        width: 400px;
+        height: 400px;
+    }
+
+    .descriptions,
+    .descriptions-reverse {
+        justify-content: space-around;
+        font-size: 1.15rem;
+    }
+
+    .description-main h2 {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 1000px) {
+
+    .descriptions,
+    .descriptions-reverse {
+        flex-direction: column-reverse;
+    }
+
+    .description-main {
+        padding: 0rem 3rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .description-image img {
+        width: 300px;
+        height: 300px;
+    }
+    .descriptions, .descriptions-reverse{
+        text-align: center;
+    }
+}
+@media (max-width: 400px) {
+    .description-image img {
+        width: 270px;
+        height: 270px;
+    }
 }
