@@ -3,6 +3,7 @@ import "../Home Components/Introduction.css";
 import Button from "../../../components/Button";
 import { useDispatch } from "react-redux";
 import { openSignup } from "../../../store/reducers/SignupReducer";
+import useResponsiveFunction from "../../../utilities/SmallScreen";
 
 function Introduction() {
   const dispatchModal = useDispatch();
@@ -11,6 +12,7 @@ function Introduction() {
     dispatchModal(openSignup());
   }
 
+  const { isSmallScreen } = useResponsiveFunction();
   return (
     <>
       <div className="intro-main">
@@ -26,6 +28,7 @@ function Introduction() {
           </div>
         </div>
         <div className="intro-pic">
+          {isSmallScreen && <div className="overlay"></div>}
           <img src={introPerson} alt="person-doing-sign-on-laptop"></img>
         </div>
       </div>

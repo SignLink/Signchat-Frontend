@@ -1,7 +1,7 @@
 .how-it-works-main {
     max-width: 70rem;
     color: var(--font-color);
-    margin: 8.05rem auto 21rem auto;
+    margin: 7rem auto 8rem auto;
 }
 
 .how-it-works-main h1 {
@@ -12,10 +12,11 @@
 .how-it-works-descriptions {
     padding-top: 5.75rem;
     display: flex;
+    justify-content: center;
 }
 
 .how-it-works-descriptions-main {
-    padding-left: 7.7rem;
+    padding-left: 5rem;
 }
 
 .how-it-works-description h2,
@@ -28,4 +29,39 @@
     max-width: 35rem;
     width: 100%;
     line-height: 40px;
+}
+
+@media (max-width:1400px) {
+    .how-it-works-img img {
+        width: 400px;
+        height: 500px;
+    }
+
+    .how-it-works-main h1 {
+        font-size: 2rem;
+    }
+
+    .how-it-works-description h2,
+    .how-it-works-description p {
+        font-size: 1.15rem;
+    }
+}
+
+@media (max-width:900px) {
+    .how-it-works-descriptions-main{
+        padding-left: 0rem;
+    }
+    .how-it-works-img{
+        display: none;
+    }
+    .how-it-works-descriptions{
+        padding-top: 2rem;
+        text-align: center;
+    }
+}
+
+@media (max-width: 600px) {
+    .how-it-works-descriptions-main{
+        padding: 0rem 3rem;
+    }
 }

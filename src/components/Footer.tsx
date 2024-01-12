@@ -39,7 +39,9 @@ function Footer() {
             </div>
           </div>
         </div>
-        <footer>Copyright &copy; SignChat 2023 </footer>
+        <div className="footer-copyright">
+          <span>Copyright &copy; SignChat 2023 </span>
+        </div>
       </div>
     </>
   );
