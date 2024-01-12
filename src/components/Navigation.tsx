@@ -46,7 +46,7 @@ function Navigation() {
                   <span className="contact-button">
                     <NavLink to="/contact">Contact</NavLink>
                   </span>
-                  <Button buttonName="Login" openModal={openLoginPage} />
+                  <Button buttonName="Login" openModal={openLoginPage} classname="blue-button" />
                 </div>
               </>
             ) : (
@@ -72,7 +72,7 @@ function Navigation() {
               <span style={{ marginRight: "1rem" }}>
                 <NavLink to="/contact">Contact</NavLink>
               </span>
-              <Button buttonName="Login" openModal={openLoginPage} />
+              <Button buttonName="Login" openModal={openLoginPage} classname="blue-button" />
             </div>
           </>
         )}

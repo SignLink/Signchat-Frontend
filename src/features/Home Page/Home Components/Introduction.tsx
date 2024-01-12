@@ -24,7 +24,7 @@ function Introduction() {
             all over the world and start chatting in sign language today.
           </p>
           <div className="sign-up-button">
-            <Button buttonName="Sign Up" openModal={openSignupPage} />
+            <Button buttonName="Sign Up" openModal={openSignupPage} classname="blue-button"/>
           </div>
         </div>
         <div className="intro-pic">

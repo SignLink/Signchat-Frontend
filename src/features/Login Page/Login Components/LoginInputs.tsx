@@ -130,8 +130,8 @@ function LoginInputs() {
               }
               value={password}
             />
-            {!isLoading && <Button buttonName="Login" />}
-            {isLoading && <Button buttonName="Logging in..." />}
+            {!isLoading && <Button buttonName="Login" classname="login-button"/>}
+            {isLoading && <Button buttonName="Logging in..." classname="login-button"/>}
           </form>
           <span className="switch-to-signup">
             Don't have an account?{" "}

@@ -52,13 +52,14 @@
     cursor: pointer;
 }
 
+.blue-button:hover {
+    background-color: var(--active-color);
+}
+
 .main-logo {
     padding-top: 2rem;
 }
 
-.blue-button:hover {
-    background-color: var(--active-color);
-}
 
 @media (max-width:1200px) {
     .smaller-screen-nav-button img {
@@ -116,6 +117,8 @@
         height: 40px;
 
     }
+
+
 }
 
 @media (max-width:1000px) {
