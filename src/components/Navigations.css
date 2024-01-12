@@ -76,9 +76,10 @@
         background-color: white;
         height: 35rem;
         align-items: center;
-        border-left: 1px solid black;
-        border-bottom: 1px solid black;
+        border-left: 1px solid #0a0c4173;
+        border-bottom: 1px solid #0a0c4173;
         z-index: 10;
+        border-radius: 0 0 0px 10px;
     }
 
     .nav-buttons {
@@ -121,6 +122,13 @@
     .nav-buttons {
         width: 40%;
     }
+
+
+    .main-logo img {
+        width: 90px;
+        height: 90px;
+
+    }
 }
 
 @media (max-width:800px) {
@@ -132,6 +140,10 @@
 @media (max-width: 600px) {
     .smaller-screen-nav-button {
         width: 4rem;
+    }
+
+    .main-logo {
+        padding-left: 1rem;
     }
 }
 
