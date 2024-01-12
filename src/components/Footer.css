@@ -65,7 +65,7 @@
 
 /*Responsive*/
 /*Large Screen*/
-@media(min-height:2500px) {
+@media(min-height:1500px) {
     .footer-main {
         position: absolute;
         bottom: 0%;

@@ -223,7 +223,7 @@ function ContactDescription() {
                 value={state.issue}
               />
               <div className="send-button">
-                <Button buttonName="Send" />
+                <Button buttonName="Send" classname="blue-button" />
               </div>
             </form>
           </div>

@@ -274,7 +274,7 @@ function SignupInputs() {
           <div className="signup-inputs-logo">
             <img src={mainLogo} alt="main-logo" />
           </div>
-          <h1>Create An Account</h1>
+          <h1>Create Account</h1>
           <form onSubmit={submitNewAccountForm}>
             <input
               type="text"
@@ -303,10 +303,10 @@ function SignupInputs() {
               }
               value={state.confirmPassword}
             />
-            {!isLoading && <Button buttonName="Create Account" />}
-            {isLoading && <Button buttonName="Signing Up..." />}
+            {!isLoading && <Button buttonName="Create Account" classname="create-account-button"/>}
+            {isLoading && <Button buttonName="Signing Up..." classname="create-account-button"/>}
           </form>
-          <span>
+          <span className="switch-to-login">
             Already have an account?{" "}
             <span className="login-link" onClick={openLoginPage}>
               Login
