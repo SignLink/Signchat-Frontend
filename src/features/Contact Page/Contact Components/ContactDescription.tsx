@@ -170,13 +170,6 @@ function ContactDescription() {
       return;
     }
 
-    // const data = {
-    //   firtname: state.firstName,
-    //   lastname: state.lastName,
-    //   email: state.email,
-    //   issue: state.issue,
-    // };
-
     dispatch({ type: "firstname", payload: "" });
     dispatch({ type: "lastname", payload: "" });
     dispatch({ type: "email", payload: "" });

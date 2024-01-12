@@ -7,7 +7,7 @@
     color: var(--font-color);
     text-align: center;
     width: 100%;
-    margin-top: 10rem;
+    margin-top: 5rem;
 }
 
 .inputs {
@@ -141,4 +141,95 @@
 .warning-message img {
     width: 30px;
     height: 30px;
+}
+
+@media (max-width:1400px) {
+    .contact-main h1 {
+        font-size: 2rem;
+    }
+
+    .contact-main p {
+        font-size: .9rem;
+    }
+
+    .inputs-image img {
+        width: 500px;
+        height: 400px;
+    }
+
+    .name-inputs input {
+        height: 3.3rem;
+    }
+}
+
+@media (max-width:1200px) {
+    .inputs-image img {
+        width: 450px;
+        height: 450px;
+    }
+}
+
+@media (max-width:1060px) {
+    .inputs-image {
+        display: none;
+    }
+
+    .inputs-main {
+        margin-top: 2rem;
+    }
+
+    .inputs {
+        display: flex;
+        width: 100%;
+    }
+
+    .inputs form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .inputs input,
+    .inputs textarea {
+        width: 100%;
+        margin: 1.5rem 0 0 0;
+    }
+
+    .inputs textarea {
+        margin-bottom: 1.5rem;
+    }
+
+    .name-inputs {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .email-input {
+        margin: auto;
+    }
+}
+
+@media (max-width:601px) {
+    .contact-main {
+        padding: 0 3rem;
+    }
+
+}
+
+@media (max-width:500px) {
+    .name-inputs {
+        margin-top: 1.5rem;
+        flex-direction: column;
+        align-items: normal;
+        justify-content: normal;
+        width: 100%;
+    }
+
+    .name-inputs input {
+        max-width: none;
+        margin-top: 0;
+        width: 100%;
+    }
+
 }
