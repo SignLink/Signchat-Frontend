@@ -21,6 +21,7 @@ import { setLogout } from "../../store/reducers/LogoutReducer";
 import { useNavigate } from "react-router";
 import { RtmClient, RtmChannel } from "agora-rtm-sdk";
 import AgoraRTM from "agora-rtm-sdk";
+import useResponsiveFunction from "../../utilities/SmallScreen";
 
 export interface localTracksTypes {
   id: UID;
@@ -75,7 +76,7 @@ function UserVideoCallPage() {
     client.current?.on("user-published", handleUserJoined);
     client.current?.on("user-unpublished", handleUserUnpublished);
     client.current?.on("user-left", handleUserLeft);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function joinCall() {
@@ -295,6 +296,8 @@ function UserVideoCallPage() {
     (state: any) => state.logout.logoutIsOpen
   );
 
+  const { isSmallScreen } = useResponsiveFunction();
+
   return (
     <>
       {logoutInitialState && (
@@ -314,40 +317,77 @@ function UserVideoCallPage() {
           />
         </Modal>
       )}
-      <MainWrapper>
-        <div className="user-videocall-main">
-          <UserNavigation />
-          {!inCall ? (
-            <UserVideoCall openCreateVideoCall={openStartVideoCall} />
-          ) : (
-            <UserActiveVideoCall
-              leaveCall={leaveCall}
-              remoteUsers={remoteUsers}
-              userCount={userCount}
-              localTrack={localTrack}
-              setRemoteUsers={setRemoteUsers}
-              activeTrack={activeTrack}
-              setActiveTrack={setActiveTrack}
-              muteMicrophone={muteMicrophone}
-              muteCamera={muteCamera}
-              muteCam={muteCam}
-              muteMic={muteMic}
-              speakerId={speakerId}
-              setSpeakerId={setSpeakerId}
-              remoteSpeakerId={remoteSpeakerId}
-              localTracks={localTrack}
-              setRemoteSpeakerId={setRemoteSpeakerId}
+      {isSmallScreen ? (
+        <>
+          <div className="user-videocall-main">
+            <UserNavigation />
+            {!inCall ? (
+              <UserVideoCall openCreateVideoCall={openStartVideoCall} />
+            ) : (
+              <UserActiveVideoCall
+                leaveCall={leaveCall}
+                remoteUsers={remoteUsers}
+                userCount={userCount}
+                localTrack={localTrack}
+                setRemoteUsers={setRemoteUsers}
+                activeTrack={activeTrack}
+                setActiveTrack={setActiveTrack}
+                muteMicrophone={muteMicrophone}
+                muteCamera={muteCamera}
+                muteCam={muteCam}
+                muteMic={muteMic}
+                speakerId={speakerId}
+                setSpeakerId={setSpeakerId}
+                remoteSpeakerId={remoteSpeakerId}
+                localTracks={localTrack}
+                setRemoteSpeakerId={setRemoteSpeakerId}
+              />
+            )}
+            <VideoCallParticipants
+              lobbyParticipants={lobbyParticipants}
+              sendMessage={sendMessage}
+              setChannelMessage={setChannelMessage}
+              channelMessage={channelMessage}
+              displayMessages={displayMessages}
             />
-          )}
-          <VideoCallParticipants
-            lobbyParticipants={lobbyParticipants}
-            sendMessage={sendMessage}
-            setChannelMessage={setChannelMessage}
-            channelMessage={channelMessage}
-            displayMessages={displayMessages}
-          />
-        </div>
-      </MainWrapper>
+          </div>
+        </>
+      ) : (
+        <MainWrapper>
+          <div className="user-videocall-main">
+            <UserNavigation />
+            {!inCall ? (
+              <UserVideoCall openCreateVideoCall={openStartVideoCall} />
+            ) : (
+              <UserActiveVideoCall
+                leaveCall={leaveCall}
+                remoteUsers={remoteUsers}
+                userCount={userCount}
+                localTrack={localTrack}
+                setRemoteUsers={setRemoteUsers}
+                activeTrack={activeTrack}
+                setActiveTrack={setActiveTrack}
+                muteMicrophone={muteMicrophone}
+                muteCamera={muteCamera}
+                muteCam={muteCam}
+                muteMic={muteMic}
+                speakerId={speakerId}
+                setSpeakerId={setSpeakerId}
+                remoteSpeakerId={remoteSpeakerId}
+                localTracks={localTrack}
+                setRemoteSpeakerId={setRemoteSpeakerId}
+              />
+            )}
+            <VideoCallParticipants
+              lobbyParticipants={lobbyParticipants}
+              sendMessage={sendMessage}
+              setChannelMessage={setChannelMessage}
+              channelMessage={channelMessage}
+              displayMessages={displayMessages}
+            />
+          </div>
+        </MainWrapper>
+      )}
     </>
   );
 }

@@ -1,9 +1,12 @@
-import { ReactElement, useEffect } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import "./VideoCallParticipants.css";
 import profile from "../../../assets/Icons/male-user.png";
 import send from "../../../assets/Icons/send.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserInfo } from "../../../store/reducers/AuthReducer";
+import useResponsiveFunction from "../../../utilities/SmallScreen";
+import userMenu from "../../../assets/Icons/user-menu.png";
+import participantsClose from "../../../assets/Icons/participants-close.png";
 
 let participants: ReactElement;
 
@@ -28,9 +31,8 @@ function VideoCallParticipants({
   channelMessage,
   displayMessages,
 }: props) {
-
   const userInfo = useSelector((state: any) => state.authentication.userInfo);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const storedEmail = localStorage.getItem("userEmail");
@@ -38,7 +40,6 @@ function VideoCallParticipants({
       dispatch(setUserInfo(storedEmail));
     }
   }, [dispatch]);
-
 
   if (lobbyParticipants.length === 0) {
     participants = (
@@ -65,64 +66,148 @@ function VideoCallParticipants({
     );
   }
 
+  //responsiveness
+  const { isSmallScreen } = useResponsiveFunction();
+  const [showParticipantsStuff, setShowParticipantsStuff] =
+    useState<boolean>(false);
+
   return (
-    <div className="videocall-participants-main">
-      <div className="user-name">
-        <img src={profile} alt="" />
-        <span>{userInfo}</span>
-      </div>
-      <div className="participants">
-        <div className="participants-title">
-          <h2>Participants</h2>
-        </div>
-        <div className="participants-lists">
-          {participants}
-          <div></div>
-        </div>
-      </div>
-      <span className="line"></span>
-      <div className="videocall-chat-main">
-        <div className="videocall-chat-box">
-          {displayMessages.length === 0 ? (
-            <>
-              <div className="empty-message">
-                <span>No Messages</span>
+    <>
+      {isSmallScreen ? (
+        <>
+          {showParticipantsStuff ? (
+            <div className="videocall-participants-main">
+              <div
+                className="close"
+                onClick={() => setShowParticipantsStuff(false)}
+              >
+                <img src={participantsClose} alt="close" />
               </div>
-            </>
+              <div className="participants">
+                <div className="participants-title">
+                  <h2>Participants</h2>
+                </div>
+                <div className="participants-lists">
+                  {participants}
+                  <div></div>
+                </div>
+              </div>
+              <span className="line"></span>
+              <div className="videocall-chat-main">
+                <div className="videocall-chat-box">
+                  {displayMessages.length === 0 ? (
+                    <>
+                      <div className="empty-message">
+                        <span>No Messages</span>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      {displayMessages.map(function (sender, index) {
+                        return (
+                          <div className="chat-info" key={index}>
+                            <img src={profile} alt="profile-pic" />
+                            <div className="chat">
+                              <span>{sender.userName}</span>
+                              <div className="chat-message">
+                                {sender.userMessage}
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </>
+                  )}
+                </div>
+                <div className="videocall-send">
+                  <form onSubmit={sendMessage}>
+                    <input
+                      type="text"
+                      placeholder="Send..."
+                      id="Send-input"
+                      onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                        setChannelMessage(event.target.value)
+                      }
+                      value={channelMessage}
+                    />
+                    <button>
+                      <img src={send} alt="send" />
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
           ) : (
-            <>
-              {displayMessages.map(function (sender, index) {
-                return (
-                  <div className="chat-info" key={index}>
-                    <img src={profile} alt="profile-pic" />
-                    <div className="chat">
-                      <span>{sender.userName}</span>
-                      <div className="chat-message">{sender.userMessage}</div>
-                    </div>
-                  </div>
-                );
-              })}
-            </>
+            <div
+              className="smaller-screen-user-button"
+              onClick={() => setShowParticipantsStuff(true)}
+            >
+              <img src={userMenu} alt="menu-button" />
+            </div>
           )}
+        </>
+      ) : (
+        <div className="videocall-participants-main">
+          <div className="user-name">
+            <img src={profile} alt="" />
+            <span>{userInfo}</span>
+          </div>
+          <div className="participants">
+            <div className="participants-title">
+              <h2>Participants</h2>
+            </div>
+            <div className="participants-lists">
+              {participants}
+              <div></div>
+            </div>
+          </div>
+          <span className="line"></span>
+          <div className="videocall-chat-main">
+            <div className="videocall-chat-box">
+              {displayMessages.length === 0 ? (
+                <>
+                  <div className="empty-message">
+                    <span>No Messages</span>
+                  </div>
+                </>
+              ) : (
+                <>
+                  {displayMessages.map(function (sender, index) {
+                    return (
+                      <div className="chat-info" key={index}>
+                        <img src={profile} alt="profile-pic" />
+                        <div className="chat">
+                          <span>{sender.userName}</span>
+                          <div className="chat-message">
+                            {sender.userMessage}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </>
+              )}
+            </div>
+            <div className="videocall-send">
+              <form onSubmit={sendMessage}>
+                <input
+                  type="text"
+                  placeholder="Send..."
+                  id="Send-input"
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                    setChannelMessage(event.target.value)
+                  }
+                  value={channelMessage}
+                />
+                <button>
+                  <img src={send} alt="send" />
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
-        <div className="videocall-send">
-          <form onSubmit={sendMessage}>
-            <input
-              type="text"
-              placeholder="Send..."
-              id="Send-input"
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                setChannelMessage(event.target.value)
-              }
-              value={channelMessage}
-            />
-            <button>
-              <img src={send} alt="send" />
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 }
 

@@ -3,8 +3,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
-    min-height: 55rem;
 }
 
 .line {
@@ -46,8 +44,7 @@
 }
 
 .participants-lists {
-    min-height: 15rem;
-    height: 32vh;
+    height: calc(100vh - 38rem);
     margin: 1rem auto;
     width: 100%;
     overflow-y: auto;
@@ -183,3 +180,111 @@
     width: 100%;
     border-radius: 10px;
 }
+
+@media (max-height:800px) {
+    .videocall-chat-box{
+        height: calc(100vh - 30rem);
+    }
+    .participants-lists{
+        height: 12rem;
+    }
+}
+
+@media (max-height:700px) {
+    .participants-lists{
+        height: calc(100vh - 30rem);
+    }
+    .videocall-chat-box{
+        height: 12rem;
+    }
+}
+
+@media (max-width:1400px) {
+    .participants-title h2 {
+        font-size: 1.05rem;
+    }
+
+    .participants-lists {
+        width: 80%;
+    }
+
+    .videocall-chat-box {
+        margin: auto;
+        width: 17rem;
+        height: 17rem;
+    }
+
+    .videocall-send input {
+        width: 16.5rem;
+    }
+
+    .chat-info {
+        font-size: .7rem;
+    }
+
+    .participants-lists {
+        height: calc(100vh - 34rem);
+    }
+
+}
+
+@media (max-width:1201px) {
+    .smaller-screen-user-button {
+        position: absolute;
+        background-color: white;
+        border: 1px solid black;
+        border-radius: 10px;
+        padding: .7rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 2rem;
+        right: 3rem;
+    }
+
+    .smaller-screen-user-button img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .videocall-participants-main {
+        padding-top: 1rem;
+        position: absolute;
+        background-color: white;
+        top: 0rem;
+        right: 0rem;
+        width: 20rem;
+    }
+    .participants-title{
+        margin-left: 0;
+        justify-content: center;
+    }
+    .close img{
+        width: 30px;
+        height: 30px;
+    }
+    .participants{
+        padding-top: 2rem;
+    }
+}
+
+@media (max-width:350px) {
+    .videocall-participants-main{
+        width: 100%;
+        /* padding: 1rem; */
+    }
+    
+    .videocall-chat-box{
+        width: 90%;
+    }
+    .videocall-send input{
+        width: 88%;
+    }
+    .videocall-chat-main{
+        width: 90%;
+    }
+    .videocall-send button{
+        right: 1.7rem;
+    }
+}
+

@@ -1,16 +1,95 @@
-.user-videocall{
+.user-videocall {
     width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
-.videocall-image img{
+
+.videocall-image img {
     width: 550px;
-    height: 734px;
+    height: 600px;
 }
-.videocall-image{
+
+.videocall-image {
+    padding: 3rem;
     width: 100%;
     text-align: center;
 }
-.videocall-button{
+
+.videocall-button {
     width: 100%;
     display: flex;
     justify-content: center;
+    padding-bottom: 2rem;
+}
+
+.video-call-button {
+    color: white !important;
+    background-color: var(--nav-font-color);
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: .8rem 1.5rem;
+    cursor: pointer;
+    width: 15rem;
+}
+
+.video-call-button:hover {
+    background-color: var(--active-color);
+}
+
+
+@media (max-height:800px) {
+    .videocall-image {
+        height: 80%;
+    }
+
+    .videocall-image img {
+        width: 80%;
+        height: 80%;
+        object-fit: cover;
+    }
+
+    .user-videocall {
+        height: calc(100vh - 1rem);
+    }
+}
+
+@media (max-width:1400px) {
+    .user-videocall img {
+        width: 450px;
+        height: 634px;
+    }
+
+    .user-videocall {
+        width: 100%;
+        height: calc(100vh - 10rem);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+}
+
+@media (max-width:550px) {
+    .videocall-image {
+        margin-top: 5rem;
+    }
+
+    .user-videocall img {
+        width: 80%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .videocall-button {
+        margin: 3rem auto 0rem auto;
+    }
+
+    .video-call-button {
+        font-size: .8rem;
+        width: 9rem;
+    }
 }

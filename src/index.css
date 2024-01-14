@@ -41,3 +41,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.empty-message {
+  height: 70%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: x-large;
+  font-weight: 700;
+  color: rgba(128, 128, 128, 0.186);
+}
+
+@media (max-width:1400px) {
+  .empty-message {
+    font-size: large;
+    text-align: center;
+  }
+}

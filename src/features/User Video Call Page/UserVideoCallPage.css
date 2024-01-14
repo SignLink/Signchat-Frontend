@@ -52,3 +52,10 @@
     width: 35px;
     height: 35px;
 }
+
+@media (max-width:1201px) {
+    .user-videocall-main {
+        display: flex;
+        align-items: center;
+    }
+}

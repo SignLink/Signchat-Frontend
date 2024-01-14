@@ -1,11 +1,5 @@
 import "./UserNavigation.css";
 import logo from "../assets/Images/signchat-logo.svg";
-import { NavLink } from "react-router-dom";
-import chat from "../assets/Icons/chat-icon.svg";
-import videocall from "../assets/Icons/videocall-icon.svg";
-import schedule from "../assets/Icons/schedule-icon.svg";
-import friends from "../assets/Icons/add-user-male.svg";
-import settings from "../assets/Icons/settings-icon.svg";
 import logout from "../assets/Icons/log-out.png";
 import { useDispatch } from "react-redux";
 import { setLogout } from "../store/reducers/LogoutReducer";

@@ -17,6 +17,7 @@ function UserVideoCall(props: Props) {
           <Button
             buttonName="Start Video Call"
             openModal={props.openCreateVideoCall}
+            classname="video-call-button"
           />
         </div>
       </div>

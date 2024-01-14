@@ -2,9 +2,9 @@
     display: flex;
     flex-direction: column;
     width: 20%;
-    height: 100vh;
     align-content: space-between;
     justify-content: space-between;
+    height: calc(100vh - 1rem);
 }
 
 .user-navigation-logo {
@@ -80,7 +80,8 @@
 .user-logout:hover img {
     filter: brightness(0) invert(1);
 }
-.user-logout{
+
+.user-logout {
     margin-left: 3rem;
 }
 
@@ -89,5 +90,25 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 4rem;
+    margin-bottom: 1rem;
+}
+
+@media (max-width:1400px) {
+
+    .user-navigation-main button span,
+    .user-name span {
+        font-size: 1.05rem;
+    }
+
+    .user-logout img {
+        width: 35px;
+        height: 35px;
+    }
+
+}
+
+@media (max-width:1201px) {
+    .user-navigation-main{
+        display: none;
+    }
 }
