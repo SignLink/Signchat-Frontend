@@ -1,6 +1,8 @@
 .logout-modal-main {
-    width: 30rem;
-    height: 9rem;
+    max-width: 30rem;
+    width: 90%;
+    max-height: 9rem;
+    height: 100%;
     position: fixed;
     background-color: white;
     border: 1px solid var(--popup-border-color);
@@ -11,9 +13,11 @@
     justify-content: center;
     gap: 1.5rem;
     border-radius: 10px;
+    padding: 1rem;
 }
 
 .logout-modal-main span {
+    text-align: center;
     font-size: 1.25rem;
     color: var(--font-color);
     font-weight: 700;
@@ -22,12 +26,15 @@
 .logout-buttons {
     display: flex;
     gap: 1rem;
+    justify-content: center;
+    width: 100%;
 }
 
 .logout-buttons button {
     border: none;
     border-radius: 10px;
-    width: 6rem;
+    max-width: 6rem;
+    width: 90%;
     padding: .5rem 1rem;
     color: white;
     font-weight: 700;
@@ -41,4 +48,16 @@
 
 .logout-buttons button:nth-child(2) {
     background-color: var(--red-color);
+}
+
+/*Responsiveness*/
+
+@media (max-width:650px) {
+    .logout-modal-main span {
+        font-size: 1.1rem;
+    }
+
+    .logout-buttons button {
+        font-size: .8rem;
+    }
 }

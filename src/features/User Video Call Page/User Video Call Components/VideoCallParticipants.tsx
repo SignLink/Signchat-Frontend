@@ -7,6 +7,8 @@ import { setUserInfo } from "../../../store/reducers/AuthReducer";
 import useResponsiveFunction from "../../../utilities/SmallScreen";
 import userMenu from "../../../assets/Icons/user-menu.png";
 import participantsClose from "../../../assets/Icons/participants-close.png";
+import { setLogout } from "../../../store/reducers/LogoutReducer";
+import logout from "../../../assets/Icons/log-out.png";
 
 let participants: ReactElement;
 
@@ -135,6 +137,15 @@ function VideoCallParticipants({
                     </button>
                   </form>
                 </div>
+              </div>
+              <div className="user-logout-div-participants">
+                <button
+                  className="user-logout-participants"
+                  onClick={() => dispatch(setLogout(true))}
+                >
+                  <img src={logout} alt="chat-icon" />
+                  <span>Logout</span>
+                </button>
               </div>
             </div>
           ) : (
