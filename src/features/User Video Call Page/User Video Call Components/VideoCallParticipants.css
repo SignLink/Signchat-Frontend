@@ -181,6 +181,8 @@
     border-radius: 10px;
 }
 
+/*Responsiveness*/
+
 @media (max-height:800px) {
     .videocall-chat-box{
         height: calc(100vh - 30rem);
@@ -228,7 +230,7 @@
 
 }
 
-@media (max-width:1201px) {
+@media (max-width:1202px) {
     .smaller-screen-user-button {
         position: absolute;
         background-color: white;
@@ -288,3 +290,9 @@
     }
 }
 
+@media (max-width:600px) {
+    .smaller-screen-user-button img {
+            width: 25px;
+            height: 25px;
+        }
+}

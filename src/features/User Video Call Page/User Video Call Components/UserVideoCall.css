@@ -57,13 +57,36 @@
     }
 }
 
-@media (max-width:1400px) {
-    .user-videocall img {
-        width: 450px;
-        height: 634px;
+@media (max-width:550px) and (max-height:800px) {
+    .videocall-image {
+        height: 50%;
+        margin-top: 1rem !important;
+    }
+
+    .videocall-image img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover;
     }
 
     .user-videocall {
+        height: calc(100vh - 1rem);
+    }
+
+    .videocall-button {
+        margin-top: 0 !important;
+    }
+}
+
+@media (max-width:1400px) {
+    .videocall-image img {
+        width: 80%;
+        height: 80%;
+        object-fit: cover;
+    }
+
+    .user-videocall {
+        margin: auto 0;
         width: 100%;
         height: calc(100vh - 10rem);
         display: flex;
@@ -71,15 +94,29 @@
         justify-content: center;
     }
 
+
+}
+
+@media (max-width:1202px) {
+    .user-videocall {
+        height: 100vh;
+    }
+
+    .videocall-image img {
+        max-width: 500px;
+        width: 70%;
+        height: 80%;
+        object-fit: cover;
+    }
 }
 
 @media (max-width:550px) {
-    .videocall-image {
+    /* .videocall-image {
         margin-top: 5rem;
-    }
+    } */
 
     .user-videocall img {
-        width: 80%;
+        width: 90%;
         height: 100%;
         object-fit: cover;
     }
