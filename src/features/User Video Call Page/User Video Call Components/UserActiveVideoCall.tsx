@@ -6,7 +6,6 @@ import { AgoraVideoPlayer } from "agora-rtc-react";
 import { UID } from "agora-rtc-sdk-ng";
 import { localTracksTypes } from "../UserVideoCallPage";
 import { useRef, useEffect, useState } from "react";
-;
 interface Props {
   leaveCall?: () => void;
   remoteUsers?: any[];
@@ -46,32 +45,6 @@ function UserActiveVideoCall({
   let peopleOrPerson = userCount === 1 ? "Person" : "People";
 
   const videoRef = useRef<any>();
-  const [signSubtitles, setSignSubtitles] = useState("");
-  const [showSubtitles, setShowSubtitles] = useState(false);
-
-  useEffect(() => {
-    // Function to fetch the video file
-    const fetchVideoAndPredict = async () => {
-      try {
-        const videoElement =
-          videoRef.current?.querySelector("div div div video");
-        // const app = await client("https://a9532372b4dd36f02c.gradio.live/");
-        // const result: any = await app.predict("/predict", [videoElement]);
-        // console.log(result.data);
-      } catch (error) {
-        console.error("Error occurred:", error);
-      }
-    };
-
-    fetchVideoAndPredict();
-  }, []);
-
-  let subtitleText: string;
-  if (signSubtitles === "") {
-    subtitleText = "No Sign Words Yet";
-  } else {
-    subtitleText = signSubtitles;
-  }
   return (
     <>
       <div className="active-videocall-main">
@@ -80,26 +53,6 @@ function UserActiveVideoCall({
             <img src={people} alt="people" />
             {`${userCount + " " + peopleOrPerson}`}
           </span>
-          <div className="show-subtitle-button">
-            <button
-              onClick={() => {
-                showSubtitles === false
-                  ? setShowSubtitles(true)
-                  : setShowSubtitles(false);
-              }}
-            >
-              {showSubtitles === false ? "Show Subtitles" : "Hide Subtitles"}
-            </button>
-          </div>
-          <div className="clear-subtitle-button">
-            <button
-              onClick={() => {
-                setSignSubtitles("");
-              }}
-            >
-              Clear Subtitles
-            </button>
-          </div>
         </div>
         <div className="main-user" id="main-user">
           {activeTrack && (
@@ -116,11 +69,6 @@ function UserActiveVideoCall({
                 key={activeTrack.id}
                 style={{ width: "100%", height: "100%" }}
               />
-              {showSubtitles && (
-                <div className="video-call-subtitles">
-                  <span>{subtitleText}</span>
-                </div>
-              )}
             </div>
           )}
         </div>
