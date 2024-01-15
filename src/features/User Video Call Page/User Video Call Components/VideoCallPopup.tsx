@@ -82,7 +82,7 @@ function VideoCallPopup({ openCall }: Props) {
             />
           </div>
           <div className="create-videocall-button-div">
-            <Button buttonName="Join Video Call" />
+            <Button buttonName="Join Video Call" classname="popup-button" />
           </div>
         </form>
       </div>
