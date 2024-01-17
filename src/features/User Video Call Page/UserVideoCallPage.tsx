@@ -76,8 +76,11 @@ function UserVideoCallPage() {
     client.current?.on("user-published", handleUserJoined);
     client.current?.on("user-unpublished", handleUserUnpublished);
     client.current?.on("user-left", handleUserLeft);
+    
+    navigate('/videocall')
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
 
   async function joinCall() {
     if (RTMClient.current) {

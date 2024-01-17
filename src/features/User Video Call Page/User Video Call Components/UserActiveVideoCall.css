@@ -1,9 +1,8 @@
 .active-videocall-main {
     width: 50%;
-    height: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
 
 }
 
@@ -15,6 +14,7 @@
     justify-content: center;
     gap: 3rem;
     align-items: center;
+    margin: 1rem auto 1rem auto;
 }
 
 .videocall-buttons button {
@@ -56,11 +56,12 @@
     justify-content: center;
     align-items: flex-start;
     overflow-y: auto;
+    height: calc(100vh - 20rem);
     max-height: 14rem;
 }
 
 .main-user {
-    margin-top: 8rem;
+    margin-top: 2rem;
     width: 100%;
     height: 26rem;
     border-radius: 10px;
@@ -135,4 +136,38 @@
 .clear-subtitle-button button {
     border-radius: 5px;
     padding: .5rem 1rem;
+}
+
+@media (max-width:1201px) {
+    .active-videocall-main {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .main-user {
+        position: relative;
+        width: 80%;
+        height: 100%;
+    }
+    .videocall-buttons{
+        margin: 1rem auto 0 auto;
+    }
+    .video-chat{
+        position: absolute;
+        bottom: 5rem;
+        padding: .7rem 12%;
+        display: flex;
+        justify-content: flex-start;
+    }
+    .videocall-buttons{
+        height: 7rem;
+    }
+}
+
+@media (max-width:1050px) {
+    .main-user {
+        height: 100%;
+    }
 }
