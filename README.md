@@ -13,5 +13,8 @@ Run `cd SignChat-Frontend` in your terminal. This will depend on where you clone
 # 3 Install the required packages
 Run `npm install` to install all the dependencies listed in the package.json file. It ensures that all necessary packages are downloaded and stored in the node_modules directory.
 
+# 4 Insert Agora project app ID
+In the settings.ts file, there's a section where you insert your app id for your project created in Agora. Make sure this is done before running the application or else the video call will not work
+
 # 4 Running the Application
 After installing the packages, run `npm start` to start the development server and open the application in your default web browser at http://localhost:3000.
